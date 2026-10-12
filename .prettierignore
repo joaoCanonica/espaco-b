@@ -12,3 +12,7 @@ ESPACO_B_*.md
 docs/dados/
 # gerado por scripts/capturar.mjs
 docs/capturas/
+# gerados por scripts
+docs/PENDENCIAS.md
+docs/COMPLIANCE.md
+docs/MIDIA_CATALOGO.md
