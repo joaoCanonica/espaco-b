@@ -1,0 +1,43 @@
+{
+  "name": "espaco-b",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site estático da Clínica Espaço B (Lages/SC).",
+  "engines": {
+    "node": ">=24.11.0 <25"
+  },
+  "packageManager": "pnpm@12.11.2",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && eslint . && prettier --check .",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "validate-config": "node scripts/stub.mjs validate-config",
+    "audit-compliance": "node scripts/stub.mjs audit-compliance",
+    "audit-a11y": "node scripts/stub.mjs audit-a11y",
+    "audit-lighthouse": "node scripts/stub.mjs audit-lighthouse",
+    "audit-seo": "node scripts/stub.mjs audit-seo",
+    "media:prepare": "node scripts/stub.mjs media:prepare",
+    "brand:extract": "node scripts/stub.mjs brand:extract",
+    "capturar": "node scripts/capturar.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@eslint/js": "10.0.1",
+    "eslint": "10.12.0",
+    "eslint-plugin-astro": "3.2.1",
+    "globals": "17.13.0",
+    "playwright": "1.64.0",
+    "potrace": "2.1.8",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1"
+  }
+}
