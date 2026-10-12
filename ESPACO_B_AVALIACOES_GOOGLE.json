@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "fonte": "Google (ficha da Espaço B no Maps), prints enviados pelo João em 12/10/2026",
+    "notaMedia": 4.8,
+    "totalAvaliacoes": 32,
+    "conferidoEm": "2026-10-12",
+    "distribuicao": "maioria 5 estrelas; as contagens de 1 a 4 estrelas não são legíveis no print (barras mínimas); NÃO inventar números",
+    "filtros": {
+      "clínica": 5,
+      "limpeza": 2,
+      "botox": 2
+    },
+    "observacao": "nota e total conferidos no print de 12/10/2026; atualizar e re-datar sempre que o João mandar print novo; sem AggregateRating no schema"
+  },
+  "avaliacoes": [
+    {
+      "id": "G-001",
+      "nomeExibicao": "Lua T.",
+      "perfil": "10 avaliações · 1 foto",
+      "quando": "um ano atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": true,
+      "trechoPublicavel": "Excelente profissional, muito atenciosa, dedicada",
+      "usavelNoSite": true,
+      "motivoDeNaoUsar": null
+    },
+    {
+      "id": "G-002",
+      "nomeExibicao": "Raquel S.",
+      "perfil": "2 avaliações",
+      "quando": "8 meses atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": true,
+      "trechoPublicavel": "Foi excelente minha experiência nessa clínica!",
+      "usavelNoSite": true,
+      "motivoDeNaoUsar": null
+    },
+    {
+      "id": "G-003",
+      "nomeExibicao": "Mayara B.",
+      "perfil": "3 avaliações",
+      "quando": "2 anos atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": false,
+      "trechoPublicavel": "Excelente profissional, super atenciosa, nos orienta e explica todo o procedimento, esclarecendo todas as dúvidas.",
+      "usavelNoSite": true,
+      "motivoDeNaoUsar": null
+    },
+    {
+      "id": "G-004",
+      "nomeExibicao": "Gisiaine S.",
+      "perfil": "3 avaliações",
+      "quando": "um ano atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": true,
+      "trechoPublicavel": "sempre fui bem recebida",
+      "usavelNoSite": false,
+      "motivoDeNaoUsar": "contém termo vetado/regulado (melhor, botox, antes e depois, resultado, perfeita) ou texto incompleto; o trecho publicável é só uma parte literal sem esses termos"
+    },
+    {
+      "id": "G-005",
+      "nomeExibicao": "Laura P.",
+      "perfil": "Local Guide · 8 avaliações · 8 fotos",
+      "quando": "um ano atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": true,
+      "trechoPublicavel": "todo o cuidado durante o atendimento",
+      "usavelNoSite": false,
+      "motivoDeNaoUsar": "contém termo vetado/regulado (melhor, botox, antes e depois, resultado, perfeita) ou texto incompleto; o trecho publicável é só uma parte literal sem esses termos"
+    },
+    {
+      "id": "G-006",
+      "nomeExibicao": "Rosane S.",
+      "perfil": "2 avaliações",
+      "quando": "7 meses atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": true,
+      "trechoPublicavel": "Sempre muito bem atendida",
+      "usavelNoSite": true,
+      "motivoDeNaoUsar": null
+    },
+    {
+      "id": "G-007",
+      "nomeExibicao": "Bruna F.",
+      "perfil": "2 avaliações",
+      "quando": "5 meses atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": false,
+      "trechoPublicavel": "Fui muito bem recebida",
+      "usavelNoSite": true,
+      "motivoDeNaoUsar": null
+    },
+    {
+      "id": "G-008",
+      "nomeExibicao": "Thais N.",
+      "perfil": "11 avaliações",
+      "quando": "um ano atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": true,
+      "trechoPublicavel": "super atenciosa",
+      "usavelNoSite": false,
+      "motivoDeNaoUsar": "contém termo vetado/regulado (melhor, botox, antes e depois, resultado, perfeita) ou texto incompleto; o trecho publicável é só uma parte literal sem esses termos"
+    },
+    {
+      "id": "G-009",
+      "nomeExibicao": "Juliana G.",
+      "perfil": "1 avaliação",
+      "quando": "6 meses atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": false,
+      "trechoPublicavel": null,
+      "usavelNoSite": false,
+      "motivoDeNaoUsar": "texto incompleto no print"
+    },
+    {
+      "id": "G-010",
+      "nomeExibicao": "Yasmim A.",
+      "perfil": "1 avaliação · 1 foto",
+      "quando": "7 meses atrás",
+      "estrelas": 5,
+      "respostaDoProprietario": false,
+      "trechoPublicavel": "Um ambiente excelente, ótimo atendimento",
+      "usavelNoSite": false,
+      "motivoDeNaoUsar": "contém termo vetado/regulado (melhor, botox, antes e depois, resultado, perfeita) ou texto incompleto; o trecho publicável é só uma parte literal sem esses termos"
+    }
+  ]
+}
