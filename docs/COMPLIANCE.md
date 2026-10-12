@@ -1,6 +1,6 @@
 # Compliance (gerado)
 
-Gerado por `scripts/audit-compliance.mjs` em 2026-10-12 · modo produção · HTML de `dist/`.
+Gerado por `scripts/audit-compliance.mjs` em 2026-10-12 · modo preview/dev · HTML de `dist/`.
 Não editar à mão: rode `pnpm audit-compliance` (ou o build). Termos em `src/config/termos.ts`.
 
 **Bloqueios: 0** · avisos: 0 · exceções: 0
@@ -19,4 +19,4 @@ Nenhum.
 
 ## Fora da varredura
 
-Nada.
+- `dist/_pendencias/index.html` (rota interna, não existe em produção)

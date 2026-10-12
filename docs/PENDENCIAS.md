@@ -27,7 +27,7 @@ Trava de produção: livre (registro e WhatsApp confirmados; sem paciente em cap
 
 Nenhum.
 
-### Avisos (46)
+### Avisos (44)
 
 | Estado | Campo | Rótulo | Valor | Motivo | Fonte |
 | --- | --- | --- | --- | --- | --- |
@@ -72,11 +72,9 @@ Nenhum.
 | informado | `servicos[4].equipamento[0].marca` | servicos[4].equipamento[0].marca | Lavieen (nunca exibido) | texto não verificado | cliente |
 | pendente | `servicos[4].equipamento[0].registroAnvisa` | registro ANVISA do equipamento | — | a informar pelo João | — |
 | aviso | `servicos[4].escopoConferido` | escopo do ato pelo COFFITO | false | o João confirmou que só a Bia atende; o escopo de cada ato é conferido na sessão 9 | — |
-| aviso | `tema.cores.framboesa` | Framboesa seca | #8E2B41 | amostrada nas flores reais; versões AA clara/funda na sessão 3 | — |
-| aviso | `tema.cores.osso` | Osso | #F1ECE1 | valor aproximado do CLAUDE.md; calibrar na sessão 3 | — |
-| aviso | `tema.cores.tinta` | Tinta | #1E211A | valor aproximado do CLAUDE.md; calibrar na sessão 3 | — |
-| pendente | `tema.tipografia.display` | fonte display | — | Gloock ou Newsreader Display; decidir na sessão 3 (licença e self-host) | — |
-| pendente | `tema.tipografia.texto` | fonte de texto | — | Albert Sans ou Schibsted Grotesk; decidir na sessão 3 | — |
+| aviso | `tema.marca` | vetor do logo | src/assets/brand/logo-b.svg | vetorização PROVISÓRIA a partir de raster de 2000 px; pedir o vetor oficial | — |
+| aviso | `tema.tipografia.display` | fonte display | Newsreader Display | escolhida na sessão 3 (espécime em docs/capturas/tipografia); aprovar com o João | — |
+| aviso | `tema.tipografia.texto` | fonte de texto | Albert Sans | escolhida na sessão 3; aprovar com o João | — |
 
 ### Informativos (6)
 
@@ -95,3 +93,10 @@ Nenhum.
 
 - **Fallback do hero**: a cadeia pedida é retrato colete → vídeo do ambiente → imagem9, mas na sessão 1 o ambiente ficou "nunca no hero" (`naoUsarComoCapa`). O resolvedor pula o ambiente em capa e cai na imagem9. Decidir se o ambiente pode ser capa de emergência. · João
 - **Rota de pendências**: o Astro ignora páginas com "_" no nome; `/_pendencias/` é gerada por `src/pages/[interna].astro` (só em dev e PREVIEW=1). · informativo
+
+## Marca (sessão 3, 12/10/2026)
+
+- **Vetor oficial do logo**: a vetorização atual é PROVISÓRIA (raster de 2000 px). Com o SVG em `media-originais/marca/logo.svg`, `pnpm brand:extract` refaz tudo. · João
+- **Aprovar tipografia**: Newsreader Display + Albert Sans (espécime em `docs/capturas/tipografia/`). · João
+- **Framboesa**: a amostra real das flores é mais quente (`#983D33`) que o `#8E2B41` da direção; adotada a amostra. Confirmar. · João
+- **Assinatura "completo"** (B + "Espaço B" em Newsreader) é provisória; se existir assinatura oficial, ela substitui. · João

@@ -1,0 +1,49 @@
+---
+// Seletor claro/escuro. O tema inicial é aplicado antes da pintura pelo script inline de Base.astro.
+---
+
+<button class="seletor-tema" type="button" data-seletor-tema aria-pressed="false">
+  <span class="rotulo-escuro">Escuro</span>
+  <span class="rotulo-claro">Claro</span>
+  <span class="so-leitor"> (alternar tema)</span>
+</button>
+
+<script>
+  const botao = document.querySelector<HTMLButtonElement>('[data-seletor-tema]');
+  const raiz = document.documentElement;
+  // O rótulo visível vem do CSS (data-theme já está no <html> antes da pintura): sem troca tardia.
+  const sincroniza = () =>
+    botao?.setAttribute('aria-pressed', String(raiz.dataset['theme'] === 'dark'));
+  sincroniza();
+  botao?.addEventListener('click', () => {
+    const novo = raiz.dataset['theme'] === 'dark' ? 'light' : 'dark';
+    raiz.dataset['theme'] = novo;
+    try {
+      localStorage.setItem('tema', novo);
+    } catch {
+      /* armazenamento indisponível: vale só nesta visita */
+    }
+    sincroniza();
+  });
+</script>
+
+<style>
+  .seletor-tema {
+    min-height: 2.75rem;
+    padding: 0 var(--e-2);
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: 600 var(--t-legenda) / 1 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .rotulo-claro,
+  :global(:root[data-theme='dark']) .rotulo-escuro {
+    display: none;
+  }
+  :global(:root[data-theme='dark']) .rotulo-claro {
+    display: inline;
+  }
+</style>

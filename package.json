@@ -23,11 +23,12 @@
     "audit-lighthouse": "node scripts/stub.mjs audit-lighthouse",
     "audit-seo": "node scripts/stub.mjs audit-seo",
     "media:prepare": "node scripts/prepare-media.mjs",
-    "brand:extract": "node scripts/stub.mjs brand:extract",
+    "brand:extract": "node scripts/brand-extract.mjs",
     "capturar": "node scripts/capturar.mjs",
     "media:validar": "node scripts/validar-manifesto.mjs",
     "media:folhas": "node scripts/extract-posters.mjs --folhas",
-    "test-config": "node scripts/test-config.mjs"
+    "test-config": "node scripts/test-config.mjs",
+    "audit-contraste": "node scripts/audit-contraste.mjs"
   },
   "dependencies": {
     "astro": "7.3.8"

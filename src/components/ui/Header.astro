@@ -1,0 +1,79 @@
+---
+// Header sticky mínimo. Lê o data-tone da seção que está logo abaixo dele (IntersectionObserver)
+// e troca cor/fundo pelo mesmo sistema de tons.
+import Logo from '../brand/Logo.astro';
+import SeletorTema from './SeletorTema.astro';
+
+interface Props {
+  tomInicial?: 'light' | 'dark' | 'moss';
+}
+const { tomInicial = 'light' } = Astro.props;
+---
+
+<header class="header" data-tone={tomInicial} data-header>
+  <div class="recipiente header__linha">
+    <a class="header__marca" href="/" aria-label="Espaço B, início">
+      <Logo variante="completo" altura="1.9rem" />
+    </a>
+    <nav aria-label="Principal" class="header__nav">
+      <slot />
+      <SeletorTema />
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  if (header && 'IntersectionObserver' in window) {
+    const secoes = [...document.querySelectorAll<HTMLElement>('main [data-tone]')];
+    let observador: IntersectionObserver | null = null;
+    const montar = () => {
+      observador?.disconnect();
+      const h = header.offsetHeight;
+      // Faixa de 1px logo abaixo do header.
+      observador = new IntersectionObserver(
+        (entradas) => {
+          for (const e of entradas) {
+            if (e.isIntersecting) {
+              const tom = (e.target as HTMLElement).dataset['tone'];
+              if (tom) header.dataset['tone'] = tom;
+            }
+          }
+        },
+        { rootMargin: `-${h}px 0px -${Math.max(0, window.innerHeight - h - 1)}px 0px` },
+      );
+      for (const s of secoes) observador.observe(s);
+    };
+    montar();
+    window.addEventListener('resize', montar, { passive: true });
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--bg);
+    color: var(--fg);
+    border-bottom: var(--l-fina) solid var(--linha);
+    transition:
+      background-color var(--dur-media) var(--curva-padrao),
+      color var(--dur-media) var(--curva-padrao);
+  }
+  .header__linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--header-altura);
+  }
+  .header__marca {
+    text-decoration: none;
+  }
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--e-4);
+    font-size: var(--t-pequeno);
+  }
+</style>

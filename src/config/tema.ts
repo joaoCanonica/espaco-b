@@ -1,27 +1,36 @@
-import { aviso, confirmado, pendente } from './tipos.ts';
+import { aviso, confirmado } from './tipos.ts';
+import { primitivas } from '../styles/paleta.mjs';
 
-// Valores-base da identidade. Variações AA de claro/escuro e tokens CSS saem na sessão 3.
+// Valores da identidade. As cores vêm de src/styles/paleta.mjs (fonte única; ver docs/MARCA.md).
+const SESSAO3 = 'src/styles/paleta.mjs (sessão 3, medições em docs/MARCA.md)';
+
 export const tema = {
   cores: {
-    musgo: confirmado('#52543F', 'medido no logo (media.manifest.json, musgoOficial)'),
-    osso: aviso('Osso', 'valor aproximado do CLAUDE.md; calibrar na sessão 3', '#F1ECE1'),
-    tinta: aviso('Tinta', 'valor aproximado do CLAUDE.md; calibrar na sessão 3', '#1E211A'),
-    framboesa: aviso(
-      'Framboesa seca',
-      'amostrada nas flores reais; versões AA clara/funda na sessão 3',
-      '#8E2B41',
+    musgo: confirmado(primitivas.musgo, 'medido no logo (media.manifest.json, musgoOficial)'),
+    osso: confirmado(primitivas.osso, SESSAO3),
+    tinta: confirmado(primitivas.tinta, SESSAO3),
+    framboesa: confirmado(
+      {
+        amostra: primitivas.framboesaAmostra,
+        funda: primitivas.framboesaFunda,
+        clara: primitivas.framboesaClara,
+      },
+      'amostrada nas flores reais (ambiente-clinica, 25,5 s); variantes AA calibradas na sessão 3',
     ),
-    cremeDoLogo: confirmado('#F4EFE6', 'medido no logo (pixels da letra)'),
+    cremeDoLogo: confirmado(primitivas.creme, 'medido no logo (pixels da letra)'),
   },
   tipografia: {
-    display: pendente<string>(
+    display: aviso(
       'fonte display',
-      'Gloock ou Newsreader Display; decidir na sessão 3 (licença e self-host)',
+      'escolhida na sessão 3 (espécime em docs/capturas/tipografia); aprovar com o João',
+      'Newsreader Display',
     ),
-    texto: pendente<string>(
-      'fonte de texto',
-      'Albert Sans ou Schibsted Grotesk; decidir na sessão 3',
-    ),
+    texto: aviso('fonte de texto', 'escolhida na sessão 3; aprovar com o João', 'Albert Sans'),
   },
+  marca: aviso(
+    'vetor do logo',
+    'vetorização PROVISÓRIA a partir de raster de 2000 px; pedir o vetor oficial',
+    'src/assets/brand/logo-b.svg',
+  ),
   tons: ['light', 'dark', 'moss'] as const,
 } as const;

@@ -1,0 +1,47 @@
+---
+// Layout base: cores geradas da paleta, tokens, fontes self-hosted (preload só da display),
+// tema sem flash (script inline antes da pintura), faixa de preview e noindex quando preciso.
+import '../styles/tokens.css';
+import '../styles/base.css';
+import fonteDisplay from '../styles/fonts/newsreader-display.woff2?url';
+import PreviewBanner from '../components/PreviewBanner.astro';
+import { emPreview } from '../config/ambiente.ts';
+import { seo } from '../config/seo.ts';
+import { cssDasCores } from '../styles/cores.mjs';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+  noindex?: boolean;
+}
+
+const { titulo = seo.tituloPadrao, descricao, noindex = false } = Astro.props;
+const semIndice = noindex || emPreview() || seo.siteUrl.valor === null;
+
+// Executa antes da primeira pintura: aplica o tema salvo ou o do sistema.
+const scriptTema = `(function(){var t;try{t=localStorage.getItem('tema')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();`;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline set:html={scriptTema} />
+    <title>{titulo}</title>
+    {descricao && <meta name="description" content={descricao} />}
+    {semIndice && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={fonteDisplay} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={cssDasCores()} />
+  </head>
+  <body>
+    <PreviewBanner />
+    <slot name="header" />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <slot name="rodape" />
+  </body>
+</html>

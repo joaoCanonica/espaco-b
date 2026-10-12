@@ -1,0 +1,398 @@
+---
+// Conteúdo da rota interna /_sistema/: o design system inteiro, sem seções de página nem copy final.
+import Base from '../../layouts/Base.astro';
+import BGigante from '../brand/BGigante.astro';
+import Janela from '../brand/Janela.astro';
+import Logo from '../brand/Logo.astro';
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import { contraforma, provisorio } from '../brand/marca.ts';
+import Provisorio from '../Provisorio.astro';
+import Header from '../ui/Header.astro';
+import Legenda from '../ui/Legenda.astro';
+import Selo from '../ui/Selo.astro';
+import { config } from '../../config/index.ts';
+import { primitivas, temas } from '../../styles/paleta.mjs';
+import manifesto from '../../../media.manifest.json' with { type: 'json' };
+
+const larguras = [480, 800, 1200, 1600, 2400];
+const srcset = (slug: string) =>
+  larguras.map((l) => `/media/img/${slug}-${l}.webp ${l}w`).join(', ');
+const gesso = {
+  src: '/media/img/textura-gesso-ripas-1200.webp',
+  srcset: srcset('textura-gesso-ripas'),
+  sizes: '(min-width: 900px) 30vw, 70vw',
+  alt: 'Parede de gesso com sombras de ripas (imagem de atmosfera)',
+  largura: 2752,
+  altura: 1536,
+  carregamento: 'eager' as const,
+};
+const ambiente = manifesto.itens.find((i) => i.id === 'ambiente-clinica');
+const zona = {
+  ...(ambiente?.legendaQueimada?.zona ?? { topo: 0.4, base: 0.56 }),
+  esquerda: 0.19,
+  direita: 0.8,
+};
+const escala = [
+  ['--t-mega', 't-mega', 'Aa'],
+  ['--t-1', 't-1', 'Título 1'],
+  ['--t-2', 't-2', 'Título 2'],
+  ['--t-3', 't-3', 'Título 3'],
+  ['--t-4', 't-4', 'Título 4'],
+  ['--t-corpo', '', 'Texto corrido para medir o ritmo do bloco em leitura contínua.'],
+  ['--t-pequeno', 't-pequeno', 'Texto pequeno de apoio'],
+  ['--t-legenda', 't-legenda', 'Legenda editorial'],
+] as const;
+const tons = ['light', 'dark', 'moss'] as const;
+const altaCf = contraforma('alta');
+const baixaCf = contraforma('baixa');
+// Mesma escala para as duas (altura da baixa = 100%): a alta aparece menor, como no B.
+const caixa = (c: ReturnType<typeof contraforma>) =>
+  `${c.caixa.x - 4} ${c.caixa.y - 4} ${c.caixa.w + 8} ${baixaCf.caixa.h + 8}`;
+---
+
+<Base titulo="Sistema · Espaço B" noindex>
+  <Header slot="header" tomInicial="dark">
+    <a href="#cores">Cores</a>
+  </Header>
+
+  <section data-tone="dark" class="secao secao--abertura" aria-labelledby="t-sistema">
+    <BGigante lado="direita" altura="150vh" corte={0.3} intensidade={0.09} />
+    <div class="recipiente pilha">
+      <Legenda numero={0}>
+        Sistema · A contraforma {provisorio && <Selo titulo="vetor extraído de raster" />}
+      </Legenda>
+      <h1 id="t-sistema" class="t-mega">
+        Espaço <em>B</em>
+      </h1>
+      <p class="suave">
+        Rota interna, fora do índice. Mostra tokens, tipografia e componentes-base.
+      </p>
+      <div class="linha-logos">
+        <Logo altura="6rem" />
+        <Logo variante="completo" altura="3rem" />
+      </div>
+    </div>
+    <div class="recipiente">
+      <MarcadorCauda />
+    </div>
+  </section>
+
+  <section data-tone="light" class="secao" id="cores" aria-labelledby="t-cores">
+    <div class="recipiente pilha">
+      <Legenda numero={1}>Cores</Legenda>
+      <h2 id="t-cores" class="t-2">
+        Musgo, osso, tinta. Framboesa só como ponto.
+      </h2>
+      <ul class="amostras" role="list">
+        {Object.entries(primitivas).map(([nome, hex]) => (
+          <li>
+            <span class="amostra" style={`background:${hex}`} />
+            <code>{nome}</code>
+            <span class="t-pequeno suave">{hex}</span>
+          </li>
+        ))}
+      </ul>
+      <h3 class="t-4">Tons × tema atual</h3>
+      <div class="tons">
+        {tons.map((t) => (
+          <div data-tone={t} class="tom">
+            <span class="t-legenda">{t}</span>
+            <p class="t-3">Título</p>
+            <p class="suave t-pequeno">Texto secundário</p>
+            <p class="t-pequeno">
+              <a href="#cores">Link</a> <span class="ponto" aria-hidden="true" />
+            </p>
+          </div>
+        ))}
+      </div>
+      <p class="t-pequeno suave">
+        Pares de contraste em docs/CONTRASTE.md (gerado por pnpm audit-contraste). Valores light:
+        {Object.keys(temas.light.light).join(', ')}.
+      </p>
+    </div>
+    <div class="recipiente">
+      <MarcadorCauda />
+    </div>
+  </section>
+
+  <section data-tone="moss" class="secao" aria-labelledby="t-tipo">
+    <div class="recipiente pilha">
+      <Legenda numero={2}>Tipografia · Newsreader Display + Albert Sans</Legenda>
+      <h2 id="t-tipo" class="so-leitor">
+        Escala tipográfica
+      </h2>
+      <dl class="escala">
+        {escala.map(([token, classe, amostra]) => (
+          <div>
+            <dt>
+              <code>{token}</code>
+            </dt>
+            <dd class={classe}>{amostra}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="t-1">
+        <em>Itálico display</em> para o acento editorial.
+      </p>
+    </div>
+    <div class="recipiente">
+      <MarcadorCauda alinhamento="fim" />
+    </div>
+  </section>
+
+  <section data-tone="light" class="secao" aria-labelledby="t-janelas">
+    <div class="recipiente pilha">
+      <Legenda numero={3}>Janelas · contraformas reais do B</Legenda>
+      <h2 id="t-janelas" class="t-2">
+        Duas formas, extraídas do logo.
+      </h2>
+      <div class="formas">
+        <figure>
+          <svg viewBox={caixa(altaCf)} class="forma-ref" aria-hidden="true">
+            <path fill="currentColor" fill-rule="evenodd" d={altaCf.d} />
+          </svg>
+          <Legenda como="figcaption" numero={1} linha={false}>
+            alta · {altaCf.proporcao}
+          </Legenda>
+        </figure>
+        <figure>
+          <svg viewBox={caixa(baixaCf)} class="forma-ref" aria-hidden="true">
+            <path fill="currentColor" fill-rule="evenodd" d={baixaCf.d} />
+          </svg>
+          <Legenda como="figcaption" numero={2} linha={false}>
+            baixa · {baixaCf.proporcao}
+          </Legenda>
+        </figure>
+      </div>
+      <div class="janelas">
+        <Janela forma="alta" imagem={gesso} largura="min(100%, 16rem)">
+          <Legenda como="figcaption" numero={1}>
+            Janela alta · imagem2
+          </Legenda>
+        </Janela>
+        <Janela forma="baixa" imagem={gesso} largura="min(100%, 26rem)">
+          <Legenda como="figcaption" numero={2}>
+            Janela baixa · imagem2
+          </Legenda>
+        </Janela>
+        <Janela forma="baixa" largura="min(100%, 18rem)">
+          <Legenda como="figcaption" numero={3}>
+            Placeholder
+          </Legenda>
+        </Janela>
+      </div>
+    </div>
+  </section>
+
+  <section data-tone="dark" class="secao" aria-labelledby="t-video">
+    <div class="recipiente pilha">
+      <Legenda numero={4}>Vídeo 9:16 inteiro na janela baixa</Legenda>
+      <h2 id="t-video" class="t-2">
+        A legenda queimada nunca é cortada.
+      </h2>
+      <Janela
+        forma="baixa"
+        largura="min(100%, 22rem)"
+        video={{
+          mp4: '/media/video/o-espaco-540.mp4',
+          webm: '/media/video/o-espaco-540.webm',
+          poster: '/media/video/o-espaco-poster-540.avif',
+          rotulo: 'O espaço da clínica (vídeo sem som)',
+          mudo: true,
+          zonaLegenda: zona,
+        }}
+      >
+        <Legenda como="figcaption" numero={4}>
+          Zona da legenda {zona.topo}–{zona.base} da altura, {zona.esquerda}–{zona.direita} da
+          largura
+        </Legenda>
+      </Janela>
+    </div>
+    <div class="recipiente">
+      <MarcadorCauda />
+    </div>
+  </section>
+
+  <section data-tone="light" class="secao" aria-labelledby="t-comp">
+    <div class="recipiente pilha">
+      <Legenda numero={5}>Componentes-base</Legenda>
+      <h2 id="t-comp" class="t-2">
+        Botões, links, foco, formulários e estados.
+      </h2>
+      <div class="linha">
+        <a class="botao" href="#t-comp">
+          Botão primário
+        </a>
+        <button class="botao botao--linha" type="button">
+          Botão de linha
+        </button>
+        <button class="botao" type="button" disabled>
+          Desabilitado
+        </button>
+        <button class="botao demo-foco" type="button">
+          Com foco
+        </button>
+      </div>
+      <p>
+        Um <a href="#t-comp">link no texto</a> com sublinhado fino;{' '}
+        <a href="#t-comp" class="demo-foco">
+          link com foco
+        </a>
+        .
+      </p>
+      <form class="formulario" onsubmit="return false">
+        <div class="campo">
+          <label for="f-nome">Nome</label>
+          <input
+            id="f-nome"
+            name="nome"
+            autocomplete="name"
+            placeholder="Como prefere ser chamada"
+          />
+        </div>
+        <div class="campo">
+          <label for="f-tel">Telefone</label>
+          <input
+            id="f-tel"
+            name="tel"
+            type="tel"
+            autocomplete="tel"
+            aria-invalid="true"
+            aria-describedby="f-tel-erro"
+          />
+          <span class="ajuda" id="f-tel-erro">
+            Estado de erro: confira o número.
+          </span>
+        </div>
+        <div class="campo">
+          <label for="f-msg">Mensagem</label>
+          <textarea id="f-msg" name="msg" rows="3"></textarea>
+        </div>
+      </form>
+      <div class="linha">
+        <Selo />
+        <Provisorio campo={config.marca.razaoSocial}>
+          <span>Dado informado</span>
+        </Provisorio>
+      </div>
+    </div>
+    <div class="recipiente">
+      <MarcadorCauda alinhamento="centro" />
+    </div>
+  </section>
+
+  <section data-tone="moss" class="secao" aria-labelledby="t-acento">
+    <BGigante lado="esquerda" altura="120vh" corte={0.45} intensidade={0.07} topo="-20%" />
+    <div class="recipiente pilha">
+      <Legenda numero={6}>Teste do acento</Legenda>
+      <h2 id="t-acento" class="t-2">
+        Sobre musgo, o acento é o osso.
+      </h2>
+      <p>Framboesa nunca sobre musgo e nunca como bloco grande: um ponto por tela.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .secao {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--secao-y);
+  }
+  .secao > .recipiente {
+    position: relative;
+    z-index: 1;
+  }
+  .pilha {
+    display: grid;
+    gap: var(--e-5);
+  }
+  .linha-logos,
+  .linha {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--e-5);
+  }
+  .amostras {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: var(--e-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .amostras li {
+    display: grid;
+    gap: var(--e-1);
+    font-size: var(--t-pequeno);
+  }
+  .amostra {
+    display: block;
+    height: 4.5rem;
+    border-radius: var(--r-d);
+    border: var(--l-fina) solid var(--linha);
+  }
+  .tons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+  .tom {
+    padding: var(--e-5);
+  }
+  .tom p {
+    margin: var(--e-2) 0 0;
+  }
+  .ponto {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--acento);
+    vertical-align: middle;
+  }
+  .escala {
+    display: grid;
+    gap: var(--e-4);
+    margin: 0;
+  }
+  .escala div {
+    display: grid;
+    grid-template-columns: minmax(6rem, 9rem) minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha);
+    padding-top: var(--e-3);
+  }
+  .escala dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .formas {
+    display: flex;
+    gap: var(--e-7);
+    color: var(--fg);
+  }
+  .formas figure {
+    margin: 0;
+  }
+  .forma-ref {
+    height: clamp(9rem, 20vw, 16rem);
+    width: auto;
+    border-left: var(--l-fina) dashed var(--linha-forte);
+  }
+  .janelas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--e-6);
+  }
+  .formulario {
+    display: grid;
+    gap: var(--e-5);
+  }
+  .demo-foco {
+    outline: var(--l-foco) solid var(--foco);
+    outline-offset: 3px;
+  }
+</style>

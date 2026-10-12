@@ -1,0 +1,36 @@
+---
+// A cauda do B como marcador FIXO de fim de seção (estático; não se desenha no scroll).
+import { cauda } from './marca.ts';
+
+interface Props {
+  altura?: string;
+  alinhamento?: 'inicio' | 'centro' | 'fim';
+}
+
+const { altura = '3.5rem', alinhamento = 'inicio' } = Astro.props;
+---
+
+{cauda && (
+  <div class:list={['marcador-cauda', `marcador-cauda--${alinhamento}`]} aria-hidden="true">
+    <svg viewBox={cauda.viewBox} style={`height:${altura}`} focusable="false">
+      <path fill="currentColor" d={cauda.d} />
+    </svg>
+  </div>
+)}
+
+<style>
+  .marcador-cauda {
+    display: flex;
+    padding-block: var(--e-6) 0;
+    color: var(--fg);
+  }
+  .marcador-cauda svg {
+    width: auto;
+  }
+  .marcador-cauda--centro {
+    justify-content: center;
+  }
+  .marcador-cauda--fim {
+    justify-content: flex-end;
+  }
+</style>

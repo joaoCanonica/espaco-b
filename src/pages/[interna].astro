@@ -1,139 +1,17 @@
 ---
-// Rota interna /_pendencias/ (dev e PREVIEW=1; nunca em produção; noindex).
-// O Astro ignora arquivos de página com "_" no nome, por isso a rota é gerada aqui.
-import PreviewBanner from '../components/PreviewBanner.astro';
-import Provisorio from '../components/Provisorio.astro';
+// Rotas internas (dev e PREVIEW=1; nunca em produção; noindex): /_pendencias/ e /_sistema/.
+// O Astro ignora páginas com "_" no nome do arquivo, por isso as rotas são geradas aqui.
+import Pendencias from '../components/internas/Pendencias.astro';
+import Sistema from '../components/internas/Sistema.astro';
 import { emProducao } from '../config/ambiente.ts';
-import { config, listarPendencias, verificarProducao } from '../config/index.ts';
-import { resolverSlot, slots } from '../config/midia.ts';
-import { modulos, type NomeModulo } from '../config/modulos.ts';
 
 export function getStaticPaths() {
-  return emProducao() ? [] : [{ params: { interna: '_pendencias' } }];
+  if (emProducao()) return [];
+  return [{ params: { interna: '_pendencias' } }, { params: { interna: '_sistema' } }];
 }
 
-const ordem = { bloqueante: 0, aviso: 1, info: 2 } as const;
-const pendencias = listarPendencias().sort(
-  (a, b) => ordem[a.severidade] - ordem[b.severidade] || a.caminho.localeCompare(b.caminho),
-);
-const bloqueios = verificarProducao();
-const resolucoes = slots.map((s) => resolverSlot(s, true));
-const nomesModulos = Object.keys(modulos) as NomeModulo[];
+const { interna } = Astro.params;
 ---
 
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Pendências · Espaço B</title>
-  </head>
-  <body>
-    <PreviewBanner />
-    <main>
-      <h1>Pendências</h1>
-      <p>
-        {pendencias.length} itens · {pendencias.filter((p) => p.severidade === 'bloqueante').length}{' '}
-        bloqueantes · trava de produção:{' '}
-        {bloqueios.length ? `${bloqueios.length} bloqueio(s)` : 'livre'}
-      </p>
-      {bloqueios.length > 0 && (
-        <ul>
-          {bloqueios.map((b) => (
-            <li>{b}</li>
-          ))}
-        </ul>
-      )}
-
-      <h2>Dados</h2>
-      <div class="tabela">
-        <table>
-          <thead>
-            <tr>
-              <th>Severidade</th>
-              <th>Estado</th>
-              <th>Campo</th>
-              <th>Valor</th>
-              <th>Motivo</th>
-              <th>Fonte</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pendencias.map((p) => (
-              <tr data-severidade={p.severidade}>
-                <td>{p.severidade}</td>
-                <td>{p.estado}</td>
-                <td>
-                  <code>{p.caminho}</code>
-                </td>
-                <td>{p.valor}</td>
-                <td>{p.motivo}</td>
-                <td>{p.fonte}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <h2>Mídia (slots)</h2>
-      <ul>
-        {resolucoes.map((r) => (
-          <li>
-            <code>{r.slot.id}</code> ({r.slot.posicao}) → {r.item?.id ?? 'nenhum'}
-            {r.pulados.length > 0 && (
-              <span> · pulados: {r.pulados.map((p) => `${p.id} (${p.motivo})`).join('; ')}</span>
-            )}
-          </li>
-        ))}
-      </ul>
-
-      <h2>Módulos</h2>
-      {nomesModulos.map((m) => (
-        <Provisorio modulo={m} rotulo={`módulo ${m}`}>
-          <section data-secao={m} data-modulo={m}>
-            <p>módulo {m}: ligado</p>
-          </section>
-        </Provisorio>
-      ))}
-
-      <h2>Exemplo de dado informado</h2>
-      <p>
-        Razão social:
-        <Provisorio campo={config.marca.razaoSocial}>{config.marca.razaoSocial.valor}</Provisorio>
-      </p>
-      <Provisorio campo={config.pessoas.bianca.fotoCredito} rotulo="crédito do fotógrafo" />
-    </main>
-
-    <style>
-      body {
-        margin: 0;
-        font:
-          0.875rem/1.5 system-ui,
-          sans-serif;
-        background: #f1ece1;
-        color: #1e211a;
-      }
-      main {
-        padding: 1rem;
-      }
-      .tabela {
-        overflow-x: auto;
-      }
-      table {
-        border-collapse: collapse;
-        min-width: 56rem;
-      }
-      th,
-      td {
-        padding: 0.25rem 0.5rem;
-        border-bottom: 1px solid #52543f44;
-        text-align: left;
-        vertical-align: top;
-      }
-      tr[data-severidade='bloqueante'] {
-        background: #8e2b4122;
-      }
-    </style>
-  </body>
-</html>
+{interna === '_pendencias' && <Pendencias />}
+{interna === '_sistema' && <Sistema />}

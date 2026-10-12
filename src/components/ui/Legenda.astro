@@ -1,0 +1,47 @@
+---
+// Numeração e legenda editorial: "01 — Estética integrada · Lages, SC".
+interface Props {
+  numero?: number;
+  como?: 'p' | 'figcaption' | 'span';
+  linha?: boolean;
+}
+const { numero, como: Tag = 'p', linha = true } = Astro.props;
+const n = numero !== undefined ? String(numero).padStart(2, '0') : null;
+---
+
+<Tag class:list={['legenda', { 'legenda--linha': linha }]}>
+  {n && <span class="legenda__numero">{n}</span>}
+  <span class="legenda__texto">
+    <slot />
+  </span>
+</Tag>
+
+<style>
+  .legenda {
+    display: flex;
+    align-items: baseline;
+    gap: var(--e-3);
+    margin: 0;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .legenda__numero {
+    font-family: var(--f-display);
+    font-size: 1.6em;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--fg);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .legenda--linha .legenda__numero::after {
+    content: '';
+    display: inline-block;
+    width: 2.5rem;
+    margin-inline-start: var(--e-3);
+    vertical-align: middle;
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+</style>
