@@ -1,0 +1,30 @@
+---
+// Faixa "em revisão": só em dev e PREVIEW=1. Em produção não renderiza nada.
+import { emPreview } from '../config/ambiente.ts';
+
+const mostrar = emPreview();
+---
+
+{mostrar && (
+  <div class="faixa-revisao" role="status" data-preview-banner>
+    <strong>Em revisão</strong> · versão de pré-visualização; itens marcados PROVISÓRIO ainda não
+    foram confirmados. <a href="/_pendencias/">Ver pendências</a>
+  </div>
+)}
+
+<style>
+  .faixa-revisao {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0.4rem 1rem;
+    font:
+      0.8125rem/1.4 system-ui,
+      sans-serif;
+    background: #1e211a;
+    color: #f1ece1;
+  }
+  .faixa-revisao a {
+    color: inherit;
+  }
+</style>

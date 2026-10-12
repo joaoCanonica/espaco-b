@@ -19,7 +19,11 @@ pnpm dev        # desenvolvimento
 pnpm build      # gera dist/
 pnpm preview    # serve dist/
 pnpm check      # astro check + ESLint + Prettier
-pnpm capturar   # capturas 390/1440 px, claro/escuro → docs/capturas/<data>/
+pnpm capturar   # capturas 390/1440 px, claro/escuro → docs/capturas/<data>/ (rotas como argumento)
+pnpm media:prepare     # derivados de mídia em public/media/ (roda sozinho em predev/prebuild)
+pnpm validate-config   # pendências da config → docs/PENDENCIAS.md
+pnpm audit-compliance  # termos vetados/avisos no dist/ → docs/COMPLIANCE.md
+pnpm test-config       # prova as travas de produção e o preview
 ```
 
 `SITE_URL` (ver `.env.exemplo`) define o domínio. Sem ele, o site é preview e fica com noindex.
@@ -40,7 +44,9 @@ pnpm capturar   # capturas 390/1440 px, claro/escuro → docs/capturas/<data>/
 | 9     | QA, conferência de compliance e deploy  |
 | L / D | Novas mídias / chegada de dado pendente |
 
-Scripts `validate-config`, `audit-*`, `media:prepare` e `brand:extract` são stubs até as sessões que os implementam.
+**Produção x preview:** `pnpm build` é produção e trava em registro profissional ausente, WhatsApp não confirmado, paciente em hero/og:image/primeira dobra, claim publicado sem fonte e termo vetado no HTML. `PREVIEW=1 pnpm build` nunca trava: mostra a faixa "em revisão", os selos PROVISÓRIO e a rota `/_pendencias/`.
+
+Scripts `audit-a11y`, `audit-lighthouse`, `audit-seo` e `brand:extract` ainda são stubs.
 
 ## Pastas
 

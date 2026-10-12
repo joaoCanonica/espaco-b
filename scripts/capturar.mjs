@@ -83,10 +83,15 @@ if (!existsSync(join(raiz, 'dist'))) await rodar(bin, ['build']);
 
 const porta = await portaLivre();
 const base = `http://127.0.0.1:${porta}`;
-const preview = spawn(bin, ['preview', '--host', '127.0.0.1', '--port', String(porta)], {
-  cwd: raiz,
-  stdio: ['ignore', 'ignore', 'inherit'],
-});
+const preview = spawn(
+  bin,
+  ['preview', '--ignore-lock', '--host', '127.0.0.1', '--port', String(porta)],
+  {
+    cwd: raiz,
+    stdio: ['ignore', 'ignore', 'inherit'],
+    detached: true, // grupo próprio: o kill alcança o node por trás do wrapper .bin
+  },
+);
 
 const arquivos = [];
 let navegador;
@@ -119,7 +124,11 @@ try {
   }
 } finally {
   await navegador?.close();
-  preview.kill();
+  try {
+    process.kill(-preview.pid, 'SIGTERM');
+  } catch {
+    preview.kill();
+  }
 }
 
 const linhas = [

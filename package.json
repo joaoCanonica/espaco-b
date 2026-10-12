@@ -17,8 +17,8 @@
     "check": "astro check && eslint . && prettier --check .",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "validate-config": "node scripts/stub.mjs validate-config",
-    "audit-compliance": "node scripts/stub.mjs audit-compliance",
+    "validate-config": "node scripts/validate-config.mjs",
+    "audit-compliance": "node scripts/audit-compliance.mjs",
     "audit-a11y": "node scripts/stub.mjs audit-a11y",
     "audit-lighthouse": "node scripts/stub.mjs audit-lighthouse",
     "audit-seo": "node scripts/stub.mjs audit-seo",
@@ -26,7 +26,8 @@
     "brand:extract": "node scripts/stub.mjs brand:extract",
     "capturar": "node scripts/capturar.mjs",
     "media:validar": "node scripts/validar-manifesto.mjs",
-    "media:folhas": "node scripts/extract-posters.mjs --folhas"
+    "media:folhas": "node scripts/extract-posters.mjs --folhas",
+    "test-config": "node scripts/test-config.mjs"
   },
   "dependencies": {
     "astro": "7.3.8"
