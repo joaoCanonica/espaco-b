@@ -1,0 +1,169 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "@id": "https://espacob.example/#negocio",
+      "name": "Clínica Espaço B",
+      "alternateName": "Clínica Espaço B — Estética e Harmonização Corporal e Facial",
+      "url": "https://espacob.example/",
+      "telephone": "+55 49 99911-5351",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Humberto de Campos, 328, Coral",
+        "addressLocality": "Lages",
+        "addressRegion": "SC",
+        "postalCode": "88508-190",
+        "addressCountry": "BR"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "https://schema.org/Monday",
+            "https://schema.org/Tuesday",
+            "https://schema.org/Wednesday",
+            "https://schema.org/Thursday",
+            "https://schema.org/Friday"
+          ],
+          "opens": "09:00",
+          "closes": "12:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "https://schema.org/Monday",
+            "https://schema.org/Tuesday",
+            "https://schema.org/Wednesday",
+            "https://schema.org/Thursday",
+            "https://schema.org/Friday"
+          ],
+          "opens": "13:30",
+          "closes": "18:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["https://schema.org/Saturday"],
+          "opens": "08:00",
+          "closes": "12:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Lages, SC"
+      },
+      "founder": {
+        "@id": "https://espacob.example/bia/#bianca-cardoso"
+      },
+      "employee": {
+        "@id": "https://espacob.example/bia/#bianca-cardoso"
+      },
+      "sameAs": [
+        "https://www.instagram.com/clinica.espacob/",
+        "https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0"
+      ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -27.8074182,
+        "longitude": -50.3162505
+      },
+      "hasMap": "https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0",
+      "image": "https://espacob.example/og/inicio.png"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://espacob.example/bia/#bianca-cardoso",
+      "name": "Bianca Cardoso",
+      "jobTitle": "Fisioterapeuta",
+      "worksFor": {
+        "@id": "https://espacob.example/#negocio"
+      },
+      "url": "https://espacob.example/bia/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://espacob.example/#site",
+      "url": "https://espacob.example/",
+      "name": "Clínica Espaço B",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@id": "https://espacob.example/#negocio"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://espacob.example/#pagina",
+      "url": "https://espacob.example/",
+      "name": "Espaço B · Estética e harmonização em Lages, SC",
+      "description": "Clínica Espaço B, em Lages (SC): rosto, corpo e pele com a fisioterapeuta Bianca Cardoso, CREFITO 183149. Primeiro a avaliação, depois o plano.",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://espacob.example/#site"
+      },
+      "about": {
+        "@id": "https://espacob.example/#negocio"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é a avaliação e por que ela vem antes de tudo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Na avaliação, a Bia ouve o que incomoda você, examina pele, contorno e histórico e explica o que faz sentido agora. Às vezes a conclusão é esperar ou procurar outro profissional. Só depois disso vocês combinam um plano, sem compromisso de fechar nada na hora."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Por que a pele fica flácida depois de emagrecer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quando o volume diminui rápido, a pele precisa se adaptar a uma área menor, e nem sempre recupera a firmeza. No rosto, os estudos mostram perda de volume no meio da bochecha e flacidez no pescoço. O quanto isso acontece varia de pessoa para pessoa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tecnologia para firmeza funciona no corpo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Há tecnologias que aquecem camadas da pele para estimular firmeza. Os estudos são mais numerosos no rosto e no pescoço; no corpo, a evidência ainda é menor. Flacidez acentuada costuma ser caso cirúrgico. Na avaliação, a Bia diz com franqueza se vale tentar ou se o caminho é outro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A redução de gordura por frio substitui a perda de peso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. Ela é estudada para gordura localizada, em quem já está perto do peso que deseja, com medições feitas cerca de três meses depois. Pode ter efeitos colaterais, quase sempre leves, e existe um efeito raro em que a gordura aumenta. Por isso a indicação é individual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A depilação com luz é para sempre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ela reduz bastante a quantidade de pelos, e essa redução costuma durar, mas não elimina todos os pelos de forma permanente. O resultado varia com a área, a cor e a espessura do pelo. Algumas pessoas precisam de manutenção. A avaliação define o plano e o intervalo entre sessões."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O que a Bia chama de “Derretimento Facial”?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "É o nome que ela dá à sensação de que o rosto perdeu sustentação: contorno menos marcado, bochechas mais baixas, pescoço mais flácido. Pode aparecer com a idade ou depois de emagrecer muito. Não é um diagnóstico: é o ponto de partida para a avaliação entender o que mudou."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quem faz os procedimentos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todos os atendimentos são feitos pela fisioterapeuta Bianca Cardoso, CREFITO 183149, responsável técnica do Espaço B. Cada procedimento segue a habilitação reconhecida pelo conselho da profissão, e você pode consultar o registro dela no site do CREFITO. Se tiver dúvida, pergunte na avaliação."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+$ node scripts/validar-manifesto.mjs
+aviso: [video-para-presenca-e-profissionalismo] consentimento declarado pelo cliente; termo não arquivado
+aviso: [video-para-presenca-e-profissionalismo] 16.57–18.47 s marcado para verificar
+aviso: [video-para-presenca-e-profissionalismo] 22.83–24.5 s marcado para verificar
+aviso: [cafe-com-bia] 20.7–24.8 s marcado para verificar
+aviso: [cafe-com-bia] 35.5–118.67 s marcado para verificar
+manifesto: 0 erro(s), 5 aviso(s)
+saída 0

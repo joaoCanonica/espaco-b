@@ -1,0 +1,74 @@
+- main:
+  - region "Protocolos com nome.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Protocolos da Bia
+    - paragraph: 01 Protocolos da Bia
+    - heading "Protocolos com nome." [level=1]
+    - paragraph: Três protocolos com o nome de quem os criou e aplica. Cada protocolo junta técnicas que a Bia escolheu e ordena do mesmo jeito para quem tem a mesma indicação. O nome é dela; a indicação é sua, definida na avaliação.
+  - region "Índice dos protocolos":
+    - paragraph: 02 Índice
+    - heading "Índice dos protocolos" [level=2]
+    - list:
+      - listitem:
+        - link "01 BiaLifting Rosto · ver protocolo →":
+          - /url: /protocolos-bia/bialifting/
+      - listitem:
+        - link "02 BiaLips Rosto · ver protocolo →":
+          - /url: /protocolos-bia/bialips/
+      - listitem:
+        - link "03 Lipocrio da Bia Corpo · ver protocolo →":
+          - /url: /protocolos-bia/lipocrio-da-bia/
+  - region "Como é o atendimento":
+    - paragraph: 03 Atendimento
+    - heading "Como é o atendimento" [level=2]
+    - list:
+      - listitem:
+        - heading "Avaliação" [level=3]
+        - paragraph: Você conta o que incomoda. A Bia avalia pele, contorno e histórico.
+      - listitem:
+        - heading "Plano" [level=3]
+        - paragraph: Vocês combinam um plano, ou a conclusão de que não é a hora.
+      - listitem:
+        - heading "Sessões" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Como são as sessões (protocolos)
+          - text: ": a informar."
+        - paragraph: conteúdo dos protocolos a enviar pelo João
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+  - region "Perguntas":
+    - paragraph: 04 Perguntas
+    - heading "Perguntas" [level=2]
+    - group: O que é a avaliação e por que ela vem antes de tudo?
+    - group: Quem faz os procedimentos?
+    - group: O que a Bia chama de “Derretimento Facial”?
+  - region "Agendar avaliação pelo WhatsApp.":
+    - heading "Agendar avaliação pelo WhatsApp." [level=2]
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - term: Serviços
+    - definition: Harmonização orofacial · Corpo e emagrecimento
+    - term: Quem atende
+    - definition: Fisioterapeuta Bianca Cardoso · CREFITO 183149
+    - term: Responsável técnica
+    - definition: Bianca Cardoso
+    - term: Conselho
+    - definition:
+      - text: COFFITO/CREFITO
+      - mark: PROVISÓRIO
+    - navigation "Outras páginas":
+      - list:
+        - listitem:
+          - link "Harmonização facial":
+            - /url: /harmonizacao-facial/
+        - listitem:
+          - link "Corpo e emagrecimento":
+            - /url: /corpo-e-emagrecimento/
+        - listitem:
+          - link "Pele e tecnologia":
+            - /url: /pele-e-tecnologia/

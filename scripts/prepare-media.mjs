@@ -1,7 +1,7 @@
 // Gera os derivados de mídia em public/media/ (fora do git) a partir de media-originais/.
 // Idempotente: cada saída guarda a chave (hash do original + parâmetros) em public/media/.cache.json.
 // Originais nunca são alterados. Uso: pnpm media:prepare  (MEDIA_SKIP=1 pula tudo)
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -30,6 +30,16 @@ const CAMINHO_CACHE = join(SAIDA, '.cache.json');
 const ORCAMENTO = { ambiente: 2.5e6, mudo: 2.5e6, clique: 6e6, clipe: 1e6 };
 const FOLGA_720 = 1.8;
 const AUDIO = { mp4: 64, webm: 48 }; // kbps
+// Na Vercel (plano hobby: build ≤ 45 min) a codificação usa presets rápidos; local usa os lentos.
+const RAPIDO = !!process.env.VERCEL || process.env.MEDIA_RAPIDO === '1';
+
+// Na Vercel, public/media não sobrevive entre builds, mas node_modules/ sim (cache de build).
+// Restaura os derivados de lá e devolve no fim: só refaz o que mudou (a chave de cada saída decide).
+const CACHE_CI = process.env.VERCEL ? join(RAIZ, 'node_modules', '.cache', 'espaco-b-media') : null;
+if (CACHE_CI && existsSync(CACHE_CI) && !existsSync(CAMINHO_CACHE)) {
+  cpSync(CACHE_CI, SAIDA, { recursive: true });
+  console.log('media:prepare: derivados restaurados do cache de build');
+}
 
 const inicio = Date.now();
 mkdirSync(DIR_IMG, { recursive: true });
@@ -175,12 +185,27 @@ function codificar({ origem, intervalos, comAudio, largura, altura, formato, orc
     ];
     if (comAudio) args.push('-map', '[ac]');
     if (formato === 'mp4') {
-      args.push('-c:v', 'libx264', '-preset', 'slow', '-profile:v', 'high', '-crf', String(crf));
+      args.push(
+        '-c:v',
+        'libx264',
+        '-preset',
+        RAPIDO ? 'veryfast' : 'slow',
+        '-profile:v',
+        'high',
+        '-crf',
+        String(crf),
+      );
       args.push('-maxrate', `${videoK}k`, '-bufsize', `${videoK * 2}k`, '-movflags', '+faststart');
       args.push(...(comAudio ? ['-c:a', 'aac', '-b:a', `${audioK}k`] : ['-an']));
     } else {
       args.push('-c:v', 'libvpx-vp9', '-crf', String(crf), '-b:v', `${videoK}k`);
-      args.push('-row-mt', '1', '-deadline', 'good', '-cpu-used', '4');
+      args.push(
+        '-row-mt',
+        '1',
+        ...(RAPIDO
+          ? ['-deadline', 'realtime', '-cpu-used', '8']
+          : ['-deadline', 'good', '-cpu-used', '4']),
+      );
       args.push(...(comAudio ? ['-c:a', 'libopus', '-b:a', `${audioK}k`] : ['-an']));
     }
     ffmpeg([...args, saida]);
@@ -328,3 +353,4 @@ for (const item of manifesto.itens) {
 relatorio.segundos = +((Date.now() - inicio) / 1000).toFixed(1);
 writeFileSync(join(SAIDA, 'indice.json'), JSON.stringify(relatorio, null, 1));
 console.log(`media:prepare: ${refeitos} refeito(s), ${pulados} em cache, ${relatorio.segundos} s`);
+if (CACHE_CI) cpSync(SAIDA, CACHE_CI, { recursive: true });

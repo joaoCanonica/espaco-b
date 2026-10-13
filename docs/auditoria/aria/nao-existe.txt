@@ -1,0 +1,7 @@
+- main:
+  - region "Esta página não existe.":
+    - paragraph: 404 Página não encontrada
+    - heading "Esta página não existe." [level=1]
+    - paragraph: O endereço pode ter mudado ou estar incompleto.
+    - link "Voltar para o início":
+      - /url: /

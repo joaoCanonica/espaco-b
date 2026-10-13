@@ -1,0 +1,91 @@
+---
+// <head> de SEO (sessão 8): title, description, robots, canonical, Open Graph, Twitter e JSON-LD.
+// Fonte única: src/config/seo.ts (metadados por rota). A imagem OG (1200×630) é gerada no build
+// por scripts/gerar-og.mjs a partir do og:title (janela em D + título). Em preview/sem SITE_URL:
+// noindex e URLs relativas.
+import { emProducao } from '../../config/ambiente.ts';
+import { metaDaRota, seo, urlDe } from '../../config/seo.ts';
+import { perguntas as faqHome } from '../home/conteudo.ts';
+import { paginas, protocolosPagina, type PerguntaCampo } from '../servicos/conteudo.ts';
+import { protocolosPublicos } from '../servicos/protocolos.ts';
+import { bianca, faq, grafo, negocio, pagina, site, trilha } from './jsonld.ts';
+
+interface Props {
+  titulo?: string | undefined;
+  descricao?: string | undefined;
+  noindex: boolean;
+}
+const { titulo: tituloPagina, descricao: descricaoPagina, noindex } = Astro.props;
+
+const bruto = Astro.url.pathname.replace(/index\.html$/, '');
+const caminho = bruto.endsWith('/') ? bruto : `${bruto.replace(/\.html$/, '')}/`;
+const idProtocolo = caminho.match(/^\/protocolos-bia\/([^/]+)\/$/)?.[1];
+const nomeProtocolo = protocolosPublicos.find((p) => p.id === idProtocolo)?.nomeTexto;
+const meta = metaDaRota(caminho, nomeProtocolo);
+const titulo = meta?.titulo ?? tituloPagina ?? seo.tituloPadrao;
+const descricao = meta?.descricao ?? descricaoPagina ?? '';
+const interna = caminho.startsWith('/_');
+const semIndice = noindex || interna || meta?.indexar === false;
+const robots = semIndice ? 'noindex, nofollow' : 'index, follow';
+
+// O endereço antigo aponta o canonical para o novo; a 404 não tem canonical.
+const canonico =
+  caminho === '/404/'
+    ? null
+    : urlDe(caminho === '/pele-e-laser/' ? '/pele-e-tecnologia/' : caminho);
+const slugOg =
+  caminho === '/' ? 'inicio' : caminho.replace(/^\/|\/$/g, '').replace(/[^a-z0-9]+/gi, '-');
+const ogImagem = urlDe(`/og/${slugOg}.png`);
+
+// FAQ do schema = exatamente as perguntas visíveis na página (condicionais saem em produção).
+const producao = emProducao();
+const visiveis = (lista: PerguntaCampo[]) => lista.filter((p) => !(producao && p.condicao));
+let perguntas: PerguntaCampo[] = [];
+if (caminho === '/') perguntas = faqHome;
+else if (caminho.startsWith('/protocolos-bia/')) perguntas = protocolosPagina.faq;
+else {
+  const pg = paginas.find((p) => caminho === `/${p.slug}/`);
+  if (pg) perguntas = visiveis(pg.faq);
+}
+
+const nos: Parameters<typeof grafo>[0] = [
+  negocio(urlDe('/og/inicio.png')),
+  bianca(),
+  site(),
+  pagina(caminho, titulo, descricao),
+];
+if (meta && meta.trilha.length) {
+  const itens = [{ nome: 'Início', caminho: '/' }];
+  if (caminho.startsWith('/protocolos-bia/') && meta.trilha.length > 1)
+    itens.push({ nome: 'Protocolos da Bia', caminho: '/protocolos-bia/' });
+  itens.push({ nome: meta.trilha[meta.trilha.length - 1] ?? titulo, caminho });
+  nos.push(trilha(itens));
+}
+if (perguntas.length) nos.push(faq(perguntas));
+const jsonld = JSON.stringify(grafo(nos)).replace(/</g, '\\u003c');
+const mostrarJsonld = !interna && caminho !== '/404/';
+---
+
+<title>{titulo}</title>
+{descricao && <meta name="description" content={descricao} />}
+<meta name="robots" content={robots} />
+{canonico && <link rel="canonical" href={canonico} />}
+{!interna && (
+  <>
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={seo.locale} />
+    <meta property="og:site_name" content={seo.nomeEntidade} />
+    <meta property="og:title" content={titulo} />
+    {descricao && <meta property="og:description" content={descricao} />}
+    {canonico && <meta property="og:url" content={canonico} />}
+    <meta property="og:image" content={ogImagem} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${titulo}: imagem com a janela em D do Espaço B`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    {descricao && <meta name="twitter:description" content={descricao} />}
+    <meta name="twitter:image" content={ogImagem} />
+  </>
+)}
+{mostrarJsonld && <script type="application/ld+json" set:html={jsonld} />}

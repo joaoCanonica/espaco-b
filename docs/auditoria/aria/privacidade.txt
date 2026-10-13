@@ -1,0 +1,142 @@
+- main:
+  - region "Política de privacidade":
+    - complementary:
+      - navigation "Você está em":
+        - list:
+          - listitem:
+            - link "Início":
+              - /url: /
+          - listitem: /Privacidade
+      - paragraph: Privacidade
+      - heading "Política de privacidade" [level=1]
+      - paragraph: Atualizada em 13/10/2026
+      - navigation "Nesta página":
+        - list:
+          - listitem:
+            - link "Quem cuida dos seus dados":
+              - /url: "#quem"
+          - listitem:
+            - link "Quais dados":
+              - /url: "#dados"
+          - listitem:
+            - link "Para que e com qual base legal":
+              - /url: "#finalidades"
+          - listitem:
+            - link "Dados de saúde":
+              - /url: "#saude"
+          - listitem:
+            - link "Terceiros e transferência internacional":
+              - /url: "#terceiros"
+          - listitem:
+            - link "Por quanto tempo":
+              - /url: "#retencao"
+          - listitem:
+            - link "Seus direitos":
+              - /url: "#direitos"
+          - listitem:
+            - link "Suas preferências neste site":
+              - /url: "#preferencias"
+          - listitem:
+            - link "Como falar com a clínica":
+              - /url: "#contato"
+          - listitem:
+            - link "Atualizações":
+              - /url: "#atualizacao"
+    - paragraph: "Em resumo: este site não tem formulário, não pede dado de saúde e não usa ferramenta de terceiros sem a sua permissão. O contato é pelo WhatsApp ou telefone, e o que você escolher sobre privacidade fica guardado só no seu navegador."
+    - heading "Quem cuida dos seus dados" [level=2]
+    - paragraph: O controlador dos dados tratados por este site é a Clínica Espaço B — Estética e Harmonização Corporal e Facial, no endereço Rua Humberto de Campos, 328, Coral · Lages/SC, CEP 88508-190.
+    - text: "Razão social: Clinica de Estetica Espaco B Ltda"
+    - mark: PROVISÓRIO
+    - text: "Encarregado pelo tratamento de dados (LGPD, art. 41):"
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: encarregado/contato LGPD
+      - text: ": a informar."
+    - paragraph: definir na sessão 7
+    - paragraph: Enquanto não houver um encarregado nomeado, fale com a clínica pelos canais da seção “Como falar com a clínica”.
+    - heading "Quais dados" [level=2]
+    - list:
+      - listitem:
+        - strong: Mensagens de WhatsApp e ligações.
+        - text: Quando você toca em “WhatsApp” ou “Telefone”, a conversa acontece fora deste site, no aplicativo. A clínica recebe o seu número, o seu nome no aplicativo e o que você escrever.
+      - listitem:
+        - strong: Armazenamento no seu navegador.
+        - text: "O site não cria cookies próprios. Ele guarda no seu navegador: a sua escolha de privacidade (sempre); se a abertura animada já foi vista nesta visita (apagado ao fechar o navegador); e o tema claro ou escuro, só se você permitir “Preferências”. Esses dados não são enviados à clínica."
+      - listitem:
+        - strong: Mapa do Google.
+        - text: Só carrega se você permitir “Mapas e terceiros”. Ao carregar, o Google recebe o seu endereço IP e pode usar cookies próprios.
+      - listitem:
+        - strong: Estatística.
+        - text: Se você permitir, o site conta, no seu navegador, cliques em WhatsApp, telefone e avaliação. Hoje nenhum dado de estatística é enviado a terceiros. Se isso mudar, esta política será atualizada e a sua permissão será pedida de novo.
+      - listitem:
+        - strong: Registros de acesso.
+        - text: Como todo site, o servidor de hospedagem pode registrar endereço IP, data, hora e página acessada, para segurança e funcionamento.
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Hospedagem do site e prazo dos registros de acesso
+          - text: ": a informar."
+        - paragraph: depende do provedor escolhido no deploy
+    - heading "Para que e com qual base legal" [level=2]
+    - list:
+      - listitem:
+        - strong: Responder e agendar a sua avaliação
+        - text: "(mensagens e ligações): procedimentos preliminares a um contrato, a seu pedido (LGPD, art. 7º, V)."
+      - listitem:
+        - strong: Guardar a sua escolha de privacidade
+        - text: ": para respeitar a escolha e poder comprová-la (LGPD, art. 7º, IX, e art. 8º, § 2º)."
+      - listitem:
+        - strong: Preferências, mapa e estatística
+        - text: ": o seu consentimento (LGPD, art. 7º, I), que você pode retirar a qualquer momento."
+      - listitem:
+        - strong: Segurança do site
+        - text: "(registros de acesso): legítimo interesse (LGPD, art. 7º, IX)."
+    - heading "Dados de saúde" [level=2]
+    - paragraph: "Este site não pede e não coleta dado de saúde. Pedimos que você não envie fotos, exames ou detalhes de saúde pelo WhatsApp antes da avaliação: essas informações são tratadas na consulta, pela profissional que atende, para cuidar da sua saúde (LGPD, art. 11, II, “f”)."
+    - heading "Terceiros e transferência internacional" [level=2]
+    - list:
+      - listitem:
+        - strong: WhatsApp (Meta).
+        - text: As conversas seguem a política do próprio WhatsApp.
+      - listitem:
+        - strong: Google Maps e Google Perfil da Empresa.
+        - text: O mapa só carrega com a sua permissão; o link de avaliação leva ao site do Google.
+      - listitem:
+        - strong: Instagram (Meta).
+        - text: Só um link para @clinica.espacob; nada do Instagram carrega neste site.
+    - paragraph: Essas empresas podem tratar dados fora do Brasil, conforme as políticas delas (LGPD, art. 33). Este site, por conta própria, não envia os seus dados para outro país.
+    - heading "Por quanto tempo" [level=2]
+    - list:
+      - listitem: "Escolha de privacidade: no seu navegador por até 12 meses; depois disso o site pergunta de novo. Você pode apagar antes, limpando os dados do site no navegador."
+      - listitem: "Tema: no seu navegador, até você mudar a permissão ou limpar os dados do site."
+      - listitem:
+        - text: "Conversas de WhatsApp:"
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Prazo de guarda das conversas de WhatsApp
+          - text: ": a informar."
+        - paragraph: a definir pela clínica (João)
+    - heading "Seus direitos" [level=2]
+    - paragraph: "Pela LGPD (art. 18), você pode pedir à clínica, a qualquer momento e sem custo:"
+    - list:
+      - listitem: a confirmação de que existe tratamento dos seus dados;
+      - listitem: acesso aos seus dados;
+      - listitem: correção de dados incompletos, errados ou desatualizados;
+      - listitem: anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados fora da lei;
+      - listitem: portabilidade dos dados a outro fornecedor, nos termos da regulamentação;
+      - listitem: eliminação dos dados tratados com o seu consentimento;
+      - listitem: informação sobre com quem a clínica compartilha os seus dados;
+      - listitem: informação sobre a possibilidade de não dar consentimento e o que acontece se você não der;
+      - listitem: a revogação do consentimento.
+    - paragraph: Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD) (LGPD, art. 18, § 1º).
+    - heading "Suas preferências neste site" [level=2]
+    - paragraph: "Você pode mudar ou retirar a sua permissão quando quiser, pelo link “Preferências de privacidade” no rodapé de todas as páginas, ou aqui:"
+    - paragraph:
+      - button "Abrir preferências de privacidade"
+    - heading "Como falar com a clínica" [level=2]
+    - paragraph:
+      - text: Para pedidos sobre os seus dados, fale com a clínica pelo
+      - link "WhatsApp (49) 99911-5351 (abre em nova aba)":
+        - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+      - text: ou no endereço Rua Humberto de Campos, 328, Coral · Lages/SC, CEP 88508-190. Para confirmar que o pedido é seu, a clínica pode pedir uma forma simples de identificação.
+    - heading "Atualizações" [level=2]
+    - paragraph: Esta política foi atualizada em 13/10/2026. Quando ela mudar de forma relevante, a data muda aqui e o site pede a sua permissão de novo.

@@ -1,0 +1,17 @@
+✓ /
+✓ /avaliar/
+✓ /bia/
+✓ /casos/
+✓ /contato/
+✓ /corpo-e-emagrecimento/
+✓ /espaco/
+✓ /harmonizacao-facial/
+✓ /pele-e-tecnologia/
+✓ /privacidade/
+✓ /protocolos-bia/
+✓ /protocolos-bia/bialifting/
+✓ /protocolos-bia/bialips/
+✓ /protocolos-bia/lipocrio-da-bia/
+✓ /nao-existe/
+✓ audit-a11y: nenhuma violação
+saída 0

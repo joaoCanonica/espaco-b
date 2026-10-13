@@ -172,3 +172,13 @@ O preview mostra "a informar" + selo; a produção omite o bloco e avisa no buil
 - **Hospedagem:** `public/_headers` está no formato Netlify / Cloudflare Pages. Se o host for outro, portar os cabeçalhos. HSTS só vale com HTTPS. · Code (deploy)
 - **Telefone:** o `tel:` usa o número do WhatsApp. Confirmar se ele atende ligação. · João
 - **Analytics:** só existe o gancho (fila local `window.espacoB.eventos`, sem rede, só com "estatística"). Escolher um provedor exige atualizar a política e subir `VERSAO` em `src/scripts/consentimento.ts`. · João
+
+## SEO local e GEO (sessão 8, 13/10/2026)
+
+- **Domínio:** definir `SITE_URL` no deploy. Sem ele: noindex, sitemap com domínio `.invalid` e robots bloqueando tudo. · João
+- **Nome do Perfil da Empresa no Google:** hoje é um descritivo com serviços e cidade; as diretrizes pedem o nome real (docs/SEO.md §1.3). · João
+- **Bairro:** confirmar "Coral" na ficha do Google e nos diretórios (há listagens com "Sagrado Coração de Jesus" para o mesmo CEP). · João
+- **Autoria perto do topo** nas páginas de serviço: o texto existe no deck ("Fisioterapeuta {{nome}} · {{registro}} · responsável técnica"), mas hoje só aparece no fecho. Incluir na abertura numa próxima sessão de páginas. · Code (com aprovação do João)
+- **Resumo citável dos protocolos** (40–60 palavras): depende do conteúdo de cada protocolo. · João
+- **CCBot:** bloqueado por padrão; liberar ou não (docs/SEO.md §1.6). · João
+- **Validação externa:** rodar validator.schema.org e o Rich Results Test na URL real depois do deploy (aqui não houve rede para eles). · Code (pós-deploy)

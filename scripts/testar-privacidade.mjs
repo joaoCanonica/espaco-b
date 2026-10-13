@@ -270,7 +270,12 @@ for (const [w, h] of [
   );
   await p.uncheck('[data-consentimento-painel] input[name="mapas"]');
   await p.click('[data-consentimento-painel] [data-acao="salvar"]');
-  ok((await p.locator('[data-mapa] iframe').count()) === 0, 'Revogação: o mapa sai da página');
+  // o evento "close" do <dialog> chega numa tarefa seguinte: espera (até 2 s) em vez de contar na hora
+  const saiu = await p
+    .waitForSelector('[data-mapa] iframe', { state: 'detached', timeout: 2000 })
+    .then(() => true)
+    .catch(() => false);
+  ok(saiu, 'Revogação: o mapa sai da página');
   const estado = await p.evaluate(() => JSON.parse(localStorage.getItem('espacob-consentimento')));
   ok(
     estado.mapas === false && estado.preferencias === true,

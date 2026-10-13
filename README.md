@@ -46,7 +46,7 @@ pnpm test-config       # prova as travas de produção e o preview
 
 **Produção x preview:** `pnpm build` é produção e trava em registro profissional ausente, WhatsApp não confirmado, paciente em hero/og:image/primeira dobra, claim publicado sem fonte e termo vetado no HTML. `PREVIEW=1 pnpm build` nunca trava: mostra a faixa "em revisão", os selos PROVISÓRIO e a rota `/_pendencias/`.
 
-Scripts `audit-a11y`, `audit-lighthouse`, `audit-seo` e `brand:extract` ainda são stubs.
+Auditorias (sessão 9; saídas em `docs/auditoria/`): `audit-a11y` (axe + teclado + sem JS + reduced-motion), `audit-lighthouse` (mobile/desktop por rota, JS e mídia), `audit-seo`, `audit-contraste`, `verificar-links`, `testar-privacidade`. Deploy: [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
 ## Pastas
 
@@ -54,3 +54,17 @@ Scripts `audit-a11y`, `audit-lighthouse`, `audit-seo` e `brand:extract` ainda s�
 - `public/media/` — derivados gerados no build (fora do git).
 - `docs/dados/` — dados conferidos (avaliações do Google).
 - `docs/pesquisa/` — fontes antes de qualquer texto.
+
+## Como criar o próximo site (a partir deste)
+
+O que reaproveitar é o **método**, não a identidade: o CLAUDE.md proíbe repetir paleta, fontes e assinatura entre sites da WAXLO.
+
+1. **Fundação (sessão 0):** novo repositório, Astro estável fixado, TypeScript strict, pnpm e Node LTS em `engines` e `packageManager`. Copiar `scripts/lib/`, os scripts de auditoria e `vercel.json`.
+2. **Mídia (1):** originais imutáveis em `media-originais/`, manifesto por arquivo (origem, consentimento, capa proibida, cortes), `prepare-media` gerando AVIF/WebP/WebM/MP4 no build.
+3. **Config tipada (2):** `src/config/` com `confirmado` / `informado` / `pendente` / `aviso`. Nada de dado inventado. `validate-config` gera as pendências e a trava de produção. A lista de termos vem do zero, conferida para a profissão do cliente.
+4. **Marca (3):** extrair as formas do logo vetorizado (`brand:extract`), tokens claro e escuro, contraste validado por script, fontes self-hosted com licença conferida.
+5. **Pesquisa antes de texto (5):** `docs/pesquisa/<tema>.md` com fonte, data e nível de evidência.
+6. **Páginas (6A–6C), conversão e LGPD (7), SEO (8).**
+7. **Passada única de normas e deploy (9):** `docs/pesquisa/final-*.md`, tabela no COMPLIANCE.md, preview com `PREVIEW=1` na Vercel, produção só com a trava limpa e o aval do cliente.
+
+Ambiente: as auditorias usam o Chromium do Playwright (`/opt/pw-browsers` ou `CHROME_PATH`). O ffmpeg vem de `ffmpeg-static` se não houver no sistema.

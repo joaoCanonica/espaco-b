@@ -103,9 +103,9 @@ Resultado: todas as verificações passaram.
 - /media/img/textura-flores-secas-480.avif
 - /media/img/ornamento-pampas-traco-480.avif
 - /media/img/textura-linho-musgo-480.avif
-- /_astro/consentimento.B6BWCKrI.js
 - /_astro/albert-sans.CL6nauOE.woff2
 - /_astro/newsreader-display-italico.Ds5SGx-l.woff2
+- /_astro/consentimento.B6BWCKrI.js
 - /favicon.svg
 
 ### /protocolos-bia/bialifting/
@@ -155,10 +155,10 @@ Resultado: todas as verificações passaram.
 - /_astro/Base.Dei7GE8_.css
 - /_astro/Banner.astro_astro_type_script_index_0_lang.C-debDKQ.js
 - /media/img/textura-flores-secas-480.avif
+- /_astro/consentimento.B6BWCKrI.js
 - /_astro/albert-sans.CL6nauOE.woff2
 - /media/video/bastidores-ensaio-e-casos-par-p001-poster.avif
 - /media/video/bastidores-ensaio-e-casos-par-p002-poster.avif
-- /_astro/consentimento.B6BWCKrI.js
 - /favicon.svg
 - /media/video/bastidores-ensaio-e-casos-par-p003-poster.avif
 - /media/video/bastidores-ensaio-e-casos-par-p004-poster.avif
@@ -185,8 +185,8 @@ Resultado: todas as verificações passaram.
 - /_astro/newsreader-display.C54luXIY.woff2
 - /_astro/Base.Dei7GE8_.css
 - /_astro/Banner.astro_astro_type_script_index_0_lang.C-debDKQ.js
-- /_astro/consentimento.B6BWCKrI.js
 - /_astro/albert-sans.CL6nauOE.woff2
+- /_astro/consentimento.B6BWCKrI.js
 - /favicon.svg
 
 ### /avaliar/

@@ -1,0 +1,11 @@
+$ astro check && eslint . && prettier --check .
+14:44:49 [types] Generated 73ms
+14:44:49 [check] Getting diagnostics for Astro files in /home/user/espaco-b...
+Result (133 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+Checking formatting...
+All matched files use Prettier code style!
+saída 0

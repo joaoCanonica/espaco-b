@@ -1,0 +1,3 @@
+$ node scripts/validate-config.mjs
+validate-config: 50 pendência(s) · 0 bloqueante(s) · 44 aviso(s) · 6 info → docs/PENDENCIAS.md
+saída 0
