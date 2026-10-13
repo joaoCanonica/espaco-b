@@ -10,6 +10,7 @@ import Banner from '../components/consentimento/Banner.astro';
 import BotaoFlutuante from '../components/conversao/BotaoFlutuante.astro';
 import Rodape from '../components/conversao/Rodape.astro';
 import { emPreview } from '../config/ambiente.ts';
+import Seo from '../components/seo/Seo.astro';
 import { seo } from '../config/seo.ts';
 import { cssDasCores } from '../styles/cores.mjs';
 
@@ -32,9 +33,7 @@ const scriptTema = `(function(){var t;try{t=localStorage.getItem('tema')}catch(e
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline set:html={scriptTema} />
-    <title>{titulo}</title>
-    {descricao && <meta name="description" content={descricao} />}
-    {semIndice && <meta name="robots" content="noindex, nofollow" />}
+    <Seo titulo={titulo} descricao={descricao} noindex={semIndice} />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href={fonteDisplay} as="font" type="font/woff2" crossorigin />
