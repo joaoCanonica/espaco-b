@@ -105,3 +105,13 @@ Nenhum.
 
 - **Título do hero**: em uso a opção 1 ("Rosto e corpo, um projeto só."); as 3 opções estão em `src/content/hero.ts`. · João
 - **CTA "Conhecer os protocolos"** aponta para `/protocolos-bia/`, que só existe a partir da sessão 6B. · Code
+
+## Home (sessão 6A, 13/10/2026)
+
+- **Protocolos: "Para quem é" e "Como é a sessão"** de BiaLifting, BiaLips e Lipocrio da Bia. Preview mostra "a informar" + selo; produção mostra só o nome (alerta no build). · João
+- **Link de consulta ao CREFITO-10**: a URL pública de consulta não foi encontrada. Preview mostra cartão; produção omite. · João
+- **Legenda técnica dos casos P-001…P-008** (área, protocolo, data do registro; todos os `dataRegistro` são `null`). Preview mostra "a informar" + selo; produção mostra só a referência P-00N. · João
+- **Cursor de comparação** não existe: não há par estático, só clipes em vídeo. Ele entra quando houver pares em foto. · João
+- **Links dos eixos** (`/harmonizacao-facial/`, `/corpo-e-emagrecimento/`, `/pele-e-laser/`) e "Conhecer a Bia" (`/bia/`) só funcionam depois das sessões 6B e 6C. · Code
+- **FAQ 4 e 5** (bioestimulador/fios e toxina) ficaram fora da home por serem condicionais (habilitação e apostilamento). · João
+- **Avaliação gratuita ou paga**: confirmar; o site não cita valor. · João

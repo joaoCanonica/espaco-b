@@ -1,0 +1,134 @@
+---
+// 08 · Perguntas (tinta). Gesto: título fixo à esquerda e coluna estreita de <details> nativos
+// à direita, numerados; cada resposta clínica traz a fonte. (FAQPage no schema: sessão 8.)
+import Legenda from '../ui/Legenda.astro';
+import { perguntas, perguntasTexto } from './conteudo.ts';
+---
+
+<section id="perguntas" class="perguntas" data-tone="dark" aria-labelledby="perguntas-titulo">
+  <div class="recipiente perguntas__grade">
+    <div class="perguntas__cabeca">
+      <Legenda numero={8}>{perguntasTexto.legenda}</Legenda>
+      <h2 id="perguntas-titulo" class="perguntas__titulo">
+        {perguntasTexto.titulo}
+      </h2>
+    </div>
+    <div class="perguntas__lista">
+      {perguntas.map((p, i) => (
+        <details class="pergunta">
+          <summary>
+            <span class="pergunta__n" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="pergunta__texto">{p.pergunta}</span>
+          </summary>
+          <div class="pergunta__resposta">
+            <p>{p.resposta}</p>
+            {p.fontes.length > 0 && (
+              <p class="pergunta__fontes">
+                Fonte{p.fontes.length > 1 ? 's' : ''}:{' '}
+                {p.fontes.map((f, k) => (
+                  <>
+                    {k > 0 && ' · '}
+                    <a href={f.url} rel="noopener" target="_blank">
+                      {f.rotulo}
+                    </a>
+                  </>
+                ))}
+              </p>
+            )}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .perguntas {
+    padding-block: var(--secao-y);
+  }
+  .perguntas__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .perguntas__titulo {
+    margin-block-start: var(--e-5);
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+  }
+  .perguntas__lista {
+    border-bottom: var(--l-fina) solid var(--linha-forte);
+  }
+  .pergunta {
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .pergunta summary {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 1.5rem;
+    gap: var(--e-3);
+    align-items: baseline;
+    padding-block: var(--e-5);
+    cursor: pointer;
+    list-style: none;
+  }
+  .pergunta summary::-webkit-details-marker {
+    display: none;
+  }
+  .pergunta summary::after {
+    content: '+';
+    justify-self: end;
+    font: 300 1.5rem/1 var(--f-texto);
+    transition: transform var(--dur-media) var(--curva-saida);
+  }
+  .pergunta[open] summary::after {
+    transform: rotate(45deg);
+  }
+  .pergunta__n {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    color: var(--fg-suave);
+  }
+  .pergunta[open] .pergunta__n {
+    color: var(--acento);
+  }
+  .pergunta__texto {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    line-height: 1.25;
+  }
+  .pergunta__resposta {
+    padding: 0 0 var(--e-6) calc(2.75rem + var(--e-3));
+  }
+  .pergunta__resposta p {
+    max-width: 36rem;
+  }
+  .pergunta__fontes {
+    margin: 0;
+    font-size: var(--t-legenda);
+    line-height: 1.6;
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .perguntas__grade {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--e-5);
+      align-items: start;
+    }
+    .perguntas__cabeca {
+      grid-column: 1 / 5;
+      position: sticky;
+      top: calc(var(--header-altura) + var(--e-6));
+    }
+    .perguntas__lista {
+      grid-column: 6 / 12;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pergunta summary::after {
+      transition: none;
+    }
+  }
+</style>

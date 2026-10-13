@@ -1,0 +1,210 @@
+---
+// 09 · Primeira consulta e contato (musgo). Gesto: três passos com numerais display enormes
+// em escada; contato em coluna; o mapa NÃO carrega: só um bloco "Ver no mapa" com link.
+import BGigante from '../brand/BGigante.astro';
+import Legenda from '../ui/Legenda.astro';
+import { contato } from '../../config/contato.ts';
+import { contatoTexto, enderecoLinhas, horarios, linkWhatsapp } from './conteudo.ts';
+
+const maps = contato.google.mapsUrl.valor;
+const wa = contato.whatsapp.valor;
+---
+
+<section id="contato" class="contato" data-tone="moss" aria-labelledby="contato-titulo">
+  <BGigante lado="direita" altura="120vh" corte={0.5} topo="-10%" intensidade={0.05} />
+  <div class="recipiente contato__grade">
+    <div class="contato__cabeca">
+      <Legenda numero={9}>{contatoTexto.legenda}</Legenda>
+      <h2 id="contato-titulo" class="t-2 contato__titulo">
+        {contatoTexto.titulo}
+      </h2>
+    </div>
+
+    <ol class="contato__passos" role="list">
+      {contatoTexto.passos.map((p, i) => (
+        <li class="passo">
+          <span class="passo__n" aria-hidden="true">
+            {i + 1}
+          </span>
+          <span class="passo__texto">{p}</span>
+        </li>
+      ))}
+    </ol>
+
+    <div class="contato__acao">
+      <p class="contato__complemento">{contatoTexto.complemento}</p>
+      {linkWhatsapp && (
+        <a class="botao" href={linkWhatsapp} rel="noopener" target="_blank">
+          {contatoTexto.botao}
+          <span class="so-leitor"> (abre o WhatsApp em nova aba)</span>
+        </a>
+      )}
+      {wa && <p class="contato__fone">WhatsApp {wa.exibicao}</p>}
+    </div>
+
+    <div class="contato__dados">
+      <div>
+        <h3 class="contato__rotulo">Endereço</h3>
+        <address>
+          {enderecoLinhas.map((l) => (
+            <span>{l}</span>
+          ))}
+        </address>
+      </div>
+      <div>
+        <h3 class="contato__rotulo">Horário</h3>
+        <ul class="contato__horarios" role="list">
+          {horarios.map((h) => (
+            <li>
+              <span>{h.dias}</span> {h.horas}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {maps && (
+        <a class="contato__mapa" href={maps} rel="noopener" target="_blank">
+          <span class="contato__mapa-rotulo">{contatoTexto.mapa}</span>
+          <span class="contato__mapa-sub">Google Maps ↗</span>
+          <span class="so-leitor"> (abre em nova aba)</span>
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .contato {
+    position: relative;
+    overflow: clip;
+    padding-block: var(--secao-y) calc(var(--secao-y) * 1.3);
+  }
+  .contato__grade {
+    position: relative;
+    display: grid;
+    gap: var(--e-7);
+  }
+  .contato__titulo {
+    max-width: 14ch;
+    margin-block-start: var(--e-5);
+  }
+  .contato__passos {
+    display: grid;
+    gap: var(--e-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .passo {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--e-4);
+  }
+  .passo__n {
+    font-family: var(--f-display);
+    font-size: var(--t-1);
+    font-weight: 300;
+    line-height: 0.8;
+  }
+  .passo__texto {
+    font-size: var(--t-4);
+    font-family: var(--f-display);
+    max-width: 26ch;
+  }
+  .contato__acao {
+    display: grid;
+    gap: var(--e-4);
+    justify-items: start;
+  }
+  .contato__complemento {
+    margin: 0;
+    font-style: italic;
+  }
+  .contato__fone {
+    margin: 0;
+    font-size: var(--t-pequeno);
+  }
+  .contato__dados {
+    display: grid;
+    gap: var(--e-6);
+    padding-block-start: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .contato__rotulo {
+    margin-block-end: var(--e-2);
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  address {
+    display: grid;
+    font-style: normal;
+  }
+  .contato__horarios {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .contato__horarios li + li {
+    margin-block-start: var(--e-2);
+  }
+  .contato__horarios span {
+    display: block;
+    font-weight: 600;
+  }
+  .contato__mapa {
+    display: grid;
+    gap: var(--e-2);
+    align-content: end;
+    min-height: 9rem;
+    padding: var(--e-5);
+    border: var(--l-fina) solid var(--linha-forte);
+    border-radius: var(--r-d);
+    text-decoration: none;
+  }
+  .contato__mapa:hover {
+    border-color: var(--fg);
+  }
+  .contato__mapa-rotulo {
+    font-family: var(--f-display);
+    font-size: var(--t-3);
+    line-height: 1;
+  }
+  .contato__mapa-sub {
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .contato__grade {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--e-5);
+    }
+    .contato__cabeca {
+      grid-column: 1 / 6;
+    }
+    .contato__passos {
+      grid-column: 6 / 13;
+      grid-row: 1 / 3;
+    }
+    .passo:nth-child(2) {
+      margin-inline-start: 10%;
+    }
+    .passo:nth-child(3) {
+      margin-inline-start: 20%;
+    }
+    .contato__acao {
+      grid-column: 1 / 6;
+      grid-row: 2;
+      align-self: end;
+    }
+    .contato__dados {
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      align-items: start;
+    }
+  }
+</style>

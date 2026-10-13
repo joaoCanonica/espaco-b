@@ -1,0 +1,188 @@
+---
+// 06 · O espaço (musgo). Gesto: vídeo do ambiente na janela grande; duas janelas pequenas
+// sobrepostas à borda dela; endereço e horário em coluna; a cauda do B fecha a seção.
+import Janela from '../brand/Janela.astro';
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { enderecoLinhas, espacoTexto, horarios } from './conteudo.ts';
+import { imagemJanela, videoDoItem } from './midia.ts';
+
+const video = videoDoItem('ambiente-clinica');
+const bronze = imagemDoItem('imagem7');
+const calcario = imagemDoItem('imagem9', '30% 50%');
+---
+
+<section id="espaco" class="espaco" data-tone="moss" aria-labelledby="espaco-titulo">
+  <div class="recipiente espaco__grade">
+    <div class="espaco__cabeca">
+      <Legenda numero={6}>{espacoTexto.legenda}</Legenda>
+      <h2 id="espaco-titulo" class="t-1 espaco__titulo">
+        {espacoTexto.titulo}
+      </h2>
+    </div>
+
+    <div class="espaco__janelas">
+      <div class="espaco__grande">
+        <Janela
+          forma="baixa"
+          {...(video && { video: { ...video, rotulo: espacoTexto.rotuloVideo, mudo: true } })}
+          placeholder="vídeo do ambiente"
+        />
+      </div>
+      <div class="espaco__pequena espaco__pequena--a" aria-hidden="true">
+        <Janela
+          forma="alta"
+          {...(bronze && { imagem: imagemJanela(bronze, '(min-width: 900px) 12vw, 30vw') })}
+          placeholder="imagem7 (textura)"
+        />
+      </div>
+      <div class="espaco__pequena espaco__pequena--b" aria-hidden="true">
+        <Janela
+          forma="alta"
+          {...(calcario && { imagem: imagemJanela(calcario, '(min-width: 900px) 9vw, 22vw') })}
+          placeholder="imagem9 (textura)"
+        />
+      </div>
+    </div>
+
+    <div class="espaco__info">
+      <p class="espaco__texto t-4">{espacoTexto.texto}</p>
+      <div class="espaco__dados">
+        <div>
+          <h3 class="espaco__rotulo">Endereço</h3>
+          <address>
+            {enderecoLinhas.map((l) => (
+              <span>{l}</span>
+            ))}
+          </address>
+        </div>
+        <div>
+          <h3 class="espaco__rotulo">Horário</h3>
+          <ul class="espaco__horarios" role="list">
+            {horarios.map((h) => (
+              <li>
+                <span>{h.dias}</span> {h.horas}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <MarcadorCauda altura="4.5rem" alinhamento="fim" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .espaco {
+    padding-block: var(--secao-y);
+    overflow: clip;
+  }
+  .espaco__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .espaco__titulo {
+    max-width: 12ch;
+    margin-block-start: var(--e-5);
+  }
+  .espaco__janelas {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-inline-end: 30%;
+  }
+  .espaco__grande {
+    position: relative;
+  }
+  .espaco__pequena {
+    position: absolute;
+    z-index: 1;
+  }
+  /* Sobreposição na borda da janela grande, fora da faixa da legenda queimada (0,40–0,56). */
+  .espaco__pequena--a {
+    right: 4%;
+    top: -8%;
+    width: 26%;
+  }
+  .espaco__pequena--b {
+    right: 18%;
+    bottom: -6%;
+    width: 22%;
+  }
+  .espaco__info {
+    display: grid;
+    gap: var(--e-6);
+    align-content: start;
+  }
+  .espaco__texto {
+    font-family: var(--f-display);
+    margin: 0;
+    max-width: 24ch;
+  }
+  .espaco__dados {
+    display: grid;
+    gap: var(--e-5);
+    padding-block-start: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .espaco__rotulo {
+    margin-block-end: var(--e-2);
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  address {
+    display: grid;
+    font-style: normal;
+  }
+  .espaco__horarios {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .espaco__horarios li + li {
+    margin-block-start: var(--e-2);
+  }
+  .espaco__horarios span {
+    display: block;
+    font-weight: 600;
+  }
+  @media (min-width: 900px) {
+    .espaco__grade {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--e-5);
+      row-gap: var(--e-7);
+    }
+    .espaco__cabeca {
+      grid-column: 1 / 9;
+    }
+    .espaco__janelas {
+      grid-column: 1 / 7;
+      padding-inline-end: 0;
+    }
+    .espaco__grande {
+      width: min(100%, 26rem);
+    }
+    .espaco__pequena--a {
+      left: min(22rem, 80%);
+      right: auto;
+      top: -5%;
+      width: 11rem;
+    }
+    .espaco__pequena--b {
+      left: min(30rem, 92%);
+      right: auto;
+      bottom: 8%;
+      width: 7.5rem;
+    }
+    .espaco__info {
+      grid-column: 8 / 13;
+      align-self: end;
+    }
+    .espaco__dados {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

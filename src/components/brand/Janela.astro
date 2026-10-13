@@ -112,7 +112,6 @@ const estilo = [
         <video
           preload="none"
           playsinline
-          poster={video.poster}
           muted={video.mudo}
           loop={video.mudo}
           aria-label={video.rotulo}
@@ -120,6 +119,16 @@ const estilo = [
           {video.webm && <source src={video.webm} type="video/webm" />}
           <source src={video.mp4} type="video/mp4" />
         </video>
+        {/* Pôster como <img> lazy: o atributo poster baixaria todos já na carga e disputaria o LCP. */}
+        <img
+          class="janela__poster"
+          src={video.poster}
+          alt=""
+          width="540"
+          height="960"
+          loading="lazy"
+          decoding="async"
+        />
         <button class="botao janela__play" type="button" data-play aria-pressed="false">
           <span data-rotulo>Assistir</span>
           <span class="so-leitor">: {video.rotulo}</span>
@@ -145,7 +154,9 @@ const estilo = [
       if (video.paused) void video.play();
       else video.pause();
     });
+    const poster = botao.parentElement?.querySelector<HTMLImageElement>('.janela__poster');
     video.addEventListener('play', () => {
+      if (poster) poster.hidden = true;
       botao.setAttribute('aria-pressed', 'true');
       rotulo.textContent = 'Pausar';
     });
@@ -183,6 +194,17 @@ const estilo = [
   .janela__moldura video {
     object-fit: contain; /* 9:16 inteiro: nada da legenda queimada é cortado pelo enquadramento */
     background: var(--c-tinta);
+  }
+  .janela__poster {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .janela__moldura .janela__poster {
+    object-fit: contain;
+  }
+  .janela__poster[hidden] {
+    display: none;
   }
   .janela__play {
     position: absolute;

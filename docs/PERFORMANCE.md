@@ -1,5 +1,28 @@
 # Performance
 
+## Home completa (entrada + hero + seções 2–9) — sessão 6A, 13/10/2026
+
+Lighthouse 13.5.0 mobile padrão, build de produção (`MEDIA_SKIP=1 pnpm build`), `astro preview`, Chromium 141, três rodadas.
+
+| Métrica             | Rodadas                  | Orçamento                                                              |
+| ------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| Performance         | 97 · 97 · 97             | ≥ 95 ✓                                                                 |
+| Acessibilidade      | 100 · 100 · 100          | 100 ✓                                                                  |
+| Boas práticas       | 100 · 100 · 100          | ≥ 95 ✓                                                                 |
+| SEO                 | 63 · 63 · 63             | ≥ 95 ✗: `noindex` proposital (sem SITE_URL); sai quando houver domínio |
+| FCP                 | 1,7 s                    | —                                                                      |
+| LCP                 | 2.036 · 2.042 · 2.032 ms | < 2,0 s ✗ (32–42 ms acima; na sessão 4 era 1,88 s)                     |
+| CLS                 | 0,0002                   | ≈ 0 ✓                                                                  |
+| TBT                 | 0 ms                     | —                                                                      |
+| Peso total na carga | 191 KiB                  | —                                                                      |
+| JS da home (gzip)   | 1,2 KB (só inline)       | ≤ 35 KB ✓                                                              |
+| HTML (gzip)         | 14,1 KB (77 KB bruto)    | —                                                                      |
+| CSS (gzip)          | 4,4 KB + 3,2 KB          | —                                                                      |
+
+- **Pôsteres de vídeo** passaram do atributo `poster` para um `<img loading="lazy">` dentro da Janela. Com o atributo, os 10 pôsteres (≈ 360 KB) baixavam junto com o retrato do LCP: Performance 93, LCP 2,9 s. Com o `<img>` lazy: 97 e 2,0 s.
+- **Vídeo** só baixa no clique (`preload="none"`). Conferido: nenhum `.mp4`/`.webm` na carga; só o `.webm` do vídeo clicado.
+- **O que ainda pesa no LCP**: HTML maior (19 `clipPath` e 26 SVGs inline) e dois CSS bloqueantes. Caminho para voltar abaixo de 2,0 s: CSS inline (`build.inlineStylesheets`) e um único `<clipPath>` por forma na página. Isso fica para a sessão 8 (fora do escopo da 6A).
+
 ## Home (entrada + hero) — sessão 4, 13/10/2026
 
 Lighthouse 13.5.0 (devDependency fixada), perfil **mobile padrão**: Moto G emulado, 4G lento simulado, CPU 4×. Build de produção (`pnpm build`) servido por `astro preview`, Chromium 141 (Playwright 1194). Cinco rodadas, primeira visita da sessão, **com a entrada rodando** (perfil limpo, sessionStorage vazio).

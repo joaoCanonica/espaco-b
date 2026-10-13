@@ -1,0 +1,102 @@
+---
+// 02 · Manifesto (osso). Gesto: frase display enorme que invade a borda de uma janela pequena.
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { manifesto } from './conteudo.ts';
+import { imagemJanela } from './midia.ts';
+
+const img = imagemDoItem('imagem2', '62% 50%');
+---
+
+<section id="manifesto" class="manifesto" data-tone="light" aria-labelledby="manifesto-titulo">
+  <div class="recipiente manifesto__grade">
+    <div class="manifesto__legenda">
+      <Legenda numero={2}>{manifesto.legenda}</Legenda>
+    </div>
+    <div class="manifesto__janela" aria-hidden="true">
+      <Janela
+        forma="alta"
+        {...(img && { imagem: imagemJanela(img, '(min-width: 900px) 18vw, 40vw') })}
+        placeholder="imagem2 (textura)"
+      />
+    </div>
+    <h2 id="manifesto-titulo" class="manifesto__frase t-1">
+      {manifesto.frase}
+    </h2>
+    <p class="manifesto__paragrafo">{manifesto.paragrafo}</p>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    position: relative;
+    overflow: clip;
+    padding-block: var(--secao-y) calc(var(--secao-y) * 0.8);
+  }
+  .manifesto__grade {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--e-5);
+    row-gap: var(--e-6);
+  }
+  .manifesto__legenda {
+    grid-column: 1 / -1;
+  }
+  .manifesto__janela {
+    grid-column: 8 / 13;
+    grid-row: 2;
+    justify-self: end;
+    width: min(100%, 13rem);
+    margin-block-start: var(--e-4);
+  }
+  .manifesto__frase {
+    grid-column: 1 / -1;
+    grid-row: 2 / 4;
+    position: relative;
+    z-index: 1;
+    padding-block-start: 7rem;
+    max-width: 17ch;
+  }
+  .manifesto__paragrafo {
+    grid-column: 3 / -1;
+    font-size: var(--t-corpo);
+    line-height: var(--lh-corpo);
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .manifesto__janela {
+      grid-column: 9 / 12;
+      grid-row: 2 / 4;
+      width: 100%;
+      margin: 0;
+    }
+    .manifesto__frase {
+      grid-column: 1 / 11;
+      padding-block-start: 12rem;
+      max-width: 15ch;
+    }
+    .manifesto__paragrafo {
+      grid-column: 7 / 12;
+      margin-block-start: var(--e-6);
+    }
+  }
+  /* Melhoria progressiva: a janela sobe um pouco com o scroll (só transform; o conteúdo já está visível). */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .manifesto__janela {
+        animation: manifesto-sobe linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 60%;
+      }
+    }
+  }
+  @keyframes manifesto-sobe {
+    from {
+      transform: translateY(3rem);
+    }
+    to {
+      transform: translateY(-1rem);
+    }
+  }
+</style>

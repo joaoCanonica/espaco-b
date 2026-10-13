@@ -1,0 +1,150 @@
+---
+// 07 · Casos (osso). Módulo `casos`. Gesto: grade em degraus (colunas desencontradas) de clipes
+// curtos, mudos, que só tocam no clique. Aviso fixo antes das mídias. Nunca na primeira dobra.
+// Sem par estático não há cursor de comparação; sem clipe utilizável a seção não existe.
+import Provisorio from '../Provisorio.astro';
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import Selo from '../ui/Selo.astro';
+import { alertarOmissao, emPreview } from '../../config/ambiente.ts';
+import { modulos } from '../../config/modulos.ts';
+import { casosTexto } from './conteudo.ts';
+import { clipesDoItem } from './midia.ts';
+
+// Pares de comparação no quadro: faixa medida nos quadros (≈ 0,20–0,53 da altura).
+// A curva do D não pode cortar o par: a Janela cai para cantos fora desta zona.
+const ZONA_PAR = { topo: 0.18, base: 0.56, esquerda: 0.04, direita: 0.96 };
+const clipes = modulos.casos.ativo ? clipesDoItem('video-para-presenca-e-profissionalismo') : [];
+if (modulos.casos.ativo && clipes.length === 0)
+  alertarOmissao('seção "Casos"', 'nenhum clipe utilizável no índice de mídia');
+const legenda = casosTexto.legendaCaso;
+const preview = emPreview();
+if (!preview && clipes.length && !legenda.valor)
+  alertarOmissao('legenda técnica dos casos', legenda.motivo ?? 'dados pendentes');
+---
+
+<Provisorio modulo="casos">
+  {clipes.length > 0 && (
+    <section
+      id="casos"
+      class="casos"
+      data-tone="light"
+      data-modulo="casos"
+      aria-labelledby="casos-titulo"
+    >
+      <div class="recipiente casos__grade">
+        <div class="casos__cabeca">
+          <Legenda numero={7}>{casosTexto.legenda}</Legenda>
+          <h2 id="casos-titulo" class="t-2 casos__titulo">
+            {casosTexto.titulo}
+          </h2>
+          <p class="casos__aviso">{casosTexto.aviso}</p>
+        </div>
+        <ol class="casos__lista" role="list">
+          {clipes.map((c, i) => (
+            <li class="caso">
+              <Janela
+                forma="baixa"
+                video={{
+                  mp4: c.mp4,
+                  ...(c.webm && { webm: c.webm }),
+                  poster: c.poster,
+                  mudo: true,
+                  zonaLegenda: ZONA_PAR,
+                  rotulo: `Caso ${String(i + 1).padStart(2, '0')}, clipe curto sem som`,
+                }}
+              >
+                <figcaption class="caso__legenda">
+                  <span class="caso__n">{c.pacienteRef}</span>
+                  {legenda.valor ? (
+                    <span>{legenda.valor}</span>
+                  ) : (
+                    preview && (
+                      <span>
+                        {legenda.rotulo}: a informar
+                        <Selo titulo={legenda.motivo ?? ''} />
+                      </span>
+                    )
+                  )}
+                </figcaption>
+              </Janela>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+</Provisorio>
+
+<style>
+  .casos {
+    padding-block: var(--secao-y) calc(var(--secao-y) * 0.7);
+  }
+  .casos__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .casos__titulo {
+    max-width: 14ch;
+    margin-block: var(--e-5);
+  }
+  .casos__aviso {
+    max-width: 44ch;
+    padding-inline-start: var(--e-4);
+    border-left: var(--l-media) solid var(--acento);
+    font-size: var(--t-pequeno);
+  }
+  .casos__lista {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--e-6) var(--e-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .caso:nth-child(even) {
+    margin-block-start: var(--e-8);
+  }
+  /* O botão desce para a base do quadro, abaixo do par de comparação. */
+  .caso :global(.janela__play) {
+    bottom: 0;
+  }
+  .caso__legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-2);
+    align-items: baseline;
+    margin-block-start: var(--e-3);
+    font-size: var(--t-legenda);
+    letter-spacing: 0.06em;
+    color: var(--fg-suave);
+  }
+  .caso__n {
+    font-weight: 600;
+    color: var(--fg);
+  }
+  @media (min-width: 900px) {
+    .casos__grade {
+      grid-template-columns: 4fr 8fr;
+      column-gap: var(--e-8);
+      align-items: start;
+    }
+    .casos__cabeca {
+      position: sticky;
+      top: calc(var(--header-altura) + var(--e-6));
+    }
+    .casos__lista {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .caso:nth-child(even) {
+      margin-block-start: 0;
+    }
+    .caso:nth-child(4n + 2),
+    .caso:nth-child(4n + 4) {
+      margin-block-start: var(--e-9);
+    }
+    .caso:nth-child(4n + 3) {
+      margin-block-start: var(--e-6);
+    }
+  }
+</style>

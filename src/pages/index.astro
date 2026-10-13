@@ -1,13 +1,21 @@
 ---
-// Home: por enquanto só a entrada e o hero (as demais seções são da sessão 6A).
+// Home: entrada e hero (sessão 4) + seções 2–9 (sessão 6A, em src/components/home/).
 import Entrada from '../components/entrada/Entrada.astro';
 import EntradaInicio from '../components/entrada/EntradaInicio.astro';
 import Hero from '../components/hero/Hero.astro';
+import Bia from '../components/home/Bia.astro';
+import Casos from '../components/home/Casos.astro';
+import Contato from '../components/home/Contato.astro';
+import Eixos from '../components/home/Eixos.astro';
+import Espaco from '../components/home/Espaco.astro';
+import Google from '../components/home/Google.astro';
+import Manifesto from '../components/home/Manifesto.astro';
+import Perguntas from '../components/home/Perguntas.astro';
+import Protocolos from '../components/home/Protocolos.astro';
 import Header from '../components/ui/Header.astro';
 import { marca } from '../config/marca.ts';
 import { pessoas } from '../config/pessoas.ts';
 import Base from '../layouts/Base.astro';
-
 // Descrição factual (só dados confirmados); o texto final de SEO é da sessão 8.
 const bia = pessoas.bianca;
 const descricao = `${marca.nomeDescritivo.valor}, em Lages (SC). Atendimento com a ${bia.titulo.valor?.toLowerCase()} ${bia.nome.valor}, ${bia.registro.valor?.conselho} ${bia.registro.valor?.numero}.`;
@@ -18,4 +26,21 @@ const descricao = `${marca.nomeDescritivo.valor}, em Lages (SC). Atendimento com
   <Entrada slot="topo" />
   <Header slot="header" tomInicial="dark" />
   <Hero />
+  <Manifesto />
+  <Eixos />
+  <Protocolos />
+  <Bia />
+  <Espaco />
+  <Casos />
+  <Google />
+  <Perguntas />
+  <Contato />
 </Base>
+
+<style is:global>
+  /* Âncoras da home não ficam sob o header fixo. */
+  #conteudo > section[id],
+  #conteudo section[id] {
+    scroll-margin-top: calc(var(--header-altura) + var(--e-4));
+  }
+</style>
