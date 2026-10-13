@@ -35,8 +35,10 @@ const scriptTema = `(function(){var t;try{t=localStorage.getItem('tema')}catch(e
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href={fonteDisplay} as="font" type="font/woff2" crossorigin />
     <style is:inline set:html={cssDasCores()} />
+    <slot name="head" />
   </head>
   <body>
+    <slot name="topo" />
     <PreviewBanner />
     <slot name="header" />
     <main id="conteudo">

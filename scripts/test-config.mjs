@@ -66,13 +66,14 @@ function validar(dir, { preview }) {
 
 const anexar = (arq, texto) => (dir) =>
   writeFileSync(join(dir, arq), readFileSync(join(dir, arq), 'utf8') + `\n${texto}\n`);
-const naPagina = (html) => (dir) => {
-  const p = join(dir, 'src/pages/index.astro');
-  const s = readFileSync(p, 'utf8');
-  if (!s.includes('<h1>Espaço B</h1>'))
-    throw new Error('âncora <h1> não encontrada em index.astro');
-  writeFileSync(p, s.replace('<h1>Espaço B</h1>', `<h1>Espaço B</h1>\n${html}`));
-};
+// Página de teste criada só na cópia temporária (a home real fica intacta).
+const PAGINA_TESTE = 'src/pages/teste-trava.astro';
+const paginaDeTeste = (dir, { imports = '', head = '', corpo = '' }) =>
+  writeFileSync(
+    join(dir, PAGINA_TESTE),
+    `---\nimport Base from '../layouts/Base.astro';\n${imports}\n---\n\n<Base titulo="Teste">\n${head}\n<h1>Teste</h1>\n${corpo}\n</Base>\n`,
+  );
+const naPagina = (html) => (dir) => paginaDeTeste(dir, { corpo: html });
 
 // Cada cenário: o que muda, se a config também trava (validate-config) e a mensagem esperada.
 const cenarios = [
@@ -155,17 +156,10 @@ const cenarios = [
   },
   {
     nome: 'mídia de paciente no og:image (HTML)',
-    aplicar: (dir) => {
-      const p = join(dir, 'src/pages/index.astro');
-      const s = readFileSync(p, 'utf8');
-      writeFileSync(
-        p,
-        s.replace(
-          '<title>',
-          '<meta property="og:image" content="/media/video/bastidores-ensaio-e-casos-poster-720.avif" />\n    <title>',
-        ),
-      );
-    },
+    aplicar: (dir) =>
+      paginaDeTeste(dir, {
+        head: '<meta slot="head" property="og:image" content="/media/video/bastidores-ensaio-e-casos-poster-720.avif" />',
+      }),
     msg: /og:image/,
   },
   {
@@ -223,29 +217,21 @@ console.log('\n== seção dependente de dado pendente some em produção, com al
 {
   const dir = copiar();
   try {
-    const p = join(dir, 'src/pages/index.astro');
-    const s = readFileSync(p, 'utf8');
-    writeFileSync(
-      p,
-      s
-        .replace(
-          '---\n',
-          "---\nimport Provisorio from '../components/Provisorio.astro';\nimport { config } from '../config/index.ts';\n",
-        )
-        .replace(
-          '<h1>Espaço B</h1>',
-          '<h1>Espaço B</h1>\n<Provisorio campo={config.pessoas.bianca.fotoCredito} rotulo="crédito do fotógrafo"><p id="credito">crédito</p></Provisorio>\n<Provisorio modulo="equipe"><section data-secao="equipe">equipe</section></Provisorio>',
-        ),
-    );
+    paginaDeTeste(dir, {
+      imports:
+        "import Provisorio from '../components/Provisorio.astro';\nimport { config } from '../config/index.ts';",
+      corpo:
+        '<Provisorio campo={config.pessoas.bianca.fotoCredito} rotulo="crédito do fotógrafo"><p id="credito">crédito</p></Provisorio>\n<Provisorio modulo="equipe"><section data-secao="equipe">equipe</section></Provisorio>',
+    });
     const prod = build(dir, { preview: false });
-    const html = readFileSync(join(dir, 'dist/index.html'), 'utf8');
+    const html = readFileSync(join(dir, 'dist/teste-trava/index.html'), 'utf8');
     ok(
       prod.codigo === 0 && !html.includes('data-secao="equipe"') && !html.includes('a informar'),
       'produção omite a seção pendente e a equipe',
     );
     ok(/omitida em produção/.test(prod.saida), 'o build avisa a omissão (não é silenciosa)');
     const prev = build(dir, { preview: true });
-    const htmlPrev = readFileSync(join(dir, 'dist/index.html'), 'utf8');
+    const htmlPrev = readFileSync(join(dir, 'dist/teste-trava/index.html'), 'utf8');
     ok(
       prev.codigo === 0 && /data-secao="?equipe/.test(htmlPrev) && htmlPrev.includes('a informar'),
       '(c) preview mantém equipe e cartão "a informar"',

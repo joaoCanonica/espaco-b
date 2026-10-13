@@ -1,0 +1,210 @@
+---
+// Hero da home: retrato monumental na contraforma baixa, imagem2 na contraforma alta (só desktop),
+// B gigante como arquitetura, título display contra texto pequeno, legenda editorial e dois CTAs.
+// Sem vídeo no hero. O título é o candidato a LCP junto com o retrato (AVIF, fetchpriority=high).
+import BGigante from '../brand/BGigante.astro';
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import Selo from '../ui/Selo.astro';
+import { emPreview } from '../../config/ambiente.ts';
+import { contato } from '../../config/contato.ts';
+import { pessoas } from '../../config/pessoas.ts';
+import { hero } from '../../content/hero.ts';
+import { imagemDoItem, imagemDoSlot } from './midia.ts';
+
+const preview = emPreview();
+const titulo = hero.titulo.valor ?? { principal: '', enfase: '' };
+const retrato = imagemDoSlot('hero.principal');
+const detalhe = imagemDoItem('imagem2');
+const wa = contato.whatsapp.valor;
+const linkWhatsapp = wa
+  ? `https://wa.me/${wa.e164.replace(/\D/g, '')}?text=${encodeURIComponent(hero.mensagemWhatsapp)}`
+  : undefined;
+const bia = pessoas.bianca;
+const assinatura = `${bia.titulo.valor} ${bia.nome.valor} · ${bia.registro.valor?.conselho} ${bia.registro.valor?.numero}`;
+---
+
+<section class="hero" data-tone="dark" aria-labelledby="hero-titulo" data-hero>
+  <BGigante lado="esquerda" altura="160vh" corte={0.42} topo="-18%" intensidade={0.06} />
+  <div class="recipiente hero__grade">
+    <div class="hero__texto">
+      <div class="hero__legenda">
+        <Legenda numero={1}>{hero.legenda}</Legenda>
+      </div>
+      <h1 id="hero-titulo" class="hero__titulo">
+        {titulo.principal} <em>{titulo.enfase}</em>
+      </h1>
+      {preview && (
+        <div class="hero__selo">
+          <Selo titulo="título provisório: o João escolhe entre 3 opções" />
+        </div>
+      )}
+      <p class="hero__assinatura">{assinatura}</p>
+      <div class="hero__acoes">
+        {linkWhatsapp && (
+          <a class="botao" href={linkWhatsapp} rel="noopener" target="_blank">
+            {hero.ctaPrimario}
+            <span class="so-leitor"> (abre o WhatsApp em nova aba)</span>
+          </a>
+        )}
+        <a class="botao botao--linha" href={hero.ctaSecundario.href}>
+          {hero.ctaSecundario.rotulo}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__janelas">
+      <div class="hero__principal">
+        {retrato ? (
+          <Janela
+            forma="baixa"
+            classeMidia="tratamento-retrato"
+            imagem={{
+              src: retrato.src,
+              srcset: retrato.srcset,
+              avifSrcset: retrato.avifSrcset,
+              sizes: '(min-width: 900px) 34vw, calc(100vw - 2rem)',
+              alt: `${bia.nome.valor}, ${bia.titulo.valor?.toLowerCase()}, em retrato de estúdio`,
+              largura: retrato.largura,
+              altura: retrato.altura,
+              objectPosition: retrato.objectPosition,
+              prioridade: 'alta',
+            }}
+          />
+        ) : (
+          <Janela forma="baixa" placeholder="retrato a definir" />
+        )}
+      </div>
+      {detalhe && (
+        <div class="hero__detalhe" aria-hidden="true">
+          <Janela
+            forma="alta"
+            imagem={{
+              src: detalhe.src,
+              srcset: detalhe.srcset,
+              avifSrcset: detalhe.avifSrcset,
+              sizes: '12vw',
+              alt: '',
+              largura: detalhe.largura,
+              altura: detalhe.altura,
+              carregamento: 'lazy',
+            }}
+          />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - var(--header-altura));
+    display: grid;
+    align-items: center;
+    padding-block: var(--e-6) var(--e-8);
+  }
+  .hero__grade {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--e-6);
+  }
+  .hero__texto {
+    display: grid;
+    gap: var(--e-5);
+    align-content: center;
+  }
+  .hero__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+  .hero__titulo em {
+    display: block;
+  }
+  .hero__assinatura {
+    margin: 0;
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+  }
+  .hero__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-3);
+  }
+  .hero__janelas {
+    position: relative;
+  }
+  .hero__detalhe {
+    display: none;
+  }
+
+  .hero__selo {
+    justify-self: start;
+  }
+  .hero__texto > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Mobile: janela única empilhada; o título sobrepõe a borda inferior da janela. */
+  @media (max-width: 899px) {
+    .hero__texto {
+      display: contents;
+    }
+    .hero__grade {
+      gap: var(--e-4);
+      grid-template-areas: 'legenda' 'janela' 'titulo' 'selo' 'assinatura' 'acoes';
+    }
+    .hero__legenda {
+      grid-area: legenda;
+    }
+    .hero__janelas {
+      grid-area: janela;
+      width: min(100%, 26rem);
+    }
+    .hero__titulo {
+      grid-area: titulo;
+      margin-top: calc(var(--t-1) * -1.1);
+    }
+    .hero__selo {
+      grid-area: selo;
+    }
+    .hero__assinatura {
+      grid-area: assinatura;
+    }
+    .hero__acoes {
+      grid-area: acoes;
+    }
+  }
+
+  /* Desktop: texto à esquerda (ela olha para o texto), retrato monumental à direita,
+     janela pequena sobreposta à borda esquerda do retrato. */
+  @media (min-width: 900px) {
+    .hero__grade {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+    }
+    .hero__titulo {
+      font-size: clamp(3.5rem, 1rem + 6.2vw, 8.25rem);
+    }
+    .hero__principal {
+      width: min(100%, calc((100svh - var(--header-altura) - var(--e-8)) * 0.7592));
+      margin-inline-start: auto;
+    }
+    .hero__detalhe {
+      display: block;
+      position: absolute;
+      width: 30%;
+      left: max(
+        -4%,
+        calc(100% - min(100%, calc((100svh - var(--header-altura) - var(--e-8)) * 0.7592)) - 18%)
+      );
+      bottom: 6%;
+    }
+  }
+</style>

@@ -212,6 +212,24 @@ a:hover {
   color: var(--fg-suave);
 }
 
+/* Tratamento GLOBAL e idêntico dos retratos de estúdio (docs/MARCA.md §5).
+   Só no derivado exibido; nunca no original, nunca localizado em rosto/pele. */
+.tratamento-retrato {
+  position: relative;
+}
+.tratamento-retrato img {
+  filter: sepia(0.14) saturate(0.9);
+}
+.tratamento-retrato::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--c-musgo);
+  mix-blend-mode: soft-light;
+  opacity: 0.45;
+}
+
 /* Utilidades */
 .recipiente {
   width: 100%;

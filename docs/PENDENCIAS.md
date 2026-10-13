@@ -19,7 +19,7 @@ Formato: o que falta · quem resolve · desde.
 
 <!-- gerado:inicio (scripts/validate-config.mjs; não editar à mão) -->
 
-## Config (gerado em 2026-10-12)
+## Config (gerado em 2026-10-13)
 
 Trava de produção: livre (registro e WhatsApp confirmados; sem paciente em capa; sem claim publicado sem fonte).
 
@@ -100,3 +100,8 @@ Nenhum.
 - **Aprovar tipografia**: Newsreader Display + Albert Sans (espécime em `docs/capturas/tipografia/`). · João
 - **Framboesa**: a amostra real das flores é mais quente (`#983D33`) que o `#8E2B41` da direção; adotada a amostra. Confirmar. · João
 - **Assinatura "completo"** (B + "Espaço B" em Newsreader) é provisória; se existir assinatura oficial, ela substitui. · João
+
+## Hero (sessão 4, 13/10/2026)
+
+- **Título do hero**: em uso a opção 1 ("Rosto e corpo, um projeto só."); as 3 opções estão em `src/content/hero.ts`. · João
+- **CTA "Conhecer os protocolos"** aponta para `/protocolos-bia/`, que só existe a partir da sessão 6B. · Code

@@ -103,3 +103,18 @@ As licenças vão junto em `src/styles/fonts/licencas/`. Nenhuma das famílias u
 **Tema sem flash:** um script inline no `<head>`, antes do CSS, aplica `data-theme` a partir do `localStorage` (com try/catch) ou do `prefers-color-scheme`. Sem JS, o CSS segue o sistema. Prova em `docs/capturas/tema/`: com tema escuro salvo, sistema claro e CPU 6× mais lenta, o primeiro quadro pintado já é escuro (o quadro 0 é o `about:blank` antes da navegação).
 
 **Movimento:** tokens de duração e curva. Com `prefers-reduced-motion`, tudo cai para 0,01 ms. Não há biblioteca de animação.
+
+## 5. Retratos de estúdio sobre a Tinta (sessão 4)
+
+Os dois retratos têm fundo frio: o do colete é azul-escuro (`#272532` no canto) e o do vestido é cinza. O site é Tinta quente (`#1E211A`). Testei cinco tratamentos **globais e idênticos** nos dois retratos, aplicados só na exibição (nunca no original, nunca localizados em rosto ou pele). Medição no canto superior direito (fundo) e num recorte do rosto:
+
+| Variante                                                   | Fundo colete | Distância à Tinta | Rosto                                   |
+| ---------------------------------------------------------- | ------------ | ----------------- | --------------------------------------- |
+| A · original                                               | `#272532`    | 26                | `#AB7772`                               |
+| B · sépia 0,18 + saturação 0,88                            | `#29262E`    | 23                | `#A47D74`                               |
+| C · musgo soft-light 55%                                   | `#211F27`    | 13                | `#A16D62` (pele mais vermelha e escura) |
+| D · musgo "color" 22%                                      | `#27262C`    | 21                | `#A47C73`                               |
+| **E · sépia 0,14 + saturação 0,90 + musgo soft-light 45%** | `#242226`    | **13**            | `#A2776A`                               |
+
+- **Escolha: E.** Leva o fundo azulado até a mesma distância da Tinta que C, sem avermelhar a pele (o rosto muda pouco em relação ao original). É uma curva só, aplicada na imagem inteira.
+- **Implementação:** classe `.tratamento-retrato` em `src/styles/base.css`, usada no hero via `<Janela classeMidia="tratamento-retrato">`. O mesmo filtro e a mesma camada valem para o retrato do vestido quando ele entrar na seção "A Bia".

@@ -4,6 +4,7 @@
 // Imagem: proporção da própria contraforma. Vídeo: 9:16 inteiro; se a curva do D cortar a zona
 // da legenda queimada, cai para cantos arredondados só fora da zona (e avisa no build).
 import Selo from '../ui/Selo.astro';
+import { alertarOmissao, emPreview } from '../../config/ambiente.ts';
 import { contraforma, zonaLivre, type Forma, type Zona } from './marca.ts';
 
 interface Imagem {
@@ -15,6 +16,10 @@ interface Imagem {
   altura: number;
   objectPosition?: string;
   carregamento?: 'lazy' | 'eager';
+  /** srcset AVIF (vira <picture>; o srcset principal fica como fallback) */
+  avifSrcset?: string;
+  /** "alta" = candidato a LCP: eager + fetchpriority=high */
+  prioridade?: 'alta' | 'normal';
 }
 interface Video {
   mp4: string;
@@ -30,6 +35,8 @@ interface Props {
   video?: Video;
   largura?: string;
   placeholder?: string;
+  /** classe extra na moldura (ex.: "tratamento-retrato") */
+  classeMidia?: string;
 }
 
 const {
@@ -38,7 +45,12 @@ const {
   video,
   largura = '100%',
   placeholder = 'imagem a definir',
+  classeMidia,
 } = Astro.props;
+const alta = imagem?.prioridade === 'alta';
+const preview = emPreview();
+// Sem mídia: em preview, placeholder com selo; em produção, a moldura fica vazia e o build avisa.
+if (!imagem && !video && !preview) alertarOmissao(`mídia da janela ${forma}`, placeholder);
 const cf = contraforma(forma);
 const id = `cf-${forma}-${Math.random().toString(36).slice(2, 8)}`;
 
@@ -75,19 +87,25 @@ const estilo = [
       <path d={cf.dNormalizado}></path>
     </clipPath>
   </svg>
-  <div class="janela__moldura" style={estilo}>
+  <div class:list={['janela__moldura', classeMidia]} style={estilo}>
     {imagem && (
-      <img
-        src={imagem.src}
-        srcset={imagem.srcset}
-        sizes={imagem.sizes}
-        alt={imagem.alt}
-        width={imagem.largura}
-        height={imagem.altura}
-        loading={imagem.carregamento ?? 'lazy'}
-        decoding="async"
-        style={`object-position:${imagem.objectPosition ?? '50% 50%'}`}
-      />
+      <picture>
+        {imagem.avifSrcset && (
+          <source type="image/avif" srcset={imagem.avifSrcset} sizes={imagem.sizes} />
+        )}
+        <img
+          src={imagem.src}
+          srcset={imagem.srcset}
+          sizes={imagem.sizes}
+          alt={imagem.alt}
+          width={imagem.largura}
+          height={imagem.altura}
+          loading={alta ? 'eager' : (imagem.carregamento ?? 'lazy')}
+          fetchpriority={alta ? 'high' : undefined}
+          decoding={alta ? 'sync' : 'async'}
+          style={`object-position:${imagem.objectPosition ?? '50% 50%'}`}
+        />
+      </picture>
     )}
     {video && (
       <>
@@ -108,7 +126,7 @@ const estilo = [
         </button>
       </>
     )}
-    {!imagem && !video && (
+    {!imagem && !video && preview && (
       <div class="janela__vazia">
         <Selo />
         <span>{placeholder}</span>
@@ -152,6 +170,9 @@ const estilo = [
     width: 100%;
     overflow: hidden;
     background: var(--linha);
+  }
+  .janela__moldura picture {
+    display: contents;
   }
   .janela__moldura img,
   .janela__moldura video {

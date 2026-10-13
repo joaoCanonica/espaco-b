@@ -1,0 +1,153 @@
+---
+// Entrada da home: tela musgo, o B creme surge, as contraformas se abrem e revelam o hero.
+// O hero já está no DOM (e legível por leitor de tela) por baixo. Tudo em transform/opacity.
+// Só roda na 1ª visita da sessão, com JS e sem prefers-reduced-motion (decidido antes da pintura).
+// Rede de segurança: a classe sai em 5 s (EntradaInicio.astro) e a animação CSS some sozinha em 2,85 s.
+import { contraforma, pathB, viewBoxB } from '../brand/marca.ts';
+
+const alta = contraforma('alta');
+const baixa = contraforma('baixa');
+const [, , vw, vh] = viewBoxB.split(' ').map(Number) as [number, number, number, number];
+// Origem do zoom: centro da contraforma baixa (fração da caixa do B).
+const origemX = ((baixa.caixa.x + baixa.caixa.w / 2) / vw) * 100;
+const origemY = ((baixa.caixa.y + baixa.caixa.h / 2) / vh) * 100;
+// Fundo musgo com as duas contraformas vazadas (evenodd); folga cobre qualquer viewport.
+const fundo = `M-3200 -2200H${vw + 3200}V${vh + 2200}H-3200Z${alta.d}${baixa.d}`;
+---
+
+<div class="entrada" data-entrada>
+  <div
+    class="entrada__palco"
+    style={`transform-origin:${origemX.toFixed(2)}% ${origemY.toFixed(2)}%`}
+  >
+    <svg
+      class="entrada__camada"
+      viewBox={viewBoxB}
+      overflow="visible"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path style="fill:var(--c-musgo)" fill-rule="evenodd" d={fundo}></path>
+    </svg>
+    <svg
+      class="entrada__camada entrada__tampa"
+      viewBox={viewBoxB}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        style="fill:var(--c-musgo);stroke:var(--c-musgo);stroke-width:6"
+        d={alta.d + baixa.d}
+      ></path>
+    </svg>
+    <svg class="entrada__camada entrada__b" viewBox={viewBoxB} aria-hidden="true" focusable="false">
+      <path style="fill:var(--c-creme)" fill-rule="evenodd" d={pathB}></path>
+    </svg>
+  </div>
+</div>
+<!-- Fora do contêiner que faz fade: o botão nunca fica semitransparente. -->
+<button class="entrada__pular" type="button" data-pular>
+  Pular<span class="so-leitor"> a abertura</span>
+</button>
+
+<script>
+  import '../../scripts/entrada.ts';
+</script>
+
+<style>
+  .entrada,
+  .entrada__pular {
+    display: none;
+  }
+  :global(:root.com-entrada) .entrada {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    overflow: hidden;
+    animation: entrada-sai 300ms linear 2550ms forwards;
+  }
+  .entrada__palco {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    --palco-h: min(46vh, 70vw * 1.282);
+    height: var(--palco-h);
+    width: calc(var(--palco-h) * 0.78);
+    will-change: transform;
+    animation: entrada-abre 1300ms cubic-bezier(0.7, 0, 0.84, 0) 1300ms forwards;
+  }
+  .entrada__camada {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .entrada__tampa {
+    will-change: opacity;
+    animation: entrada-tampa 500ms var(--curva-padrao) 800ms forwards;
+  }
+  .entrada__b {
+    opacity: 0;
+    will-change: opacity, transform;
+    animation: entrada-b 600ms var(--curva-saida) 100ms forwards;
+  }
+  :global(:root.com-entrada) .entrada__pular {
+    display: block;
+    position: fixed;
+    z-index: 301;
+    right: var(--gutter);
+    bottom: max(var(--e-6), env(safe-area-inset-bottom));
+    min-height: 2.75rem;
+    padding: 0 var(--e-5);
+    border: var(--l-fina) solid var(--c-osso);
+    border-radius: var(--r-d);
+    background: var(--c-musgo);
+    color: var(--c-osso);
+    font: 600 var(--t-legenda) / 1 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    cursor: pointer;
+    /* some antes do fade de saída: nunca fica meio transparente (contraste) */
+    animation: entrada-pular-some 1ms step-end 2500ms forwards;
+    will-change: opacity;
+  }
+  .entrada__pular:focus-visible {
+    outline: var(--l-foco) solid var(--c-osso);
+    outline-offset: 3px;
+  }
+
+  @keyframes entrada-b {
+    from {
+      opacity: 0;
+      transform: translateY(2%);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes entrada-tampa {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes entrada-abre {
+    to {
+      transform: scale(24);
+    }
+  }
+  @keyframes entrada-pular-some {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  @keyframes entrada-sai {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+</style>
