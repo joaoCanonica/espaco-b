@@ -160,3 +160,15 @@ O preview mostra "a informar" + selo; a produção omite o bloco e avisa no buil
   - confirmar se P-002 e P-007 são a mesma paciente. · João
 - **404:** título e texto ("Esta página não existe." / "O endereço pode ter mudado ou estar incompleto.") não estão no COPY_DECK. Aprovar. · João
 - **/contato:** o botão "Ligar" usa o mesmo número do WhatsApp (`tel:`). Confirmar se o número também atende chamada. · João
+
+## Conversão, consentimento e privacidade (sessão 7, 13/10/2026)
+
+- **Revisão jurídica da política de privacidade** ([DECISÃO HUMANA] em COMPLIANCE.md):
+  - controlador sem CNPJ;
+  - razão social ainda `informado` (some em produção);
+  - encarregado (art. 41);
+  - prazos de guarda das conversas de WhatsApp e dos logs da hospedagem. · João + jurídico
+- **Link direto de avaliação** (`avaliacaoDiretaUrl`): testar e confirmar. Até lá, `/avaliar` leva à ficha no Maps, o build avisa e a plaquinha `print/avaliar.pdf` sai PROVISÓRIA (não imprimir). Depois de confirmar: `pnpm plaquinha`. · João
+- **Hospedagem:** `public/_headers` está no formato Netlify / Cloudflare Pages. Se o host for outro, portar os cabeçalhos. HSTS só vale com HTTPS. · Code (deploy)
+- **Telefone:** o `tel:` usa o número do WhatsApp. Confirmar se ele atende ligação. · João
+- **Analytics:** só existe o gancho (fila local `window.espacoB.eventos`, sem rede, só com "estatística"). Escolher um provedor exige atualizar a política e subir `VERSAO` em `src/scripts/consentimento.ts`. · João

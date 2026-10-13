@@ -1,0 +1,301 @@
+---
+// Banner de consentimento (1º nível) + painel de preferências (2º nível, <dialog>).
+// Aceitar, Recusar e Personalizar têm a MESMA classe, tamanho e cor. Nada vem pré-marcado.
+// Sem JS o banner não aparece, e então nada opcional carrega: o site segue só com o essencial.
+---
+
+<section
+  class="consentimento"
+  data-tone="dark"
+  data-consentimento
+  hidden
+  aria-labelledby="consentimento-titulo"
+>
+  <div class="recipiente consentimento__grade">
+    <div class="consentimento__texto">
+      <h2 id="consentimento-titulo" class="consentimento__titulo">
+        Privacidade
+      </h2>
+      <p>
+        O site usa só o essencial para funcionar. Com a sua permissão, também guarda o tema que você
+        escolher, carrega o mapa do Google e conta cliques de contato (sem enviar a terceiros).{' '}
+        <a href="/privacidade/">Política de privacidade</a>
+      </p>
+    </div>
+    <div class="consentimento__acoes">
+      <button class="consentimento__botao" type="button" data-acao="aceitar">
+        Aceitar
+      </button>
+      <button class="consentimento__botao" type="button" data-acao="recusar">
+        Recusar
+      </button>
+      <button class="consentimento__botao" type="button" data-acao="personalizar">
+        Personalizar
+      </button>
+    </div>
+  </div>
+</section>
+
+<dialog
+  class="consentimento-painel"
+  data-tone="light"
+  data-consentimento-painel
+  aria-labelledby="painel-titulo"
+>
+  <form method="dialog" class="consentimento-painel__form">
+    <h2 id="painel-titulo" class="consentimento-painel__titulo">
+      Preferências de privacidade
+    </h2>
+    <p class="consentimento-painel__intro">
+      Escolha o que pode ser usado. Você pode mudar quando quiser pelo link “Preferências de
+      privacidade”, no rodapé.
+    </p>
+    <fieldset class="consentimento-painel__categorias">
+      <legend class="so-leitor">Categorias</legend>
+      <label class="categoria">
+        <input type="checkbox" checked disabled />
+        <span class="categoria__nome">Essenciais (sempre ativas)</span>
+        <span class="categoria__desc">
+          Guardam só a sua escolha de privacidade. Sem elas o site não lembra o que você decidiu.
+        </span>
+      </label>
+      <label class="categoria">
+        <input type="checkbox" name="preferencias" />
+        <span class="categoria__nome">Preferências</span>
+        <span class="categoria__desc">Lembram o tema claro ou escuro entre as visitas.</span>
+      </label>
+      <label class="categoria">
+        <input type="checkbox" name="mapas" />
+        <span class="categoria__nome">Mapas e terceiros</span>
+        <span class="categoria__desc">
+          Carregam o mapa do Google na página de contato. O Google recebe o seu endereço IP e pode
+          usar cookies próprios.
+        </span>
+      </label>
+      <label class="categoria">
+        <input type="checkbox" name="estatistica" />
+        <span class="categoria__nome">Estatística</span>
+        <span class="categoria__desc">
+          Contam, no seu navegador, cliques em WhatsApp, telefone e avaliação. Hoje nada disso é
+          enviado a terceiros.
+        </span>
+      </label>
+    </fieldset>
+    <div class="consentimento-painel__acoes">
+      <button class="consentimento__botao" type="submit" value="salvar" data-acao="salvar">
+        Salvar escolhas
+      </button>
+      <button class="consentimento__botao" type="submit" value="aceitar" data-acao="aceitar">
+        Aceitar tudo
+      </button>
+      <button class="consentimento__botao" type="submit" value="recusar" data-acao="recusar">
+        Recusar tudo
+      </button>
+    </div>
+  </form>
+</dialog>
+
+<p class="so-leitor" role="status" data-consentimento-status></p>
+
+<script>
+  import {
+    CATEGORIAS,
+    aceitarTudo,
+    ler,
+    recusarTudo,
+    registrarConversao,
+    salvar,
+    type Categoria,
+  } from '../../scripts/consentimento.ts';
+
+  const banner = document.querySelector<HTMLElement>('[data-consentimento]');
+  const painel = document.querySelector<HTMLDialogElement>('[data-consentimento-painel]');
+  const status = document.querySelector<HTMLElement>('[data-consentimento-status]');
+  const raiz = document.documentElement;
+
+  const mostrarBanner = (sim: boolean) => {
+    if (!banner) return;
+    banner.hidden = !sim;
+    raiz.dataset['consentimentoEstado'] = sim ? 'pendente' : 'decidido';
+  };
+  const avisar = (txt: string) => {
+    if (status) status.textContent = txt;
+  };
+
+  const abrirPainel = () => {
+    if (!painel) return;
+    const e = ler();
+    for (const c of CATEGORIAS) {
+      const caixa = painel.querySelector<HTMLInputElement>(`input[name="${c}"]`);
+      if (caixa) caixa.checked = e?.[c] ?? false;
+    }
+    painel.showModal();
+  };
+
+  mostrarBanner(ler() === null);
+
+  banner?.addEventListener('click', (ev) => {
+    const acao = (ev.target as HTMLElement).closest<HTMLElement>('[data-acao]')?.dataset['acao'];
+    if (acao === 'aceitar') {
+      aceitarTudo();
+      mostrarBanner(false);
+      avisar('Tudo permitido. Você pode mudar no rodapé.');
+    } else if (acao === 'recusar') {
+      recusarTudo();
+      mostrarBanner(false);
+      avisar('Só o essencial. Você pode mudar no rodapé.');
+    } else if (acao === 'personalizar') abrirPainel();
+  });
+
+  painel?.addEventListener('close', () => {
+    const v = painel.returnValue;
+    if (v === 'aceitar') aceitarTudo();
+    else if (v === 'recusar') recusarTudo();
+    else if (v === 'salvar') {
+      const escolha = Object.fromEntries(
+        CATEGORIAS.map((c) => [
+          c,
+          painel.querySelector<HTMLInputElement>(`input[name="${c}"]`)?.checked ?? false,
+        ]),
+      ) as Record<Categoria, boolean>;
+      salvar(escolha);
+    } else return; // fechou com Esc: nada muda
+    painel.returnValue = '';
+    mostrarBanner(false);
+    avisar('Preferências de privacidade salvas.');
+  });
+
+  // Revogação: link permanente no rodapé (sem JS ele leva à política, que explica como mudar).
+  document.addEventListener('click', (ev) => {
+    const link = (ev.target as HTMLElement).closest('[data-abrir-consentimento]');
+    if (!link) return;
+    ev.preventDefault();
+    abrirPainel();
+  });
+  document.addEventListener('consentimento:abrir', abrirPainel);
+
+  // Rastreio de conversão (gancho, sem rede): só registra com "estatística" aceita.
+  document.addEventListener('click', (ev) => {
+    const a = (ev.target as HTMLElement).closest<HTMLAnchorElement>('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') ?? '';
+    if (href.startsWith('https://wa.me/')) registrarConversao('whatsapp');
+    else if (href.startsWith('tel:')) registrarConversao('telefone');
+    else if (a.hasAttribute('data-avaliar')) registrarConversao('avaliar');
+  });
+</script>
+
+<style>
+  .consentimento {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: var(--z-faixa);
+    padding-block: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha-forte);
+    box-shadow: 0 -1px 0 var(--linha);
+  }
+  .consentimento[hidden] {
+    display: none;
+  }
+  .consentimento__grade {
+    display: grid;
+    gap: var(--e-4);
+  }
+  .consentimento__titulo {
+    font-size: var(--t-4);
+  }
+  .consentimento__texto p {
+    margin: var(--e-2) 0 0;
+    max-width: 48rem;
+    font-size: var(--t-pequeno);
+  }
+  .consentimento__acoes,
+  .consentimento-painel__acoes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--e-3);
+  }
+  /* Os três botões são idênticos: mesma borda, mesmo fundo, mesma largura. */
+  .consentimento__botao {
+    min-height: 3rem;
+    padding: 0 var(--e-3);
+    border: var(--l-fina) solid var(--fg);
+    border-radius: var(--r-d);
+    background: transparent;
+    color: var(--fg);
+    font: 600 var(--t-pequeno) / 1.1 var(--f-texto);
+    cursor: pointer;
+  }
+  .consentimento__botao:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  @media (min-width: 900px) {
+    .consentimento__grade {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: var(--e-7);
+    }
+    .consentimento__acoes {
+      grid-template-columns: repeat(3, 10rem);
+    }
+  }
+
+  .consentimento-painel {
+    width: min(100% - 2rem, 40rem);
+    max-height: calc(100svh - 2rem);
+    padding: 0;
+    border: var(--l-fina) solid var(--linha-forte);
+    background: var(--bg);
+    color: var(--fg);
+  }
+  .consentimento-painel::backdrop {
+    background: rgb(0 0 0 / 0.55);
+  }
+  .consentimento-painel__form {
+    display: grid;
+    gap: var(--e-5);
+    padding: var(--e-6);
+  }
+  .consentimento-painel__titulo {
+    font-size: var(--t-3);
+  }
+  .consentimento-painel__intro {
+    margin: 0;
+    font-size: var(--t-pequeno);
+  }
+  .consentimento-painel__categorias {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .categoria {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: var(--e-1) var(--e-3);
+    padding-block: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha-forte);
+    cursor: pointer;
+  }
+  .categoria input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0.1rem 0 0;
+    accent-color: var(--fg);
+  }
+  .categoria__nome {
+    font-weight: 600;
+  }
+  .categoria__desc {
+    grid-column: 2;
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+  }
+  @media (max-width: 520px) {
+    .consentimento-painel__acoes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

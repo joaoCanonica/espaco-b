@@ -1,0 +1,67 @@
+---
+// Botão fixo de WhatsApp, só no mobile. Não cobre conteúdo (o body ganha um respiro do mesmo
+// tamanho), some perto do rodapé e enquanto o banner de consentimento estiver aberto.
+import { linkWhatsapp } from './links.ts';
+---
+
+{linkWhatsapp && (
+  <a class="flutuante" href={linkWhatsapp} rel="noopener" target="_blank" data-flutuante>
+    WhatsApp<span class="so-leitor">: agendar avaliação (abre em nova aba)</span>
+  </a>
+)}
+
+<script>
+  const botao = document.querySelector<HTMLElement>('[data-flutuante]');
+  const rodape = document.querySelector('[data-rodape]');
+  if (botao && rodape && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      ([e]) => {
+        botao.dataset['perto'] = String(!!e?.isIntersecting);
+      },
+      { rootMargin: '0px 0px 120px 0px' },
+    ).observe(rodape);
+  }
+</script>
+
+<style>
+  .flutuante {
+    display: none;
+  }
+  @media (max-width: 899px) {
+    .flutuante {
+      position: fixed;
+      right: var(--gutter);
+      bottom: max(var(--e-4), env(safe-area-inset-bottom));
+      z-index: var(--z-header);
+      display: inline-flex;
+      align-items: center;
+      min-height: 3rem;
+      padding: 0 var(--e-6) 0 var(--e-5);
+      border-radius: var(--r-d);
+      background: var(--c-tinta);
+      color: var(--c-osso);
+      font: 600 var(--t-pequeno) / 1 var(--f-texto);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      box-shadow: 0 0 0 1px var(--c-osso);
+      transition:
+        opacity var(--dur-media) var(--curva-padrao),
+        visibility 0s linear var(--dur-media);
+    }
+    .flutuante[data-perto='true'],
+    :global(:root[data-consentimento-estado='pendente']) .flutuante {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    /* Respiro no fim da página: o botão nunca fica sobre o último conteúdo. */
+    :global(body) {
+      padding-bottom: calc(3rem + var(--e-6));
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flutuante {
+      transition: none;
+    }
+  }
+</style>

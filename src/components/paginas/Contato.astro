@@ -2,9 +2,10 @@
 // /contato. Composição tipográfica: o número do WhatsApp em display gigante contra o B gigante
 // cortado pela borda; sem foto e sem formulário (só WhatsApp e telefone). Depois: horários,
 // endereço, Instagram, a primeira consulta e as avaliações reais do Google (módulo).
-// Mapa: só link (o mapa com consentimento é da sessão 7).
+// Mapa: iframe do Google só depois do aceite da categoria "mapas" (sessão 7).
 import BGigante from '../brand/BGigante.astro';
 import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import Mapa from '../consentimento/Mapa.astro';
 import Google from '../home/Google.astro';
 import Legenda from '../ui/Legenda.astro';
 import Migalhas from '../servicos/Migalhas.astro';
@@ -88,6 +89,15 @@ const maps = contato.google.mapsUrl.valor;
         </div>
       )}
     </div>
+  </div>
+</section>
+
+<section class="ct-mapa" data-tone="light" aria-labelledby="ct-mapa-titulo">
+  <div class="recipiente">
+    <h2 id="ct-mapa-titulo" class="so-leitor">
+      Mapa
+    </h2>
+    <Mapa />
   </div>
 </section>
 
@@ -191,6 +201,9 @@ const maps = contato.google.mapsUrl.valor;
     }
   }
 
+  .ct-mapa {
+    padding-block: 0 calc(var(--secao-y) * 0.8);
+  }
   .ct-consulta {
     padding-block: var(--secao-y) var(--e-8);
   }

@@ -315,7 +315,19 @@ function escreverRelatorio({ achados, bloqueios, avisosAchados, producao, ignora
       : 'Nada.',
     '',
   ].join('\n');
-  writeFileSync(join(RAIZ, 'docs', 'COMPLIANCE.md'), md);
+  // Bloco manual de decisões humanas: preservado entre regenerações (sessão 7).
+  const arq = join(RAIZ, 'docs', 'COMPLIANCE.md');
+  const anterior = existsSync(arq) ? readFileSync(arq, 'utf8') : '';
+  const manual =
+    anterior.match(/<!-- decisoes:inicio -->[\s\S]*?<!-- decisoes:fim -->/)?.[0] ??
+    '<!-- decisoes:inicio -->\n<!-- decisoes:fim -->';
+  writeFileSync(
+    arq,
+    md.replace(
+      '## Bloqueios (travam produção)',
+      `## Decisões humanas (manual; preservado pelo gerador)\n\n${manual}\n\n## Bloqueios (travam produção)`,
+    ),
+  );
 }
 
 // Modo texto: audita um arquivo de texto (ex.: docs/COPY_DECK.md) linha a linha, com as mesmas listas.

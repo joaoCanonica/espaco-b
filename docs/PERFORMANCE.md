@@ -1,5 +1,22 @@
 # Performance
 
+## Conversão, consentimento e CSP — sessão 7, 13/10/2026
+
+Lighthouse 13.5.0 mobile padrão, build de produção (com a CSP por hash no `<meta>`).
+
+| Página        | Perf.        | Acess. | Boas prát. | SEO | LCP                      | CLS    |
+| ------------- | ------------ | ------ | ---------- | --- | ------------------------ | ------ |
+| /             | 96 · 96 · 96 | 100    | 100        | 63  | 2.130 · 2.190 · 2.185 ms | 0,0003 |
+| /contato/     | 99           | 100    | 100        | 60  | 1.808 ms                 | 0,0001 |
+| /privacidade/ | 100          | 100    | 100        | 60  | 1.509 ms                 | 0,0001 |
+| /avaliar/     | 100          | 100    | 100        | 60  | 1.506 ms                 | 0,0001 |
+
+- **Home:**
+  - HTML com 19,1 KB gzip (antes 14,1): rodapé, banner, painel e CSP;
+  - JS inline 1,2 KB gzip, mais 1 módulo (banner + consentimento, ≈ 2,1 KB gzip);
+  - LCP acima da meta de 2,0 s (ver MELHORIAS.md).
+- **Mapa:** só carrega com o consentimento "mapas"; não entra na carga inicial.
+
 ## /bia, /espaco, /casos, /contato e 404 — sessão 6C, 13/10/2026
 
 Lighthouse 13.5.0 mobile padrão, build de produção, uma rodada por página. A 404 foi medida em `/404.html`, porque com status 404 o Lighthouse não roda.

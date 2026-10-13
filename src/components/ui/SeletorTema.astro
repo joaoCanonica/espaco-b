@@ -18,8 +18,11 @@
   botao?.addEventListener('click', () => {
     const novo = raiz.dataset['theme'] === 'dark' ? 'light' : 'dark';
     raiz.dataset['theme'] = novo;
+    // Só guarda entre visitas com a categoria "preferências" aceita (sessão 7). Lê a escolha
+    // direto do armazenamento (sem importar o módulo) para o script continuar inline e leve.
     try {
-      localStorage.setItem('tema', novo);
+      const c = JSON.parse(localStorage.getItem('espacob-consentimento') ?? 'null');
+      if (c?.preferencias === true) localStorage.setItem('tema', novo);
     } catch {
       /* armazenamento indisponível: vale só nesta visita */
     }

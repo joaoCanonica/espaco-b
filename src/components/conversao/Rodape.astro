@@ -1,0 +1,153 @@
+---
+// Rodapé de todas as páginas: marca, endereço, responsável técnica e registro, contato,
+// privacidade e o link PERMANENTE de revogação do consentimento. Sem CNPJ (decisão do João).
+import Logo from '../brand/Logo.astro';
+import { contato } from '../../config/contato.ts';
+import { legal } from '../../config/legal.ts';
+import { marca } from '../../config/marca.ts';
+import { pessoas } from '../../config/pessoas.ts';
+import { enderecoLinhas } from '../home/conteudo.ts';
+import { linkTelefone, linkWhatsapp, numeroExibicao } from './links.ts';
+
+const bia = pessoas.bianca;
+const rt = legal.responsavelTecnica.valor;
+const insta = contato.instagram.valor;
+const ano = new Date().getFullYear();
+// Aviso do rodapé (COPY_DECK §10).
+const aviso =
+  'As informações deste site são educativas e não substituem a avaliação individual. Cada pessoa responde de um jeito aos procedimentos.';
+---
+
+<footer class="rodape" data-tone="dark" data-rodape>
+  <div class="recipiente rodape__grade">
+    <div class="rodape__marca">
+      <Logo variante="completo" altura="2.25rem" />
+      <p class="rodape__descritivo">{marca.nomeDescritivo.valor}</p>
+    </div>
+    <div class="rodape__bloco">
+      <h2 class="rodape__rotulo">Endereço</h2>
+      <address>
+        {enderecoLinhas.map((l) => (
+          <span>{l}</span>
+        ))}
+      </address>
+    </div>
+    <div class="rodape__bloco">
+      <h2 class="rodape__rotulo">Responsável técnica</h2>
+      <p>
+        {bia.titulo.valor} {bia.nome.valor}
+        <br />
+        {rt?.registro}
+      </p>
+    </div>
+    <div class="rodape__bloco">
+      <h2 class="rodape__rotulo">Contato</h2>
+      <ul role="list">
+        {linkWhatsapp && (
+          <li>
+            <a href={linkWhatsapp} rel="noopener" target="_blank">
+              WhatsApp {numeroExibicao}
+              <span class="so-leitor"> (abre em nova aba)</span>
+            </a>
+          </li>
+        )}
+        {linkTelefone && (
+          <li>
+            <a href={linkTelefone}>Telefone {numeroExibicao}</a>
+          </li>
+        )}
+        {insta && (
+          <li>
+            <a href={insta.url} rel="noopener" target="_blank">
+              Instagram @{insta.usuario}
+              <span class="so-leitor"> (abre em nova aba)</span>
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+    <nav class="rodape__bloco" aria-label="Privacidade e avaliações">
+      <h2 class="rodape__rotulo">Privacidade</h2>
+      <ul role="list">
+        <li>
+          <a href="/privacidade/">Política de privacidade</a>
+        </li>
+        <li>
+          <a href="/privacidade/#preferencias" data-abrir-consentimento>
+            Preferências de privacidade
+          </a>
+        </li>
+        <li>
+          <a href="/avaliar/">Avaliar no Google</a>
+        </li>
+      </ul>
+    </nav>
+    <p class="rodape__aviso">{aviso}</p>
+    <p class="rodape__direitos">
+      © {ano} {marca.nomeCurto.valor}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    padding-block: var(--e-8) var(--e-6);
+    border-top: var(--l-fina) solid var(--linha);
+    font-size: var(--t-pequeno);
+  }
+  .rodape__grade {
+    display: grid;
+    gap: var(--e-6);
+  }
+  .rodape__descritivo {
+    margin: var(--e-3) 0 0;
+    max-width: 22rem;
+    color: var(--fg-suave);
+  }
+  .rodape__rotulo {
+    margin-block-end: var(--e-2);
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .rodape__bloco p {
+    margin: 0;
+  }
+  .rodape address {
+    display: grid;
+    font-style: normal;
+  }
+  .rodape ul {
+    display: grid;
+    gap: var(--e-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rodape__aviso,
+  .rodape__direitos {
+    margin: 0;
+    color: var(--fg-suave);
+    font-size: var(--t-legenda);
+  }
+  .rodape__aviso {
+    padding-block-start: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha);
+  }
+  @media (min-width: 900px) {
+    .rodape__grade {
+      grid-template-columns: 2fr repeat(4, 1fr);
+      column-gap: var(--e-6);
+    }
+    .rodape__aviso {
+      grid-column: 1 / 5;
+    }
+    .rodape__direitos {
+      grid-column: 5;
+      align-self: end;
+      padding-block-start: var(--e-5);
+      border-top: var(--l-fina) solid var(--linha);
+    }
+  }
+</style>

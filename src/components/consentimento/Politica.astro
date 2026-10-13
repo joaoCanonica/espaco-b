@@ -1,0 +1,349 @@
+---
+// Política de privacidade (sessão 7). Linguagem simples; base em docs/pesquisa/lgpd-privacidade.md.
+// [DECISÃO HUMANA: revisão jurídica] antes de produção (docs/COMPLIANCE.md).
+// Dado que falta (razão social conferida, encarregado, prazos) aparece como "a informar" no
+// preview e some em produção com alerta: nada é inventado.
+import Provisorio from '../Provisorio.astro';
+import Legenda from '../ui/Legenda.astro';
+import Migalhas from '../servicos/Migalhas.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import { contato } from '../../config/contato.ts';
+import { legal } from '../../config/legal.ts';
+import { marca } from '../../config/marca.ts';
+import { pendente } from '../../config/tipos.ts';
+import { enderecoLinhas } from '../home/conteudo.ts';
+import { linkWhatsapp, numeroExibicao } from '../conversao/links.ts';
+
+/** Versão desta política (muda junto com VERSAO em src/scripts/consentimento.ts). */
+const ATUALIZADA_EM = '13/10/2026';
+
+const razao = legal.razaoSocial;
+const encarregado = legal.privacidade.encarregado;
+const retencaoWhatsapp = pendente<string>(
+  'Prazo de guarda das conversas de WhatsApp',
+  'a definir pela clínica (João)',
+);
+const hospedagem = pendente<string>(
+  'Hospedagem do site e prazo dos registros de acesso',
+  'depende do provedor escolhido no deploy',
+);
+const insta = contato.instagram.valor;
+// Em produção, campo não confirmado some COM o rótulo (e avisa no build); no preview, selo.
+const producao = emProducao();
+const mostra = (c: { estado: string; rotulo?: string; motivo?: string }, rotulo: string) => {
+  if (!producao || c.estado === 'confirmado') return true;
+  alertarOmissao(`"${rotulo}" (/privacidade)`, `dado ${c.estado}: ${c.motivo ?? ''}`);
+  return false;
+};
+const mostraRazao = mostra(razao, 'Razão social');
+const mostraEncarregado = mostra(encarregado, 'Encarregado (LGPD)');
+const mostraRetencao = mostra(retencaoWhatsapp, 'Prazo das conversas de WhatsApp');
+const mostraHospedagem = mostra(hospedagem, 'Hospedagem e registros de acesso');
+
+const secoes = [
+  ['quem', 'Quem cuida dos seus dados'],
+  ['dados', 'Quais dados'],
+  ['finalidades', 'Para que e com qual base legal'],
+  ['saude', 'Dados de saúde'],
+  ['terceiros', 'Terceiros e transferência internacional'],
+  ['retencao', 'Por quanto tempo'],
+  ['direitos', 'Seus direitos'],
+  ['preferencias', 'Suas preferências neste site'],
+  ['contato', 'Como falar com a clínica'],
+  ['atualizacao', 'Atualizações'],
+] as const;
+---
+
+<section class="pol" data-tone="light" aria-labelledby="titulo-pagina">
+  <div class="recipiente pol__grade">
+    <aside class="pol__lateral">
+      <Migalhas itens={[{ rotulo: 'Privacidade' }]} />
+      <Legenda>Privacidade</Legenda>
+      <h1 id="titulo-pagina" class="pol__titulo vt-titulo">
+        Política de privacidade
+      </h1>
+      <p class="pol__data">Atualizada em {ATUALIZADA_EM}</p>
+      <nav aria-label="Nesta página">
+        <ol class="pol__indice" role="list">
+          {secoes.map(([id, t], i) => (
+            <li>
+              <a href={`#${id}`}>
+                <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span> {t}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+
+    <div class="pol__texto">
+      <p class="pol__resumo">
+        Em resumo: este site não tem formulário, não pede dado de saúde e não usa ferramenta de
+        terceiros sem a sua permissão. O contato é pelo WhatsApp ou telefone, e o que você escolher
+        sobre privacidade fica guardado só no seu navegador.
+      </p>
+
+      <h2 id="quem">Quem cuida dos seus dados</h2>
+      <p>
+        O controlador dos dados tratados por este site é a {marca.nomeDescritivo.valor}, no endereço{' '}
+        {enderecoLinhas.join(', ')}.
+      </p>
+      {mostraRazao && (
+        <div class="pol__campo">
+          Razão social:{' '}
+          <Provisorio campo={razao} rotulo="Razão social (política de privacidade)">
+            <span>{razao.valor}</span>
+          </Provisorio>
+        </div>
+      )}
+      {mostraEncarregado && (
+        <div class="pol__campo">
+          Encarregado pelo tratamento de dados (LGPD, art. 41):{' '}
+          <Provisorio campo={encarregado}>
+            <span>{encarregado.valor}</span>
+          </Provisorio>
+        </div>
+      )}
+      <p>
+        Enquanto não houver um encarregado nomeado, fale com a clínica pelos canais da seção “Como
+        falar com a clínica”.
+      </p>
+
+      <h2 id="dados">Quais dados</h2>
+      <ul>
+        <li>
+          <strong>Mensagens de WhatsApp e ligações.</strong> Quando você toca em “WhatsApp” ou
+          “Telefone”, a conversa acontece fora deste site, no aplicativo. A clínica recebe o seu
+          número, o seu nome no aplicativo e o que você escrever.
+        </li>
+        <li>
+          <strong>Armazenamento no seu navegador.</strong> O site não cria cookies próprios. Ele
+          guarda no seu navegador: a sua escolha de privacidade (sempre); se a abertura animada já
+          foi vista nesta visita (apagado ao fechar o navegador); e o tema claro ou escuro, só se
+          você permitir “Preferências”. Esses dados não são enviados à clínica.
+        </li>
+        <li>
+          <strong>Mapa do Google.</strong> Só carrega se você permitir “Mapas e terceiros”. Ao
+          carregar, o Google recebe o seu endereço IP e pode usar cookies próprios.
+        </li>
+        <li>
+          <strong>Estatística.</strong> Se você permitir, o site conta, no seu navegador, cliques em
+          WhatsApp, telefone e avaliação. Hoje nenhum dado de estatística é enviado a terceiros. Se
+          isso mudar, esta política será atualizada e a sua permissão será pedida de novo.
+        </li>
+        <li>
+          <strong>Registros de acesso.</strong> Como todo site, o servidor de hospedagem pode
+          registrar endereço IP, data, hora e página acessada, para segurança e funcionamento.{' '}
+          {mostraHospedagem && (
+            <Provisorio campo={hospedagem}>
+              <span>{hospedagem.valor}</span>
+            </Provisorio>
+          )}
+        </li>
+      </ul>
+
+      <h2 id="finalidades">Para que e com qual base legal</h2>
+      <ul>
+        <li>
+          <strong>Responder e agendar a sua avaliação</strong> (mensagens e ligações): procedimentos
+          preliminares a um contrato, a seu pedido (LGPD, art. 7º, V).
+        </li>
+        <li>
+          <strong>Guardar a sua escolha de privacidade</strong>: para respeitar a escolha e poder
+          comprová-la (LGPD, art. 7º, IX, e art. 8º, § 2º).
+        </li>
+        <li>
+          <strong>Preferências, mapa e estatística</strong>: o seu consentimento (LGPD, art. 7º, I),
+          que você pode retirar a qualquer momento.
+        </li>
+        <li>
+          <strong>Segurança do site</strong> (registros de acesso): legítimo interesse (LGPD, art.
+          7º, IX).
+        </li>
+      </ul>
+
+      <h2 id="saude">Dados de saúde</h2>
+      <p>
+        Este site não pede e não coleta dado de saúde. Pedimos que você não envie fotos, exames ou
+        detalhes de saúde pelo WhatsApp antes da avaliação: essas informações são tratadas na
+        consulta, pela profissional que atende, para cuidar da sua saúde (LGPD, art. 11, II, “f”).
+      </p>
+
+      <h2 id="terceiros">Terceiros e transferência internacional</h2>
+      <ul>
+        <li>
+          <strong>WhatsApp (Meta).</strong> As conversas seguem a política do próprio WhatsApp.
+        </li>
+        <li>
+          <strong>Google Maps e Google Perfil da Empresa.</strong> O mapa só carrega com a sua
+          permissão; o link de avaliação leva ao site do Google.
+        </li>
+        {insta && (
+          <li>
+            <strong>Instagram (Meta).</strong> Só um link para @{insta.usuario}; nada do Instagram
+            carrega neste site.
+          </li>
+        )}
+      </ul>
+      <p>
+        Essas empresas podem tratar dados fora do Brasil, conforme as políticas delas (LGPD, art.
+        33). Este site, por conta própria, não envia os seus dados para outro país.
+      </p>
+
+      <h2 id="retencao">Por quanto tempo</h2>
+      <ul>
+        <li>
+          Escolha de privacidade: no seu navegador por até 12 meses; depois disso o site pergunta de
+          novo. Você pode apagar antes, limpando os dados do site no navegador.
+        </li>
+        <li>Tema: no seu navegador, até você mudar a permissão ou limpar os dados do site.</li>
+        {mostraRetencao && (
+          <li>
+            Conversas de WhatsApp:{' '}
+            <Provisorio campo={retencaoWhatsapp}>
+              <span>{retencaoWhatsapp.valor}</span>
+            </Provisorio>
+          </li>
+        )}
+      </ul>
+
+      <h2 id="direitos">Seus direitos</h2>
+      <p>Pela LGPD (art. 18), você pode pedir à clínica, a qualquer momento e sem custo:</p>
+      <ol class="pol__direitos">
+        <li>a confirmação de que existe tratamento dos seus dados;</li>
+        <li>acesso aos seus dados;</li>
+        <li>correção de dados incompletos, errados ou desatualizados;</li>
+        <li>
+          anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados fora
+          da lei;
+        </li>
+        <li>portabilidade dos dados a outro fornecedor, nos termos da regulamentação;</li>
+        <li>eliminação dos dados tratados com o seu consentimento;</li>
+        <li>informação sobre com quem a clínica compartilha os seus dados;</li>
+        <li>
+          informação sobre a possibilidade de não dar consentimento e o que acontece se você não
+          der;
+        </li>
+        <li>a revogação do consentimento.</li>
+      </ol>
+      <p>
+        Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD) (LGPD, art. 18,
+        § 1º).
+      </p>
+
+      <h2 id="preferencias">Suas preferências neste site</h2>
+      <p>
+        Você pode mudar ou retirar a sua permissão quando quiser, pelo link “Preferências de
+        privacidade” no rodapé de todas as páginas, ou aqui:
+      </p>
+      <p>
+        <button class="botao botao--linha" type="button" data-abrir-consentimento>
+          Abrir preferências de privacidade
+        </button>
+      </p>
+      <noscript>
+        <p>
+          Com o JavaScript desligado, o site não guarda nenhuma escolha e não carrega nada opcional.
+        </p>
+      </noscript>
+
+      <h2 id="contato">Como falar com a clínica</h2>
+      <p>
+        Para pedidos sobre os seus dados, fale com a clínica
+        {linkWhatsapp && (
+          <>
+            {' '}
+            pelo{' '}
+            <a href={linkWhatsapp} rel="noopener" target="_blank">
+              WhatsApp {numeroExibicao}
+              <span class="so-leitor"> (abre em nova aba)</span>
+            </a>
+          </>
+        )}{' '}
+        ou no endereço {enderecoLinhas.join(', ')}. Para confirmar que o pedido é seu, a clínica
+        pode pedir uma forma simples de identificação.
+      </p>
+
+      <h2 id="atualizacao">Atualizações</h2>
+      <p>
+        Esta política foi atualizada em {ATUALIZADA_EM}. Quando ela mudar de forma relevante, a data
+        muda aqui e o site pede a sua permissão de novo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pol {
+    padding-block: var(--e-6) var(--secao-y);
+  }
+  .pol__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .pol__lateral {
+    display: grid;
+    gap: var(--e-4);
+    align-content: start;
+  }
+  .pol__titulo {
+    font-size: var(--t-2);
+    max-width: 10ch;
+  }
+  .pol__data {
+    margin: 0;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .pol__indice {
+    display: grid;
+    gap: var(--e-2);
+    margin: var(--e-4) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--t-pequeno);
+  }
+  .pol__indice span {
+    display: inline-block;
+    min-width: 2em;
+    color: var(--fg-suave);
+  }
+  .pol__texto {
+    max-width: 44rem;
+  }
+  .pol__texto h2 {
+    margin-block: var(--e-7) var(--e-4);
+    padding-block-start: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha-forte);
+    font-size: var(--t-3);
+    scroll-margin-top: calc(var(--header-altura) + var(--e-4));
+  }
+  .pol__texto li {
+    margin-block-end: var(--e-3);
+  }
+  .pol__texto ul,
+  .pol__texto ol {
+    padding-inline-start: 1.25rem;
+  }
+  .pol__campo {
+    margin-block-end: 1em;
+  }
+  .pol__resumo {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    line-height: 1.35;
+  }
+  @media (min-width: 900px) {
+    .pol__grade {
+      grid-template-columns: 4fr 7fr;
+      column-gap: var(--e-9);
+    }
+    .pol__lateral {
+      position: sticky;
+      top: calc(var(--header-altura) + var(--e-5));
+    }
+  }
+</style>

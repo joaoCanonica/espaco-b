@@ -13,6 +13,7 @@
     "dev": "astro dev",
     "prebuild": "node scripts/prepare-media.mjs",
     "build": "astro build",
+    "postbuild": "node scripts/gerar-csp.mjs",
     "preview": "astro preview",
     "check": "astro check && eslint . && prettier --check .",
     "lint": "eslint .",
@@ -29,7 +30,10 @@
     "media:folhas": "node scripts/extract-posters.mjs --folhas",
     "test-config": "node scripts/test-config.mjs",
     "audit-contraste": "node scripts/audit-contraste.mjs",
-    "verificar-links": "node scripts/verificar-links.mjs"
+    "verificar-links": "node scripts/verificar-links.mjs",
+    "gerar-csp": "node scripts/gerar-csp.mjs",
+    "plaquinha": "node scripts/gerar-plaquinha.mjs",
+    "testar-privacidade": "node scripts/testar-privacidade.mjs"
   },
   "dependencies": {
     "astro": "7.3.8"
@@ -46,6 +50,7 @@
     "potrace": "2.1.8",
     "prettier": "3.9.10",
     "prettier-plugin-astro": "1.1.1",
+    "qrcode": "1.5.4",
     "sharp": "0.35.5",
     "typescript": "6.0.3",
     "typescript-eslint": "8.71.1"

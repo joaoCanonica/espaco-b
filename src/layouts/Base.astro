@@ -1,10 +1,14 @@
 ---
 // Layout base: cores geradas da paleta, tokens, fontes self-hosted (preload só da display),
 // tema sem flash (script inline antes da pintura), faixa de preview e noindex quando preciso.
+// Sessão 7: banner de consentimento, rodapé padrão, WhatsApp fixo (mobile) e gancho de rastreio.
 import '../styles/tokens.css';
 import '../styles/base.css';
 import fonteDisplay from '../styles/fonts/newsreader-display.woff2?url';
 import PreviewBanner from '../components/PreviewBanner.astro';
+import Banner from '../components/consentimento/Banner.astro';
+import BotaoFlutuante from '../components/conversao/BotaoFlutuante.astro';
+import Rodape from '../components/conversao/Rodape.astro';
 import { emPreview } from '../config/ambiente.ts';
 import { seo } from '../config/seo.ts';
 import { cssDasCores } from '../styles/cores.mjs';
@@ -38,12 +42,14 @@ const scriptTema = `(function(){var t;try{t=localStorage.getItem('tema')}catch(e
     <slot name="head" />
   </head>
   <body>
+    <Banner />
     <slot name="topo" />
     <PreviewBanner />
     <slot name="header" />
     <main id="conteudo">
       <slot />
     </main>
-    <slot name="rodape" />
+    {Astro.slots.has('rodape') ? <slot name="rodape" /> : <Rodape />}
+    <BotaoFlutuante />
   </body>
 </html>

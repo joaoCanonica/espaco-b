@@ -1,0 +1,12 @@
+# Cabeçalhos de segurança (formato _headers: Netlify / Cloudflare Pages).
+# A CSP completa, com os hashes de scripts e estilos de cada página, entra no <meta> de cada
+# HTML via scripts/gerar-csp.mjs (pós-build). Aqui ficam só as diretivas que o <meta> não
+# aceita (frame-ancestors) e os demais cabeçalhos. HSTS só vale servido por HTTPS no deploy.
+/*
+  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains

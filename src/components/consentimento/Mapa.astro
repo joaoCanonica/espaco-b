@@ -1,0 +1,109 @@
+---
+// Mapa do Google: o iframe só é criado depois do aceite da categoria "mapas".
+// Antes disso: link para a ficha no Maps e um botão que pede a permissão explicitamente.
+import { contato } from '../../config/contato.ts';
+
+const geo = contato.google.geo.valor;
+const maps = contato.google.mapsUrl.valor;
+const embed = geo
+  ? `https://www.google.com/maps?q=${geo.lat},${geo.lng}&hl=pt-BR&z=17&output=embed`
+  : null;
+---
+
+{embed && (
+  <div class="mapa" data-mapa data-src={embed}>
+    <div class="mapa__aviso" data-mapa-aviso>
+      <p>
+        O mapa é do Google e só carrega com a sua permissão (categoria “Mapas e terceiros”). Ao
+        carregar, o Google recebe o seu endereço IP.
+      </p>
+      <div class="mapa__acoes">
+        <button class="botao botao--linha" type="button" data-mapa-permitir hidden>
+          Permitir e carregar o mapa
+        </button>
+        {maps && (
+          <a class="botao botao--linha" href={maps} rel="noopener" target="_blank">
+            Abrir no Google Maps<span class="so-leitor"> (nova aba)</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+<script>
+  import { aoMudar, aoPermitir, ler, salvar } from '../../scripts/consentimento.ts';
+
+  for (const caixa of document.querySelectorAll<HTMLElement>('[data-mapa]')) {
+    const src = caixa.dataset['src'];
+    const aviso = caixa.querySelector<HTMLElement>('[data-mapa-aviso]');
+    const permitir = caixa.querySelector<HTMLButtonElement>('[data-mapa-permitir]');
+    if (!src) continue;
+    if (permitir) permitir.hidden = false;
+    const montar = () => {
+      if (caixa.querySelector('iframe')) return;
+      const f = document.createElement('iframe');
+      f.src = src;
+      f.title = 'Mapa: localização do Espaço B em Lages, SC';
+      f.loading = 'lazy';
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.className = 'mapa__iframe';
+      caixa.append(f);
+      if (aviso) aviso.hidden = true;
+    };
+    aoPermitir('mapas', montar);
+    // Revogou: o mapa sai da página.
+    aoMudar((e) => {
+      if (e.mapas) return;
+      caixa.querySelector('iframe')?.remove();
+      if (aviso) aviso.hidden = false;
+      aoPermitir('mapas', montar);
+    });
+    permitir?.addEventListener('click', () => {
+      const atual = ler();
+      salvar({
+        preferencias: atual?.preferencias ?? false,
+        estatistica: atual?.estatistica ?? false,
+        mapas: true,
+      });
+    });
+  }
+</script>
+
+<style>
+  .mapa {
+    position: relative;
+    display: grid;
+    min-height: 18rem;
+    border: var(--l-fina) solid var(--linha-forte);
+    border-radius: 0 var(--r-pleno) var(--r-pleno) 0 / 0 40% 40% 0;
+    overflow: hidden;
+  }
+  .mapa__aviso {
+    display: grid;
+    gap: var(--e-4);
+    align-content: center;
+    padding: var(--e-6);
+  }
+  .mapa__aviso[hidden] {
+    display: none;
+  }
+  .mapa__aviso p {
+    margin: 0;
+    font-size: var(--t-pequeno);
+  }
+  .mapa__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-3);
+  }
+  .mapa__acoes [hidden] {
+    display: none;
+  }
+  .mapa :global(.mapa__iframe) {
+    width: 100%;
+    height: 100%;
+    min-height: 22rem;
+    border: 0;
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+// /avaliar (sessão 7).
+import Avaliar from '../components/conversao/Avaliar.astro';
+import NavServicos from '../components/servicos/NavServicos.astro';
+import Header from '../components/ui/Header.astro';
+import { marca } from '../config/marca.ts';
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  titulo={`Avaliar no Google · ${marca.nomeCurto.valor}`}
+  descricao="Deixe a sua avaliação do Espaço B no Google. Vale qualquer experiência; não há brinde nem desconto por avaliação."
+>
+  <Header slot="header" tomInicial="moss">
+    <NavServicos />
+  </Header>
+  <Avaliar />
+</Base>
