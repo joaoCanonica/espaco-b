@@ -140,3 +140,23 @@ O preview mostra "a informar" + selo; a produção omite o bloco e avisa no buil
 - **Escopo do ato (COFFITO):** está como `aviso` em `servicos.ts`, com selo no bloco "Conselho" do preview, e é conferido na sessão 9. · João
 - **Endereço `/pele-e-laser/`:** a home (6A) aponta para ele. Virou um redirecionamento para `/pele-e-tecnologia/`; o link da home pode ser trocado na próxima sessão que mexer nela. · Code
 - **`/bia/`:** o link da home só funciona depois da sessão 6C (o `pnpm verificar-links` lista esse link à parte). · Code
+
+## /bia, /espaco, /casos, /contato e 404 (sessão 6C, 13/10/2026)
+
+- **/bia:**
+  - formação (curso, instituição, ano) e cursos/habilitações (toxina no CREFITO-10, RQE se houver): preview "a informar", produção omite com alerta;
+  - transcrição revisada do episódio 1;
+  - URL de consulta do CREFITO-10;
+  - Café com Bia: só a abertura liberada (0–14 s); ouvir e liberar o resto. · João
+- **Legendas `.vtt`:** os slots em `media-originais/legendas/` só têm bloco NOTE. Nenhuma faixa `<track>` é publicada; os vídeos mantêm a legenda queimada original. Quando houver falas revisadas, o `prepare-media` precisa copiar o `.vtt` para `public/media`, e a Janela, ganhar `<track>`. · João / Code
+- **/espaco:**
+  - galeria de fotos reais do espaço (alta, sem pessoas);
+  - acessibilidade (acesso, rampa/escada, estacionamento);
+  - quadros do vídeo como galeria exigem estender o `prepare-media` (fora do escopo da 6C). · João / Code
+- **/casos:**
+  - procedimento de cada caso P-001…P-008 (todos os `dataRegistro` são `null`, então a data não aparece);
+  - termo de consentimento não arquivado (aviso, com selo no preview);
+  - texto da nota final a validar na sessão 9;
+  - confirmar se P-002 e P-007 são a mesma paciente. · João
+- **404:** título e texto ("Esta página não existe." / "O endereço pode ter mudado ou estar incompleto.") não estão no COPY_DECK. Aprovar. · João
+- **/contato:** o botão "Ligar" usa o mesmo número do WhatsApp (`tel:`). Confirmar se o número também atende chamada. · João

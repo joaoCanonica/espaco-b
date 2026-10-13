@@ -1,0 +1,21 @@
+---
+// /contato (sessão 6C).
+import Contato from '../components/paginas/Contato.astro';
+import NavServicos from '../components/servicos/NavServicos.astro';
+import Transicoes from '../components/servicos/Transicoes.astro';
+import Header from '../components/ui/Header.astro';
+import { marca } from '../config/marca.ts';
+import Base from '../layouts/Base.astro';
+import { contatoPagina } from '../components/paginas/conteudo.ts';
+---
+
+<Base
+  descricao={`${contatoPagina.titulo} WhatsApp, horários e endereço do Espaço B, em Lages (SC).`}
+  titulo={`Contato · ${marca.nomeCurto.valor}`}
+>
+  <Transicoes slot="head" />
+  <Header slot="header" tomInicial="dark">
+    <NavServicos />
+  </Header>
+  <Contato />
+</Base>

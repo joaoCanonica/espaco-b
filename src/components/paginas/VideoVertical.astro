@@ -1,0 +1,47 @@
+---
+// Vídeo 9:16 numa contraforma: clique para tocar, pôster lazy (Janela), legendas .vtt quando o
+// slot tiver falas (hoje vazio: só a legenda queimada do próprio vídeo), transcrição ou aviso.
+import Provisorio from '../Provisorio.astro';
+import Janela from '../brand/Janela.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import type { Campo } from '../../config/tipos.ts';
+import { videoDoItem } from '../home/midia.ts';
+
+interface Props {
+  item: string;
+  rotulo: string;
+  forma?: 'alta' | 'baixa';
+  mudo?: boolean;
+  legenda?: string;
+  transcricao?: Campo<string>;
+}
+const { item, rotulo, forma = 'baixa', mudo = false, legenda, transcricao } = Astro.props;
+const video = videoDoItem(item);
+if (!video && emProducao()) alertarOmissao(`vídeo "${rotulo}"`, 'derivado ausente no índice');
+---
+
+<div class="video-vertical">
+  <Janela forma={forma} {...(video && { video: { ...video, rotulo, mudo } })} placeholder={rotulo}>
+    {legenda && <figcaption class="video-vertical__legenda">{legenda}</figcaption>}
+  </Janela>
+  {transcricao && (
+    <div class="video-vertical__transcricao">
+      <Provisorio campo={transcricao}>
+        <p>{transcricao.valor}</p>
+      </Provisorio>
+    </div>
+  )}
+</div>
+
+<style>
+  .video-vertical__legenda {
+    margin-block-start: var(--e-3);
+    font-size: var(--t-legenda);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .video-vertical__transcricao {
+    margin-block-start: var(--e-4);
+  }
+</style>

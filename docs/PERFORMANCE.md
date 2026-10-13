@@ -1,5 +1,19 @@
 # Performance
 
+## /bia, /espaco, /casos, /contato e 404 — sessão 6C, 13/10/2026
+
+Lighthouse 13.5.0 mobile padrão, build de produção, uma rodada por página. A 404 foi medida em `/404.html`, porque com status 404 o Lighthouse não roda.
+
+| Página    | Perf. | Acess. | Boas prát. | SEO | LCP      | CLS | TBT  | Peso    |
+| --------- | ----- | ------ | ---------- | --- | -------- | --- | ---- | ------- |
+| /bia/     | 99    | 100    | 100        | 63  | 1.810 ms | 0   | 0 ms | 169 KiB |
+| /espaco/  | 100   | 100    | 100        | 63  | 1.729 ms | 0   | 0 ms | 155 KiB |
+| /casos/   | 100   | 100    | 100        | 63  | 1.806 ms | 0   | 0 ms | 152 KiB |
+| /contato/ | 99    | 100    | 100        | 60  | 1.656 ms | 0   | 0 ms | 156 KiB |
+| 404       | 100   | 100    | 100        | 50  | 1.505 ms | 0   | 0 ms | 93 KiB  |
+
+- **SEO:** a auditoria reprovada é `is-crawlable` (o `noindex` proposital). A 404 também é `noindex` e não tem descrição, de propósito.
+
 ## Páginas de serviço e protocolos — sessão 6B, 13/10/2026
 
 Lighthouse 13.5.0 mobile padrão, build de produção, `astro preview`, uma rodada por página.

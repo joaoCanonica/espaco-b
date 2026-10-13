@@ -1,0 +1,349 @@
+---
+// /bia. Abertura: nome gigante à esquerda; retrato de corpo inteiro (vestido) na contraforma
+// baixa, grande, à direita; o colete na contraforma alta, menor, sobreposta à borda esquerda dela.
+// Depois: trajetória (só fatos confirmados), termos dela, a série (ep. 1) e o Café com Bia.
+import Provisorio from '../Provisorio.astro';
+import Janela from '../brand/Janela.astro';
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import Legenda from '../ui/Legenda.astro';
+import Migalhas from '../servicos/Migalhas.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import { imagemDoItem } from '../hero/midia.ts';
+import { biaTexto, nomeBia, registroBia } from '../home/conteudo.ts';
+import { imagemJanela } from '../home/midia.ts';
+import VideoVertical from './VideoVertical.astro';
+import { biaPagina } from './conteudo.ts';
+
+const vestido = imagemDoItem('retrato-bia-vestido');
+const colete = imagemDoItem('retrato-bia-colete', '45% 15%');
+const producao = emProducao();
+const trajetoria = [biaPagina.formacao, biaPagina.cursos];
+if (producao)
+  for (const c of trajetoria)
+    if (c.estado !== 'confirmado') alertarOmissao(`"${c.rotulo}" (/bia)`, c.motivo ?? 'pendente');
+const consulta = biaTexto.consulta;
+---
+
+<section class="bia-ab" data-tone="light" data-dobra="primeira" aria-labelledby="titulo-pagina">
+  <div class="recipiente bia-ab__grade">
+    <div class="bia-ab__texto">
+      <Migalhas itens={[{ rotulo: biaPagina.legenda }]} />
+      <Legenda numero={1}>{biaPagina.legenda}</Legenda>
+      <h1 id="titulo-pagina" class="bia-ab__titulo vt-titulo">
+        {biaPagina.titulo}
+      </h1>
+      <p class="bia-ab__credencial">{biaPagina.credencial}</p>
+      <p class="bia-ab__abertura">{biaPagina.abertura}</p>
+    </div>
+    <div class="bia-ab__janelas">
+      <div class="bia-ab__vestido">
+        <Janela
+          forma="baixa"
+          classeMidia="tratamento-retrato"
+          {...(vestido && {
+            imagem: {
+              ...imagemJanela(
+                vestido,
+                '(min-width: 900px) 34vw, 78vw',
+                `${nomeBia}, fisioterapeuta, retrato de corpo inteiro`,
+              ),
+              prioridade: 'alta' as const,
+            },
+          })}
+          placeholder="retrato de corpo inteiro"
+        />
+      </div>
+      <div class="bia-ab__colete">
+        <Janela
+          forma="alta"
+          classeMidia="tratamento-retrato"
+          {...(colete && {
+            imagem: imagemJanela(colete, '(min-width: 900px) 14vw, 32vw', `${nomeBia}, retrato`),
+          })}
+          placeholder="retrato"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bia-traj" data-tone="moss" aria-labelledby="bia-traj-titulo">
+  <div class="recipiente bia-traj__grade">
+    <div>
+      <Legenda numero={2}>Trajetória</Legenda>
+      <h2 id="bia-traj-titulo" class="t-2 bia-traj__titulo">
+        Registro e formação
+      </h2>
+    </div>
+    <dl class="bia-traj__lista">
+      <div class="bia-traj__item">
+        <dt>Registro</dt>
+        <dd>
+          <span class="bia-traj__grande">{registroBia}</span>
+          <Provisorio campo={consulta}>
+            <a href={consulta.valor ?? '#'} rel="noopener" target="_blank">
+              {consulta.rotulo}
+              <span class="so-leitor"> (abre em nova aba)</span>
+            </a>
+          </Provisorio>
+        </dd>
+      </div>
+      <div class="bia-traj__item">
+        <dt>Atuação</dt>
+        <dd>{biaPagina.abertura}</dd>
+      </div>
+      {!producao &&
+        trajetoria.map((c) => (
+          <div class="bia-traj__item">
+            <dt>{c.rotulo}</dt>
+            <dd>
+              <Provisorio campo={c}>
+                <span>{c.valor}</span>
+              </Provisorio>
+            </dd>
+          </div>
+        ))}
+    </dl>
+  </div>
+</section>
+
+<section class="bia-termos" data-tone="light" aria-labelledby="bia-termos-titulo">
+  <div class="recipiente">
+    <Legenda numero={3}>Como ela fala do trabalho</Legenda>
+    <h2 id="bia-termos-titulo" class="so-leitor">
+      Termos que a Bia usa
+    </h2>
+    <ul class="bia-termos__lista" role="list">
+      {biaPagina.termos.map((t) => (
+        <li>
+          <p class="bia-termos__termo">{t.termo}</p>
+          <p class="bia-termos__texto">{t.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="bia-videos" data-tone="dark" aria-labelledby="bia-serie-titulo">
+  <div class="recipiente bia-videos__grade">
+    <div class="bia-videos__serie">
+      <VideoVertical
+        item="mulheres-transformadas-com-bia"
+        rotulo={biaPagina.serie.rotulo}
+        legenda="Com som · clique para assistir · legenda no próprio vídeo"
+        transcricao={biaPagina.serie.transcricao}
+      />
+    </div>
+    <div class="bia-videos__texto">
+      <Legenda numero={4}>Série</Legenda>
+      <h2 id="bia-serie-titulo" class="t-3">
+        {biaPagina.serie.titulo}
+      </h2>
+      <p>{biaPagina.serie.texto}</p>
+    </div>
+    <div class="bia-videos__cafe">
+      <h2 class="t-3">{biaPagina.cafe.titulo}</h2>
+      <p>{biaPagina.cafe.texto}</p>
+      <p class="bia-videos__nota">{biaPagina.cafe.nota}</p>
+      <div class="bia-videos__cafe-janela">
+        <VideoVertical
+          item="cafe-com-bia"
+          forma="alta"
+          rotulo={biaPagina.cafe.rotulo}
+          legenda="Com som · clique para assistir"
+        />
+      </div>
+    </div>
+    <MarcadorCauda altura="4rem" alinhamento="fim" />
+  </div>
+</section>
+
+<style>
+  .bia-ab {
+    padding-block: var(--e-6) var(--secao-y);
+    overflow: clip;
+  }
+  .bia-ab__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .bia-ab__texto {
+    display: grid;
+    gap: var(--e-5);
+    align-content: start;
+  }
+  .bia-ab__titulo {
+    font-size: clamp(3.5rem, 1.5rem + 9vw, 13rem);
+    font-weight: 300;
+    line-height: 0.86;
+    letter-spacing: var(--tracking-display);
+  }
+  .bia-ab__credencial {
+    margin: 0;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+  }
+  .bia-ab__abertura {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+  }
+  .bia-ab__janelas {
+    position: relative;
+    padding-inline-start: 24%;
+  }
+  .bia-ab__colete {
+    position: absolute;
+    left: 0;
+    bottom: 8%;
+    width: 34%;
+    z-index: 1;
+  }
+  @media (min-width: 900px) {
+    .bia-ab__grade {
+      grid-template-columns: 6fr 5fr;
+      column-gap: var(--e-7);
+      align-items: start;
+    }
+    .bia-ab__texto {
+      padding-block-start: var(--e-9);
+    }
+    .bia-ab__janelas {
+      padding-inline-start: 20%;
+    }
+    .bia-ab__colete {
+      width: 30%;
+      bottom: -4%;
+    }
+  }
+
+  .bia-traj {
+    padding-block: calc(var(--secao-y) * 0.8);
+  }
+  .bia-traj__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .bia-traj__titulo {
+    margin-block-start: var(--e-4);
+  }
+  .bia-traj__lista {
+    display: grid;
+    margin: 0;
+  }
+  .bia-traj__item {
+    display: grid;
+    gap: var(--e-2);
+    padding-block: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .bia-traj__item dt {
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .bia-traj__item dd {
+    display: grid;
+    gap: var(--e-3);
+    justify-items: start;
+    margin: 0;
+  }
+  .bia-traj__grande {
+    font-family: var(--f-display);
+    font-size: var(--t-2);
+    line-height: 1;
+  }
+  @media (min-width: 900px) {
+    .bia-traj__grade {
+      grid-template-columns: 4fr 7fr;
+      column-gap: var(--e-9);
+    }
+    .bia-traj__item {
+      grid-template-columns: 12rem 1fr;
+    }
+  }
+
+  .bia-termos {
+    padding-block: var(--secao-y) calc(var(--secao-y) * 0.6);
+  }
+  .bia-termos__lista {
+    display: grid;
+    gap: var(--e-7);
+    margin: var(--e-7) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .bia-termos__termo {
+    margin: 0 0 var(--e-3);
+    font-family: var(--f-display);
+    font-size: var(--t-2);
+    font-style: italic;
+    line-height: 1;
+    max-width: none;
+  }
+  .bia-termos__texto {
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .bia-termos__lista {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--e-9);
+    }
+    .bia-termos__lista li:nth-child(2) {
+      margin-block-start: var(--e-9);
+    }
+  }
+
+  .bia-videos {
+    padding-block: var(--secao-y) var(--e-8);
+  }
+  .bia-videos__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .bia-videos__serie {
+    width: min(100%, 22rem);
+  }
+  .bia-videos__texto,
+  .bia-videos__cafe {
+    display: grid;
+    gap: var(--e-4);
+    align-content: start;
+  }
+  .bia-videos__texto p,
+  .bia-videos__cafe p {
+    margin: 0;
+  }
+  .bia-videos__nota {
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+  }
+  .bia-videos__cafe-janela {
+    width: min(70%, 14rem);
+    margin-block-start: var(--e-4);
+  }
+  @media (min-width: 900px) {
+    .bia-videos__grade {
+      grid-template-columns: 5fr 4fr 3fr;
+      column-gap: var(--e-7);
+      align-items: start;
+    }
+    .bia-videos__serie {
+      width: 100%;
+      max-width: 28rem;
+    }
+    .bia-videos__texto {
+      padding-block-start: var(--e-9);
+    }
+    .bia-videos__cafe {
+      padding-block-start: calc(var(--e-10) * 1.4);
+    }
+    .bia-videos__grade > :global(.marcador-cauda) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

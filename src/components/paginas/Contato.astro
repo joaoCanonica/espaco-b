@@ -1,0 +1,245 @@
+---
+// /contato. Composição tipográfica: o número do WhatsApp em display gigante contra o B gigante
+// cortado pela borda; sem foto e sem formulário (só WhatsApp e telefone). Depois: horários,
+// endereço, Instagram, a primeira consulta e as avaliações reais do Google (módulo).
+// Mapa: só link (o mapa com consentimento é da sessão 7).
+import BGigante from '../brand/BGigante.astro';
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import Google from '../home/Google.astro';
+import Legenda from '../ui/Legenda.astro';
+import Migalhas from '../servicos/Migalhas.astro';
+import { contato } from '../../config/contato.ts';
+import { contatoTexto, enderecoLinhas, linkWhatsapp } from '../home/conteudo.ts';
+import { contatoPagina, horariosExtenso } from './conteudo.ts';
+
+const wa = contato.whatsapp.valor;
+const tel = wa ? `tel:${wa.e164}` : undefined;
+const insta = contato.instagram.valor;
+const maps = contato.google.mapsUrl.valor;
+---
+
+<section class="ct-ab" data-tone="dark" data-dobra="primeira" aria-labelledby="titulo-pagina">
+  <BGigante lado="direita" altura="150vh" corte={0.45} topo="-20%" intensidade={0.07} />
+  <div class="recipiente ct-ab__conteudo">
+    <Migalhas itens={[{ rotulo: contatoPagina.legenda }]} />
+    <Legenda numero={1}>{contatoPagina.legenda}</Legenda>
+    <h1 id="titulo-pagina" class="ct-ab__titulo vt-titulo">
+      {contatoPagina.titulo}
+    </h1>
+    {wa && (
+      <p class="ct-ab__numero">
+        <a href={tel}>
+          <span class="so-leitor">Telefone e WhatsApp: </span>
+          {wa.exibicao}
+        </a>
+      </p>
+    )}
+    <div class="ct-ab__acoes">
+      {linkWhatsapp && (
+        <a class="botao" href={linkWhatsapp} rel="noopener" target="_blank">
+          {contatoTexto.botao}
+          <span class="so-leitor"> (abre o WhatsApp em nova aba)</span>
+        </a>
+      )}
+      {tel && (
+        <a class="botao botao--linha" href={tel}>
+          Ligar
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<section class="ct-dados" data-tone="light" aria-labelledby="ct-dados-titulo">
+  <div class="recipiente">
+    <Legenda numero={2}>Onde e quando</Legenda>
+    <h2 id="ct-dados-titulo" class="so-leitor">
+      Horários, endereço e Instagram
+    </h2>
+    <div class="ct-dados__grade">
+      <div class="ct-dados__bloco ct-dados__bloco--horario">
+        <h3 class="ct-dados__rotulo">Horários</h3>
+        <ul role="list">
+          {horariosExtenso.map((h) => (
+            <li>{h}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="ct-dados__bloco">
+        <h3 class="ct-dados__rotulo">Endereço</h3>
+        <address>
+          {enderecoLinhas.map((l) => (
+            <span>{l}</span>
+          ))}
+        </address>
+        {maps && (
+          <a href={maps} rel="noopener" target="_blank">
+            {contatoTexto.mapa} ↗<span class="so-leitor"> (Google Maps, abre em nova aba)</span>
+          </a>
+        )}
+      </div>
+      {insta && (
+        <div class="ct-dados__bloco">
+          <h3 class="ct-dados__rotulo">Instagram</h3>
+          <a href={insta.url} rel="noopener" target="_blank">
+            @{insta.usuario}
+            <span class="so-leitor"> (abre em nova aba)</span>
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<section class="ct-consulta" data-tone="moss" aria-labelledby="ct-consulta-titulo">
+  <div class="recipiente ct-consulta__grade">
+    <div>
+      <Legenda numero={3}>Primeira consulta</Legenda>
+      <h2 id="ct-consulta-titulo" class="t-2 ct-consulta__titulo">
+        {contatoPagina.primeiraConsulta}
+      </h2>
+    </div>
+    <ol class="ct-consulta__passos" role="list">
+      {contatoTexto.passos.map((p, i) => (
+        <li>
+          <span aria-hidden="true">{i + 1}</span>
+          <p>{p}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="ct-consulta__nota">{contatoTexto.complemento}</p>
+    <MarcadorCauda altura="4rem" alinhamento="fim" />
+  </div>
+</section>
+
+<Google />
+
+<style>
+  .ct-ab {
+    position: relative;
+    overflow: clip;
+    padding-block: var(--e-6) var(--secao-y);
+  }
+  .ct-ab__conteudo {
+    position: relative;
+    display: grid;
+    gap: var(--e-5);
+  }
+  .ct-ab__titulo {
+    margin-block-start: var(--e-6);
+    font-size: var(--t-2);
+    font-style: italic;
+    max-width: 14ch;
+  }
+  .ct-ab__numero {
+    margin: var(--e-4) 0;
+    max-width: none;
+    font-family: var(--f-display);
+    font-size: clamp(2.75rem, 0.5rem + 10vw, 12rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: var(--tracking-display);
+    font-variant-numeric: lining-nums;
+    white-space: nowrap;
+  }
+  .ct-ab__numero a {
+    text-decoration-thickness: var(--l-fina);
+    text-underline-offset: 0.12em;
+  }
+  .ct-ab__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-4);
+  }
+
+  .ct-dados {
+    padding-block: calc(var(--secao-y) * 0.8);
+  }
+  .ct-dados__grade {
+    display: grid;
+    gap: var(--e-6);
+    margin-block-start: var(--e-6);
+  }
+  .ct-dados__bloco {
+    display: grid;
+    gap: var(--e-3);
+    align-content: start;
+    padding-block-start: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .ct-dados__bloco ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+  }
+  .ct-dados__rotulo {
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  address {
+    display: grid;
+    font-style: normal;
+  }
+  @media (min-width: 900px) {
+    .ct-dados__grade {
+      grid-template-columns: 6fr 3fr 3fr;
+      column-gap: var(--e-7);
+    }
+  }
+
+  .ct-consulta {
+    padding-block: var(--secao-y) var(--e-8);
+  }
+  .ct-consulta__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .ct-consulta__titulo {
+    margin-block-start: var(--e-4);
+    max-width: 12ch;
+  }
+  .ct-consulta__passos {
+    display: grid;
+    gap: var(--e-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ct-consulta__passos li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    align-items: baseline;
+    gap: var(--e-3);
+    padding-block-start: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .ct-consulta__passos span {
+    font-family: var(--f-display);
+    font-size: var(--t-3);
+    line-height: 1;
+  }
+  .ct-consulta__passos p {
+    margin: 0;
+    font-size: var(--t-4);
+    font-family: var(--f-display);
+  }
+  .ct-consulta__nota {
+    font-style: italic;
+  }
+  @media (min-width: 900px) {
+    .ct-consulta__grade {
+      grid-template-columns: 4fr 7fr;
+      column-gap: var(--e-9);
+    }
+    .ct-consulta__nota {
+      grid-column: 2;
+    }
+    .ct-consulta__grade > :global(.marcador-cauda) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
