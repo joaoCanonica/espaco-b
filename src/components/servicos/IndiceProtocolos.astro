@@ -1,0 +1,104 @@
+---
+// Índice assimétrico dos protocolos confirmados: numeração, nome gigante deslocado, área e link.
+import Legenda from '../ui/Legenda.astro';
+import { AREA, protocolosPublicos } from './protocolos.ts';
+
+interface Props {
+  numero: number;
+}
+const { numero } = Astro.props;
+---
+
+<section class="indice" data-tone="light" aria-labelledby="indice-titulo">
+  <div class="recipiente">
+    <Legenda numero={numero}>Índice</Legenda>
+    <h2 id="indice-titulo" class="so-leitor">
+      Índice dos protocolos
+    </h2>
+    <ol class="indice__lista" role="list">
+      {protocolosPublicos.map((p, i) => (
+        <li class="indice__item">
+          <a class="indice__link" href={`/protocolos-bia/${p.id}/`}>
+            <span class="indice__n">{String(i + 1).padStart(2, '0')}</span>
+            <span class="indice__nome">{p.nomeTexto}</span>
+            <span class="indice__area">{AREA[p.servico]?.rotulo ?? ''} · ver protocolo →</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .indice {
+    padding-block: var(--secao-y);
+    overflow: clip;
+  }
+  .indice__lista {
+    margin: var(--e-6) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .indice__item {
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .indice__item:last-child {
+    border-bottom: var(--l-fina) solid var(--linha-forte);
+  }
+  .indice__link {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--e-2) var(--e-4);
+    align-items: baseline;
+    padding-block: var(--e-6);
+    text-decoration: none;
+  }
+  .indice__n {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    color: var(--fg-suave);
+  }
+  .indice__nome {
+    font-family: var(--f-display);
+    font-size: clamp(2.75rem, 1rem + 8vw, 9.5rem);
+    font-weight: 330;
+    line-height: 0.9;
+    letter-spacing: var(--tracking-display);
+    overflow-wrap: anywhere;
+    transition: transform var(--dur-media) var(--curva-saida);
+  }
+  .indice__area {
+    grid-column: 2;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--linha-forte);
+    text-underline-offset: 0.3em;
+  }
+  .indice__link:hover .indice__nome,
+  .indice__link:focus-visible .indice__nome {
+    transform: translateX(0.08em);
+  }
+  @media (min-width: 900px) {
+    .indice__link {
+      grid-template-columns: 4rem minmax(0, 1fr) 14rem;
+    }
+    .indice__area {
+      grid-column: 3;
+      justify-self: end;
+    }
+    .indice__item:nth-child(2) .indice__nome {
+      padding-inline-start: 12%;
+    }
+    .indice__item:nth-child(3) .indice__nome {
+      padding-inline-start: 24%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .indice__nome {
+      transition: none;
+    }
+  }
+</style>

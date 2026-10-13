@@ -1,0 +1,71 @@
+---
+// Quem executa e qual conselho regula: lidos de src/config/servicos.ts e pessoas.ts.
+// O escopo de cada ato ainda é "aviso" na config: selo no preview (a produção mostra só o fato).
+import Selo from '../ui/Selo.astro';
+import { emPreview } from '../../config/ambiente.ts';
+import { pessoas } from '../../config/pessoas.ts';
+import { servicos } from '../../config/servicos.ts';
+
+interface Props {
+  slugs: string[];
+}
+const { slugs } = Astro.props;
+const lista = servicos.filter((s) => slugs.includes(s.slug));
+const bia = pessoas.bianca;
+const conselhos = [...new Set(lista.map((s) => s.conselho))].join(', ');
+const registros = [...new Set(lista.map((s) => s.executor.registro))].join(', ');
+const escopoPendente = lista.some((s) => s.escopoConferido.estado !== 'confirmado');
+const preview = emPreview();
+---
+
+<dl class="executor">
+  <div>
+    <dt>Serviços</dt>
+    <dd>{lista.map((s) => s.rotulo).join(' · ')}</dd>
+  </div>
+  <div>
+    <dt>Quem atende</dt>
+    <dd>
+      {bia.titulo.valor} {bia.nome.valor} · {registros}
+    </dd>
+  </div>
+  <div>
+    <dt>Responsável técnica</dt>
+    <dd>{bia.nome.valor}</dd>
+  </div>
+  <div>
+    <dt>Conselho</dt>
+    <dd>
+      {conselhos}
+      {preview && escopoPendente && (
+        <Selo titulo={lista[0]?.escopoConferido.motivo ?? 'escopo a conferir'} />
+      )}
+    </dd>
+  </div>
+</dl>
+
+<style>
+  .executor {
+    display: grid;
+    gap: var(--e-4);
+    margin: 0;
+    font-size: var(--t-pequeno);
+  }
+  .executor dt {
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .executor dd {
+    margin: 0;
+  }
+  @media (min-width: 700px) {
+    .executor {
+      grid-template-columns: repeat(4, auto);
+      justify-content: start;
+      column-gap: var(--e-7);
+    }
+  }
+</style>

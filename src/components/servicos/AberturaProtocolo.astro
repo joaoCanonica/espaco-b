@@ -1,0 +1,93 @@
+---
+// Abertura da subpágina de um protocolo (musgo). Composição: nome gigante que atravessa a
+// tela por cima de uma contraforma alta estreita e alta, encostada na borda direita.
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { imagemJanela } from '../home/midia.ts';
+import Migalhas from './Migalhas.astro';
+import Texto from './Texto.astro';
+import { visao } from './blocos.ts';
+import { conteudoDoProtocolo, protocolosPagina } from './conteudo.ts';
+import { AREA, TEXTURA } from './protocolos.ts';
+
+interface Props {
+  id: string;
+  nome: string;
+  servico: string;
+  indice: number;
+  total: number;
+}
+const { id, nome, servico, indice, total } = Astro.props;
+const img = imagemDoItem(TEXTURA[id] ?? 'imagem9');
+const resumo = visao(conteudoDoProtocolo(nome).resumo, `protocolo ${nome}`);
+const area = AREA[servico];
+---
+
+<section class="ab-protocolo" data-tone="moss" aria-labelledby="titulo-pagina">
+  <div class="ab-protocolo__janela" aria-hidden="true">
+    <Janela
+      forma="alta"
+      {...(img && {
+        imagem: {
+          ...imagemJanela(img, '(min-width: 900px) 24vw, 46vw'),
+          prioridade: 'alta' as const,
+        },
+      })}
+      placeholder={nome}
+    />
+  </div>
+  <div class="recipiente ab-protocolo__conteudo">
+    <Migalhas
+      itens={[{ rotulo: protocolosPagina.legenda, href: '/protocolos-bia/' }, { rotulo: nome }]}
+    />
+    <Legenda numero={indice}>
+      Protocolo {String(indice).padStart(2, '0')} de {String(total).padStart(2, '0')}
+      {area && ` · ${area.rotulo}`}
+    </Legenda>
+    <h1 id="titulo-pagina" class="ab-protocolo__nome vt-titulo">
+      {nome}
+    </h1>
+    <div class="ab-protocolo__resumo">{resumo.mostrar && <Texto v={resumo} />}</div>
+  </div>
+</section>
+
+<style>
+  .ab-protocolo {
+    position: relative;
+    overflow: clip;
+    padding-block: var(--e-6) var(--secao-y);
+  }
+  .ab-protocolo__janela {
+    position: absolute;
+    top: 10rem;
+    right: -4%;
+    width: 40%;
+  }
+  .ab-protocolo__conteudo {
+    position: relative;
+    display: grid;
+    gap: var(--e-5);
+  }
+  .ab-protocolo__nome {
+    margin-block-start: 19rem;
+    font-size: clamp(3.75rem, 1rem + 13vw, 15rem);
+    font-weight: 300;
+    line-height: 0.86;
+    letter-spacing: var(--tracking-display);
+    overflow-wrap: anywhere;
+  }
+  .ab-protocolo__resumo {
+    max-width: 34rem;
+  }
+  @media (min-width: 900px) {
+    .ab-protocolo__janela {
+      top: 0;
+      right: 6vw;
+      width: min(24vw, 22rem);
+    }
+    .ab-protocolo__nome {
+      margin-block-start: 16rem;
+    }
+  }
+</style>

@@ -28,7 +28,8 @@
     "media:validar": "node scripts/validar-manifesto.mjs",
     "media:folhas": "node scripts/extract-posters.mjs --folhas",
     "test-config": "node scripts/test-config.mjs",
-    "audit-contraste": "node scripts/audit-contraste.mjs"
+    "audit-contraste": "node scripts/audit-contraste.mjs",
+    "verificar-links": "node scripts/verificar-links.mjs"
   },
   "dependencies": {
     "astro": "7.3.8"

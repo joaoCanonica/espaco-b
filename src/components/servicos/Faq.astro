@@ -1,0 +1,136 @@
+---
+// FAQ da página (3 a 5, do deck, com fonte). Perguntas condicionais: selo no preview,
+// fora em produção (alerta). FAQPage no schema fica para a sessão 8.
+import Provisorio from '../Provisorio.astro';
+import Legenda from '../ui/Legenda.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import type { PerguntaCampo } from './conteudo.ts';
+
+interface Props {
+  numero: number;
+  perguntas: PerguntaCampo[];
+  tom: 'light' | 'dark' | 'moss';
+  onde: string;
+}
+const { numero, perguntas, tom, onde } = Astro.props;
+const producao = emProducao();
+const lista = perguntas.filter((p) => {
+  if (!p.condicao || !producao) return true;
+  alertarOmissao(`pergunta "${p.pergunta}" (${onde})`, p.condicao.motivo ?? 'condicional');
+  return false;
+});
+const id = `${onde}-perguntas`;
+---
+
+<section class="faq" data-tone={tom} aria-labelledby={id}>
+  <div class="recipiente faq__grade">
+    <div class="faq__cabeca">
+      <Legenda numero={numero}>Perguntas</Legenda>
+      <h2 id={id} class="faq__titulo">
+        Perguntas
+      </h2>
+    </div>
+    <div class="faq__lista">
+      {lista.map((p, i) => (
+        <details class="faq__item">
+          <summary>
+            <span class="faq__n" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="faq__pergunta">{p.pergunta}</span>
+            {p.condicao && (
+              <Provisorio campo={p.condicao}>
+                <span class="so-leitor">condicional</span>
+              </Provisorio>
+            )}
+          </summary>
+          <div class="faq__resposta">
+            <p>{p.resposta}</p>
+            {p.fontes.length > 0 ? (
+              <p class="faq__fontes">
+                Fonte{p.fontes.length > 1 ? 's' : ''}:{' '}
+                {p.fontes.map((f, k) => (
+                  <>
+                    {k > 0 && ' · '}
+                    <a href={f.url} rel="noopener" target="_blank">
+                      {f.rotulo}
+                    </a>
+                  </>
+                ))}
+              </p>
+            ) : (
+              <p class="faq__fontes">Sem afirmação clínica: descreve como a clínica atende.</p>
+            )}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding-block: var(--secao-y);
+  }
+  .faq__grade {
+    display: grid;
+    gap: var(--e-6);
+  }
+  .faq__titulo {
+    margin-block-start: var(--e-4);
+    font-size: var(--t-2);
+  }
+  .faq__lista {
+    border-bottom: var(--l-fina) solid var(--linha-forte);
+  }
+  .faq__item {
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .faq__item summary {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    gap: var(--e-3);
+    align-items: baseline;
+    padding-block: var(--e-5);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__n {
+    font-family: var(--f-display);
+    color: var(--fg-suave);
+  }
+  .faq__pergunta {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    line-height: 1.25;
+  }
+  .faq__resposta {
+    padding: 0 0 var(--e-6) calc(2.5rem + var(--e-3));
+  }
+  .faq__fontes {
+    font-size: var(--t-legenda);
+    line-height: 1.6;
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .faq__grade {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--e-5);
+    }
+    .faq__cabeca {
+      grid-column: 8 / 13;
+      grid-row: 1;
+      text-align: end;
+    }
+    .faq__cabeca :global(.legenda) {
+      justify-content: flex-end;
+    }
+    .faq__lista {
+      grid-column: 1 / 8;
+      grid-row: 1;
+    }
+  }
+</style>

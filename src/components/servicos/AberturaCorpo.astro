@@ -1,0 +1,95 @@
+---
+// Abertura de /corpo-e-emagrecimento (musgo). Composição: título largo em cima; uma única
+// contraforma baixa enorme vaza pela borda ESQUERDA da tela; texto à direita dela.
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { imagemJanela } from '../home/midia.ts';
+import Migalhas from './Migalhas.astro';
+import Resumo from './Resumo.astro';
+import type { PaginaServico } from './conteudo.ts';
+
+interface Props {
+  p: PaginaServico;
+}
+const { p } = Astro.props;
+const tecido = imagemDoItem('imagem6', '30% 50%');
+---
+
+<section class="ab-corpo" data-tone="moss" aria-labelledby="titulo-pagina">
+  <div class="recipiente">
+    <Migalhas itens={[{ rotulo: p.legenda }]} />
+    <div class="ab-corpo__cabeca">
+      <Legenda numero={1}>{p.legenda}</Legenda>
+      <h1 id="titulo-pagina" class="ab-corpo__titulo vt-titulo">
+        {p.titulo}
+      </h1>
+    </div>
+  </div>
+  <div class="ab-corpo__base">
+    <div class="ab-corpo__janela" aria-hidden="true">
+      <Janela
+        forma="baixa"
+        {...(tecido && {
+          imagem: {
+            ...imagemJanela(tecido, '(min-width: 900px) 46vw, 80vw'),
+            prioridade: 'alta' as const,
+          },
+        })}
+        placeholder="imagem6 (textura)"
+      />
+    </div>
+    <div class="ab-corpo__texto">
+      <Resumo abertura={p.abertura} resumo={p.resumo} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ab-corpo {
+    padding-block: var(--e-6) var(--secao-y);
+    overflow: clip;
+  }
+  .ab-corpo__cabeca {
+    margin-block-start: var(--e-7);
+  }
+  .ab-corpo__titulo {
+    margin-block-start: var(--e-4);
+    font-size: clamp(3.4rem, 1.6rem + 11vw, 15rem);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: var(--tracking-display);
+    max-width: 12ch;
+  }
+  .ab-corpo__base {
+    display: grid;
+    gap: var(--e-6);
+    margin-block-start: var(--e-7);
+  }
+  .ab-corpo__janela {
+    width: 82%;
+    margin-inline-start: -14%;
+  }
+  .ab-corpo__texto {
+    padding-inline: var(--gutter);
+    display: grid;
+    gap: var(--e-5);
+  }
+  @media (min-width: 900px) {
+    .ab-corpo__base {
+      grid-template-columns: 6fr 5fr;
+      align-items: center;
+      column-gap: var(--e-8);
+      margin-block-start: calc(var(--e-9) * -0.6);
+    }
+    .ab-corpo__janela {
+      width: 100%;
+      max-width: 44rem;
+      margin-inline-start: -12vw;
+    }
+    .ab-corpo__texto {
+      padding-inline: 0 var(--gutter);
+      max-width: 34rem;
+    }
+  }
+</style>

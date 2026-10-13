@@ -115,3 +115,28 @@ Nenhum.
 - **Links dos eixos** (`/harmonizacao-facial/`, `/corpo-e-emagrecimento/`, `/pele-e-laser/`) e "Conhecer a Bia" (`/bia/`) só funcionam depois das sessões 6B e 6C. · Code
 - **FAQ 4 e 5** (bioestimulador/fios e toxina) ficaram fora da home por serem condicionais (habilitação e apostilamento). · João
 - **Avaliação gratuita ou paga**: confirmar; o site não cita valor. · João
+
+## Páginas de serviço e protocolos (sessão 6B, 13/10/2026)
+
+O preview mostra "a informar" + selo; a produção omite o bloco e avisa no build.
+
+- **Resumos citáveis (40–60 palavras):** são frases aprovadas do COPY_DECK juntadas sem reescrita. O João aprova ou manda um resumo próprio por página. · João
+- **Harmonização facial:**
+  - "Para quem é" por procedimento;
+  - como são as sessões (duração, intervalo, retorno);
+  - o que é o serviço "FaceLifting";
+  - bloco de preenchimentos (lábios, sulco nasogeniano), que depende da base COFFITO, ainda não pesquisada;
+  - bloco de toxina botulínica e FAQ 4/5, que dependem do apostilamento no CREFITO-10. · João
+- **Corpo e emagrecimento:**
+  - lista de tecnologias de firmeza (pela função, sem marca);
+  - transcrição revisada e legendas `.vtt` do vídeo (o slot está vazio);
+  - o vídeo cita um medicamento na legenda queimada (`flagFinal`, decidir na sessão 9). · João
+- **Pele e tecnologia:**
+  - indicações de pele;
+  - bloco "Rejuvenescimento" (tecnologia descrita pela função, sem marca). · João
+- **"Depilação definitiva":** aparece só como o rótulo do serviço lido da config (aviso de termo regulado no COMPLIANCE). O título usa "Depilação com luz: redução duradoura dos pelos" (decisão 6 do deck). · João
+- **Contraindicações gerais:** o deck não traz nenhuma. Vale para as 3 páginas e para os 3 protocolos. · João
+- **Protocolos (BiaLifting, BiaLips, Lipocrio da Bia):** faltam "Para quem é", "Como é a sessão", "O que esperar", as contraindicações e o resumo. Em produção, cada subpágina mostra só o nome, quem aplica, o atendimento e as perguntas gerais. · João
+- **Escopo do ato (COFFITO):** está como `aviso` em `servicos.ts`, com selo no bloco "Conselho" do preview, e é conferido na sessão 9. · João
+- **Endereço `/pele-e-laser/`:** a home (6A) aponta para ele. Virou um redirecionamento para `/pele-e-tecnologia/`; o link da home pode ser trocado na próxima sessão que mexer nela. · Code
+- **`/bia/`:** o link da home só funciona depois da sessão 6C (o `pnpm verificar-links` lista esse link à parte). · Code

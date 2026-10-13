@@ -1,5 +1,23 @@
 # Performance
 
+## Páginas de serviço e protocolos — sessão 6B, 13/10/2026
+
+Lighthouse 13.5.0 mobile padrão, build de produção, `astro preview`, uma rodada por página.
+
+| Página                           | Perf. | Acess. | Boas prát. | SEO | LCP      | CLS | TBT  | Peso    |
+| -------------------------------- | ----- | ------ | ---------- | --- | -------- | --- | ---- | ------- |
+| /harmonizacao-facial/            | 98    | 100    | 100        | 60  | 1.961 ms | 0   | 0 ms | 171 KiB |
+| /corpo-e-emagrecimento/          | 98    | 100    | 100        | 63  | 1.958 ms | 0   | 0 ms | 168 KiB |
+| /pele-e-tecnologia/              | 98    | 100    | 100        | 60  | 1.958 ms | 0   | 0 ms | 169 KiB |
+| /protocolos-bia/                 | 99    | 100    | 100        | 60  | 1.962 ms | 0   | 0 ms | 179 KiB |
+| /protocolos-bia/bialifting/      | 100   | 100    | 100        | 60  | 1.654 ms | 0   | 0 ms | 109 KiB |
+| /protocolos-bia/bialips/         | 100   | 100    | 100        | 60  | 1.506 ms | 0   | 0 ms | 103 KiB |
+| /protocolos-bia/lipocrio-da-bia/ | 100   | 100    | 100        | 60  | 1.506 ms | 0   | 0 ms | 103 KiB |
+
+- **SEO:** a única auditoria reprovada é `is-crawlable` (o `noindex` proposital, sem SITE_URL). A variação entre 60 e 63 vem de quais auditorias se aplicam a cada página.
+- **Vídeo do corpo:** fica fora da primeira dobra e só baixa no clique. O pôster é um `<img>` lazy.
+- **View Transitions entre documentos:** é CSS puro (`@view-transition`), sob `@supports` e `prefers-reduced-motion: no-preference`. A navegação funciona igual sem ele. A home não tem a regra, então a transição só acontece entre as páginas de serviço.
+
 ## Home completa (entrada + hero + seções 2–9) — sessão 6A, 13/10/2026
 
 Lighthouse 13.5.0 mobile padrão, build de produção (`MEDIA_SKIP=1 pnpm build`), `astro preview`, Chromium 141, três rodadas.

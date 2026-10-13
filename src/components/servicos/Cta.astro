@@ -1,0 +1,86 @@
+---
+// Fecho: WhatsApp neutro, executor, outras páginas e a cauda do B (marcador fixo de fim).
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import { linkWhatsapp } from '../home/conteudo.ts';
+import Executor from './Executor.astro';
+import { ctaWhatsapp, semCompromisso } from './conteudo.ts';
+
+interface Props {
+  slugs: string[];
+  atual: string;
+  tom: 'light' | 'dark' | 'moss';
+}
+const { slugs, atual, tom } = Astro.props;
+const outras = [
+  { href: '/harmonizacao-facial/', rotulo: 'Harmonização facial' },
+  { href: '/corpo-e-emagrecimento/', rotulo: 'Corpo e emagrecimento' },
+  { href: '/pele-e-tecnologia/', rotulo: 'Pele e tecnologia' },
+  { href: '/protocolos-bia/', rotulo: 'Protocolos da Bia' },
+].filter((o) => o.href !== atual);
+---
+
+<section class="cta" data-tone={tom} aria-labelledby="cta-titulo">
+  <div class="recipiente cta__grade">
+    <div class="cta__acao">
+      <h2 id="cta-titulo" class="t-2">
+        {ctaWhatsapp}.
+      </h2>
+      <p class="cta__nota">{semCompromisso}</p>
+      {linkWhatsapp && (
+        <a class="botao" href={linkWhatsapp} rel="noopener" target="_blank">
+          {ctaWhatsapp}
+          <span class="so-leitor"> (abre o WhatsApp em nova aba)</span>
+        </a>
+      )}
+    </div>
+    <div class="cta__executor">
+      <Executor slugs={slugs} />
+    </div>
+    <nav class="cta__outras" aria-label="Outras páginas">
+      <ul role="list">
+        {outras.map((o) => (
+          <li>
+            <a href={o.href}>{o.rotulo}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <MarcadorCauda altura="4rem" alinhamento="fim" />
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: var(--secao-y) var(--e-8);
+  }
+  .cta__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .cta__acao {
+    display: grid;
+    gap: var(--e-4);
+    justify-items: start;
+  }
+  .cta__acao h2 {
+    max-width: 16ch;
+  }
+  .cta__nota {
+    margin: 0;
+    font-style: italic;
+  }
+  .cta__executor {
+    padding-block-start: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .cta__outras ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-3) var(--e-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+  }
+</style>

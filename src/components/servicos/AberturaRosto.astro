@@ -1,0 +1,105 @@
+---
+// Abertura de /harmonizacao-facial (osso). Composição: as duas contraformas empilhadas
+// exatamente como no B (alta = 56,75% da largura da baixa, borda esquerda alinhada, vão de 3%).
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem, imagemDoSlot } from '../hero/midia.ts';
+import { imagemJanela } from '../home/midia.ts';
+import { nomeBia } from '../home/conteudo.ts';
+import Migalhas from './Migalhas.astro';
+import Resumo from './Resumo.astro';
+import type { PaginaServico } from './conteudo.ts';
+
+interface Props {
+  p: PaginaServico;
+}
+const { p } = Astro.props;
+const retrato = imagemDoSlot('bia.retrato');
+const pampas = imagemDoItem('imagem10');
+---
+
+<section class="ab-rosto" data-tone="light" aria-labelledby="titulo-pagina">
+  <div class="recipiente ab-rosto__grade">
+    <div class="ab-rosto__texto">
+      <Migalhas itens={[{ rotulo: p.legenda }]} />
+      <Legenda numero={1}>{p.legenda}</Legenda>
+      <h1 id="titulo-pagina" class="ab-rosto__titulo vt-titulo">
+        {p.titulo}
+      </h1>
+      <Resumo abertura={p.abertura} resumo={p.resumo} />
+    </div>
+    <div class="ab-rosto__b" aria-hidden="true">
+      <div class="ab-rosto__alta">
+        <Janela
+          forma="alta"
+          {...(pampas && { imagem: imagemJanela(pampas, '(min-width: 900px) 14vw, 30vw') })}
+          placeholder="imagem10 (textura)"
+        />
+      </div>
+      <div class="ab-rosto__baixa">
+        <Janela
+          forma="baixa"
+          classeMidia="tratamento-retrato"
+          {...(retrato && {
+            imagem: {
+              ...imagemJanela(
+                retrato,
+                '(min-width: 900px) 26vw, 56vw',
+                `${nomeBia}, fisioterapeuta`,
+              ),
+              prioridade: 'alta' as const,
+            },
+          })}
+          placeholder="retrato da Bia"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ab-rosto {
+    padding-block: var(--e-6) var(--secao-y);
+    overflow: clip;
+  }
+  .ab-rosto__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .ab-rosto__texto {
+    display: grid;
+    gap: var(--e-5);
+    align-content: start;
+  }
+  .ab-rosto__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    max-width: 11ch;
+  }
+  .ab-rosto__b {
+    display: grid;
+    gap: 3%;
+    width: min(78%, 22rem);
+    justify-self: end;
+  }
+  .ab-rosto__alta {
+    width: 56.75%;
+  }
+  @media (min-width: 900px) {
+    .ab-rosto__grade {
+      grid-template-columns: 7fr 5fr;
+      column-gap: var(--e-8);
+      align-items: end;
+    }
+    .ab-rosto__texto {
+      padding-block-start: var(--e-6);
+    }
+    .ab-rosto__b {
+      width: 100%;
+      max-width: 26rem;
+      margin-block-start: var(--e-6);
+    }
+  }
+</style>

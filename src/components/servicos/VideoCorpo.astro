@@ -1,0 +1,126 @@
+---
+// Vídeo da Bia sobre flacidez depois de emagrecer: janela vertical grande, clique para tocar,
+// pôster lazy, legendas .vtt se existirem e transcrição em texto (ou slot vazio com aviso).
+// Fora da primeira dobra (manifesto: naoUsarComoCapa). Nenhum medicamento por nome no texto.
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import Provisorio from '../Provisorio.astro';
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import { pendente } from '../../config/tipos.ts';
+import { videoDoItem } from '../home/midia.ts';
+
+interface Props {
+  numero: number;
+  tom: 'light' | 'dark' | 'moss';
+}
+const { numero, tom } = Astro.props;
+const video = videoDoItem('usou-monjauro-corpo-flacido');
+if (!video && emProducao()) alertarOmissao('vídeo da página Corpo', 'derivado ausente no índice');
+
+// Transcrição revisada: media-originais/legendas/<slug>.vtt com falas (hoje só um bloco NOTE).
+const vtt = join(
+  process.cwd(),
+  'media-originais',
+  'legendas',
+  'corpo-flacidez-pos-emagrecimento.vtt',
+);
+const falas = existsSync(vtt)
+  ? readFileSync(vtt, 'utf8')
+      .split(/\r?\n\r?\n/)
+      .filter((b) => b.includes('-->'))
+      .map((b) =>
+        b
+          .split(/\r?\n/)
+          .filter((l) => !l.includes('-->') && !/^\d+$/.test(l))
+          .join(' '),
+      )
+  : [];
+const transcricao = pendente<string>(
+  'Transcrição do vídeo',
+  'sem transcrição revisada (slot .vtt vazio); legendas em .vtt também pendentes',
+);
+---
+
+{video && (
+  <section class="video-corpo" data-tone={tom} aria-labelledby="video-corpo-titulo">
+    <div class="recipiente video-corpo__grade">
+      <div class="video-corpo__janela">
+        <Janela
+          forma="baixa"
+          video={{ ...video, rotulo: 'Vídeo: a Bia fala sobre flacidez depois de emagrecer' }}
+        >
+          <figcaption class="video-corpo__legenda">Vídeo com som · clique para assistir</figcaption>
+        </Janela>
+      </div>
+      <div class="video-corpo__texto">
+        <Legenda numero={numero}>Em vídeo</Legenda>
+        <h2 id="video-corpo-titulo" class="t-3">
+          Flacidez depois de emagrecer.
+        </h2>
+        <h3 class="video-corpo__rotulo">Transcrição</h3>
+        {falas.length > 0 ? (
+          <div class="video-corpo__transcricao">
+            {falas.map((f) => (
+              <p>{f}</p>
+            ))}
+          </div>
+        ) : (
+          <Provisorio campo={transcricao}>
+            <span />
+          </Provisorio>
+        )}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .video-corpo {
+    padding-block: var(--secao-y);
+  }
+  .video-corpo__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .video-corpo__janela {
+    width: min(100%, 24rem);
+  }
+  .video-corpo__legenda {
+    margin-block-start: var(--e-3);
+    font-size: var(--t-legenda);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .video-corpo__texto {
+    display: grid;
+    gap: var(--e-5);
+    align-content: start;
+  }
+  .video-corpo__rotulo {
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .video-corpo__transcricao {
+    max-height: 28rem;
+    overflow: auto;
+  }
+  @media (min-width: 900px) {
+    .video-corpo__grade {
+      grid-template-columns: 5fr 6fr;
+      column-gap: var(--e-9);
+    }
+    .video-corpo__janela {
+      width: 100%;
+      max-width: 30rem;
+      justify-self: end;
+    }
+    .video-corpo__texto {
+      padding-block-start: var(--e-9);
+    }
+  }
+</style>

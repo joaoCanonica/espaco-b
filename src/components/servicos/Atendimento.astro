@@ -1,0 +1,100 @@
+---
+// "Como é o atendimento": avaliação → plano → sessões, em linha horizontal numerada (desktop).
+import Legenda from '../ui/Legenda.astro';
+import Texto from './Texto.astro';
+import { visao } from './blocos.ts';
+import { passosAvaliacao, semCompromisso, type Bloco } from './conteudo.ts';
+
+interface Props {
+  numero: number;
+  sessoes?: Bloco;
+  tom: 'light' | 'dark' | 'moss';
+  onde: string;
+}
+const { numero, sessoes, tom, onde } = Astro.props;
+const v = sessoes ? visao(sessoes.texto, onde) : { mostrar: false, texto: null };
+const etapas = [
+  { nome: 'Avaliação', texto: `${passosAvaliacao[0]} ${passosAvaliacao[1]}` },
+  { nome: 'Plano', texto: passosAvaliacao[2] ?? '' },
+];
+const id = `${onde}-atendimento`;
+---
+
+<section class="atendimento" data-tone={tom} aria-labelledby={id}>
+  <div class="recipiente">
+    <Legenda numero={numero}>Atendimento</Legenda>
+    <h2 id={id} class="t-2 atendimento__titulo">
+      Como é o atendimento
+    </h2>
+    <ol class="atendimento__etapas" role="list">
+      {etapas.map((e, i) => (
+        <li class="etapa">
+          <span class="etapa__n" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h3 class="etapa__nome">{e.nome}</h3>
+          <p>{e.texto}</p>
+        </li>
+      ))}
+      {v.mostrar && (
+        <li class="etapa">
+          <span class="etapa__n" aria-hidden="true">
+            03
+          </span>
+          <h3 class="etapa__nome">{sessoes?.titulo}</h3>
+          <Texto v={v} fontes={sessoes?.fontes} />
+        </li>
+      )}
+    </ol>
+    <p class="atendimento__nota">{semCompromisso}</p>
+  </div>
+</section>
+
+<style>
+  .atendimento {
+    padding-block: calc(var(--secao-y) * 0.8);
+  }
+  .atendimento__titulo {
+    margin-block: var(--e-5) var(--e-7);
+    max-width: 14ch;
+  }
+  .atendimento__etapas {
+    display: grid;
+    gap: var(--e-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .etapa {
+    position: relative;
+    padding-block-start: var(--e-5);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .etapa__n {
+    display: block;
+    font-family: var(--f-display);
+    font-size: var(--t-3);
+    line-height: 1;
+    color: var(--fg-suave);
+  }
+  .etapa__nome {
+    margin-block: var(--e-3);
+    font-size: var(--t-4);
+  }
+  .atendimento__nota {
+    margin-block-start: var(--e-7);
+    font-style: italic;
+  }
+  @media (min-width: 900px) {
+    .atendimento__etapas {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: var(--e-6);
+    }
+    .etapa:nth-child(2) {
+      margin-block-start: var(--e-7);
+    }
+    .etapa:nth-child(3) {
+      margin-block-start: var(--e-9);
+    }
+  }
+</style>
