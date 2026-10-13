@@ -318,7 +318,60 @@ function escreverRelatorio({ achados, bloqueios, avisosAchados, producao, ignora
   writeFileSync(join(RAIZ, 'docs', 'COMPLIANCE.md'), md);
 }
 
+// Modo texto: audita um arquivo de texto (ex.: docs/COPY_DECK.md) linha a linha, com as mesmas listas.
+// Termo vetado sai com código 1. Avisos (termos regulados) só são listados.
+export async function auditarTexto(caminho) {
+  const imp = (p) => import(pathToFileURL(join(RAIZ, p)).href);
+  const { vetados, avisos } = await imp('src/config/termos.ts');
+  const { bianca } = await imp('src/config/pessoas.ts');
+  const { marcasDeEquipamento } = await imp('src/config/servicos.ts');
+  const draAtivo = bianca.tratamento.dra.ativo;
+  const listaVetados = [
+    ...vetados.filter((t) => !(t.soSemDra && draAtivo)),
+    ...marcasDeEquipamento().map((m) => ({
+      id: `marca de equipamento: ${m}`,
+      padrao: `\\b${m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`,
+    })),
+  ].map((t) => ({ ...t, re: compilar(t) }));
+  const listaAvisos = avisos.map((t) => ({ ...t, re: compilar(t) }));
+  const linhas = readFileSync(caminho, 'utf8').split('\n');
+  const bloqueios = [];
+  const avisosAchados = [];
+  linhas.forEach((linha, i) => {
+    for (const t of listaVetados)
+      for (const m of linha.matchAll(t.re))
+        bloqueios.push({
+          termo: t.id,
+          linha: i + 1,
+          trecho: linha.slice(Math.max(0, m.index - 30), m.index + 40).trim(),
+        });
+    for (const t of listaAvisos)
+      for (const m of linha.matchAll(t.re))
+        avisosAchados.push({
+          termo: t.id,
+          linha: i + 1,
+          trecho: linha.slice(Math.max(0, m.index - 30), m.index + 40).trim(),
+        });
+  });
+  return { bloqueios, avisos: avisosAchados };
+}
+
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const iTexto = process.argv.indexOf('--texto');
+  if (iTexto > -1) {
+    const arquivo = process.argv[iTexto + 1];
+    if (!arquivo) throw new Error('uso: audit-compliance --texto <arquivo>');
+    const t = await auditarTexto(arquivo);
+    for (const b of t.bloqueios)
+      console.error(`VETADO: "${b.termo}" linha ${b.linha} → ${b.trecho}`);
+    const porTermo = {};
+    for (const a of t.avisos) porTermo[a.termo] = (porTermo[a.termo] ?? 0) + 1;
+    console.log(`avisos (termos regulados, conferir na sessão 9): ${JSON.stringify(porTermo)}`);
+    console.log(
+      `audit-compliance --texto ${arquivo}: ${t.bloqueios.length} vetado(s), ${t.avisos.length} aviso(s)`,
+    );
+    process.exit(t.bloqueios.length ? 1 : 0);
+  }
   const producao = process.env.NODE_ENV === 'production' && process.env.PREVIEW !== '1';
   const r = await auditar({ producao });
   for (const b of r.bloqueios)
