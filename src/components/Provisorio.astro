@@ -1,0 +1,75 @@
+---
+// Selo PROVISÓRIO e cartão "a informar".
+// Preview/dev: dado não confirmado → conteúdo + selo (ou cartão "a informar" se vazio);
+//              módulo desligado → cartão (a seção nunca some em preview).
+// Produção: dado não confirmado ou módulo desligado → não renderiza e avisa no build.
+import { alertarOmissao, emProducao } from '../config/ambiente.ts';
+import { modulos, type NomeModulo } from '../config/modulos.ts';
+import type { Campo } from '../config/tipos.ts';
+import Selo from './ui/Selo.astro';
+
+interface Props {
+  campo?: Campo<unknown>;
+  modulo?: NomeModulo;
+  rotulo?: string;
+}
+
+const { campo, modulo, rotulo } = Astro.props;
+const producao = emProducao();
+const mod = modulo ? modulos[modulo] : undefined;
+const nome = rotulo ?? campo?.rotulo ?? modulo ?? 'dado';
+
+const moduloDesligado = !!mod && !mod.ativo;
+const naoConfirmado = !!campo && campo.estado !== 'confirmado';
+const vazio = !!campo && campo.valor === null;
+
+let modoRender: 'normal' | 'selo' | 'cartao' | 'oculto' = 'normal';
+if (producao) {
+  if (moduloDesligado) {
+    modoRender = 'oculto';
+    alertarOmissao(`seção "${nome}"`, `módulo desligado (${mod?.motivo})`);
+  } else if (naoConfirmado) {
+    modoRender = 'oculto';
+    alertarOmissao(
+      `"${nome}"`,
+      `dado ${campo?.estado}${campo?.motivo ? ` (${campo.motivo})` : ''}`,
+    );
+  }
+} else if (moduloDesligado || vazio) {
+  modoRender = 'cartao';
+} else if (naoConfirmado) {
+  modoRender = 'selo';
+}
+const motivo = moduloDesligado ? `módulo desligado: ${mod?.motivo}` : (campo?.motivo ?? '');
+---
+
+{modoRender === 'normal' && <slot />}
+{modoRender === 'selo' && (
+  <span class="provisorio" data-provisorio={campo?.estado}>
+    <slot />
+    <Selo titulo={motivo} />
+  </span>
+)}
+{modoRender === 'cartao' && (
+  <div class="cartao-a-informar" data-provisorio="cartao" data-secao={modulo}>
+    <Selo />
+    <p>
+      <strong>{nome}</strong>: a informar.
+    </p>
+    {motivo && <p class="motivo">{motivo}</p>}
+  </div>
+)}
+
+<style>
+  .cartao-a-informar {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px dashed currentColor;
+    font:
+      0.875rem/1.5 system-ui,
+      sans-serif;
+  }
+  .motivo {
+    opacity: 0.75;
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+// Subpágina de cada protocolo CONFIRMADO (sessão 6B). Conteúdo pendente: cartões no preview,
+// fora em produção (com alerta); fica o nome, quem aplica, o atendimento e as perguntas gerais.
+import AberturaProtocolo from '../../components/servicos/AberturaProtocolo.astro';
+import Atendimento from '../../components/servicos/Atendimento.astro';
+import Cta from '../../components/servicos/Cta.astro';
+import Detalhes from '../../components/servicos/Detalhes.astro';
+import Faq from '../../components/servicos/Faq.astro';
+import Importante from '../../components/servicos/Importante.astro';
+import NavServicos from '../../components/servicos/NavServicos.astro';
+import Transicoes from '../../components/servicos/Transicoes.astro';
+import {
+  conteudoDoProtocolo,
+  protocolosPagina,
+  type Bloco,
+} from '../../components/servicos/conteudo.ts';
+import { protocolosPublicos } from '../../components/servicos/protocolos.ts';
+import Header from '../../components/ui/Header.astro';
+import { marca } from '../../config/marca.ts';
+import { pessoas } from '../../config/pessoas.ts';
+import { pendente } from '../../config/tipos.ts';
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return protocolosPublicos.map((p, i) => ({
+    params: { protocolo: p.id },
+    props: {
+      id: p.id,
+      nome: p.nomeTexto,
+      servico: p.servico,
+      indice: i + 1,
+      total: protocolosPublicos.length,
+    },
+  }));
+}
+
+interface Props {
+  id: string;
+  nome: string;
+  servico: string;
+  indice: number;
+  total: number;
+}
+const { id, nome, servico, indice, total } = Astro.props;
+const c = conteudoDoProtocolo(nome);
+const bia = pessoas.bianca;
+const onde = `protocolo-${id}`;
+const blocos: Bloco[] = [
+  { titulo: 'Para quem é', texto: c.paraQuem },
+  { titulo: 'Como é a sessão', texto: c.sessao },
+  { titulo: 'O que esperar', texto: c.esperar },
+  { titulo: 'Quem aplica', texto: `${bia.titulo.valor} ${bia.nome.valor}` },
+];
+const importante: Bloco[] = [
+  {
+    titulo: 'Contraindicações',
+    texto: pendente<string>(
+      `Contraindicações (${nome})`,
+      'a enviar pelo João junto com o conteúdo do protocolo',
+    ),
+  },
+];
+---
+
+<Base
+  titulo={`${nome} · ${protocolosPagina.legenda} · ${marca.nomeCurto.valor}`}
+  descricao={`${nome}: protocolo do Espaço B aplicado pela ${bia.titulo.valor?.toLowerCase()} ${bia.nome.valor}.`}
+>
+  <Transicoes slot="head" />
+  <Header slot="header" tomInicial="moss">
+    <NavServicos atual="/protocolos-bia/" />
+  </Header>
+  <AberturaProtocolo id={id} nome={nome} servico={servico} indice={indice} total={total} />
+  <Detalhes
+    numero={2}
+    legenda="O protocolo"
+    titulo={`Sobre o ${nome}`}
+    blocos={blocos}
+    tom="light"
+    onde={onde}
+  />
+  <Atendimento numero={3} tom="dark" onde={onde} />
+  <Importante numero={4} blocos={importante} tom="moss" onde={onde} />
+  <Faq numero={5} perguntas={protocolosPagina.faq} tom="light" onde={onde} />
+  <Cta slugs={[servico]} atual={`/protocolos-bia/${id}/`} tom="dark" />
+</Base>

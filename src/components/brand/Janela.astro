@@ -1,0 +1,225 @@
+---
+// Janela em "D": foto ou vídeo recortados pelo path REAL de uma contraforma do B
+// (clip-path com clipPathUnits=objectBoundingBox). Escalas: "alta" (menor) e "baixa" (maior).
+// Imagem: proporção da própria contraforma. Vídeo: 9:16 inteiro; se a curva do D cortar a zona
+// da legenda queimada, cai para cantos arredondados só fora da zona (e avisa no build).
+import Selo from '../ui/Selo.astro';
+import { alertarOmissao, emPreview } from '../../config/ambiente.ts';
+import { contraforma, zonaLivre, type Forma, type Zona } from './marca.ts';
+
+interface Imagem {
+  src: string;
+  srcset?: string;
+  sizes?: string;
+  alt: string;
+  largura: number;
+  altura: number;
+  objectPosition?: string;
+  carregamento?: 'lazy' | 'eager';
+  /** srcset AVIF (vira <picture>; o srcset principal fica como fallback) */
+  avifSrcset?: string;
+  /** "alta" = candidato a LCP: eager + fetchpriority=high */
+  prioridade?: 'alta' | 'normal';
+}
+interface Video {
+  mp4: string;
+  webm?: string;
+  poster: string;
+  rotulo: string;
+  mudo?: boolean;
+  zonaLegenda?: Zona;
+}
+interface Props {
+  forma?: Forma;
+  imagem?: Imagem;
+  video?: Video;
+  largura?: string;
+  placeholder?: string;
+  /** classe extra na moldura (ex.: "tratamento-retrato") */
+  classeMidia?: string;
+}
+
+const {
+  forma = 'baixa',
+  imagem,
+  video,
+  largura = '100%',
+  placeholder = 'imagem a definir',
+  classeMidia,
+} = Astro.props;
+const alta = imagem?.prioridade === 'alta';
+const preview = emPreview();
+// Sem mídia: em preview, placeholder com selo; em produção, a moldura fica vazia e o build avisa.
+if (!imagem && !video && !preview) alertarOmissao(`mídia da janela ${forma}`, placeholder);
+const cf = contraforma(forma);
+const id = `cf-${forma}-${Math.random().toString(36).slice(2, 8)}`;
+
+let modo: 'd' | 'cantos' = 'd';
+let proporcao = `${cf.proporcao}`;
+if (video) {
+  proporcao = '9 / 16';
+  if (video.zonaLegenda && !zonaLivre(forma, video.zonaLegenda)) {
+    modo = 'cantos';
+    console.warn(
+      `[espaco-b] Janela ${forma}: a curva do D cortaria a legenda queimada; usando cantos fora da zona.`,
+    );
+  }
+}
+const z = video?.zonaLegenda;
+// Cantos (fallback): raio vertical limitado à área fora da zona da legenda.
+const cantos = z
+  ? `0 50% 50% 0 / 0 ${Math.floor(z.topo * 100)}% ${Math.floor((1 - z.base) * 100)}% 0`
+  : '0 50% 50% 0';
+const estilo = [
+  `aspect-ratio:${proporcao}`,
+  modo === 'd' ? `clip-path:url(#${id})` : `border-radius:${cantos}`,
+].join(';');
+---
+
+<figure
+  class:list={['janela', `janela--${forma}`]}
+  data-janela={forma}
+  data-modo={modo}
+  style={`--janela-largura:${largura}`}
+>
+  <svg class="janela__defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <clipPath id={id} clipPathUnits="objectBoundingBox">
+      <path d={cf.dNormalizado}></path>
+    </clipPath>
+  </svg>
+  <div class:list={['janela__moldura', classeMidia]} style={estilo}>
+    {imagem && (
+      <picture>
+        {imagem.avifSrcset && (
+          <source type="image/avif" srcset={imagem.avifSrcset} sizes={imagem.sizes} />
+        )}
+        <img
+          src={imagem.src}
+          srcset={imagem.srcset}
+          sizes={imagem.sizes}
+          alt={imagem.alt}
+          width={imagem.largura}
+          height={imagem.altura}
+          loading={alta ? 'eager' : (imagem.carregamento ?? 'lazy')}
+          fetchpriority={alta ? 'high' : undefined}
+          decoding={alta ? 'sync' : 'async'}
+          style={`object-position:${imagem.objectPosition ?? '50% 50%'}`}
+        />
+      </picture>
+    )}
+    {video && (
+      <>
+        <video
+          preload="none"
+          playsinline
+          muted={video.mudo}
+          loop={video.mudo}
+          aria-label={video.rotulo}
+        >
+          {video.webm && <source src={video.webm} type="video/webm" />}
+          <source src={video.mp4} type="video/mp4" />
+        </video>
+        {/* Pôster como <img> lazy: o atributo poster baixaria todos já na carga e disputaria o LCP. */}
+        <img
+          class="janela__poster"
+          src={video.poster}
+          alt=""
+          width="540"
+          height="960"
+          loading="lazy"
+          decoding="async"
+        />
+        <button class="botao janela__play" type="button" data-play aria-pressed="false">
+          <span data-rotulo>Assistir</span>
+          <span class="so-leitor">: {video.rotulo}</span>
+        </button>
+      </>
+    )}
+    {!imagem && !video && preview && (
+      <div class="janela__vazia">
+        <Selo />
+        <span>{placeholder}</span>
+      </div>
+    )}
+  </div>
+  <slot />
+</figure>
+
+<script>
+  for (const botao of document.querySelectorAll<HTMLButtonElement>('.janela [data-play]')) {
+    const video = botao.parentElement?.querySelector('video');
+    const rotulo = botao.querySelector('[data-rotulo]');
+    if (!video || !rotulo) continue;
+    botao.addEventListener('click', () => {
+      if (video.paused) void video.play();
+      else video.pause();
+    });
+    const poster = botao.parentElement?.querySelector<HTMLImageElement>('.janela__poster');
+    video.addEventListener('play', () => {
+      if (poster) poster.hidden = true;
+      botao.setAttribute('aria-pressed', 'true');
+      rotulo.textContent = 'Pausar';
+    });
+    video.addEventListener('pause', () => {
+      botao.setAttribute('aria-pressed', 'false');
+      rotulo.textContent = 'Assistir';
+    });
+  }
+</script>
+
+<style>
+  .janela {
+    position: relative;
+    margin: 0;
+    width: var(--janela-largura, 100%);
+  }
+  .janela__defs {
+    position: absolute;
+  }
+  .janela__moldura {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--linha);
+  }
+  .janela__moldura picture {
+    display: contents;
+  }
+  .janela__moldura img,
+  .janela__moldura video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .janela__moldura video {
+    object-fit: contain; /* 9:16 inteiro: nada da legenda queimada é cortado pelo enquadramento */
+    background: var(--c-tinta);
+  }
+  .janela__poster {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .janela__moldura .janela__poster {
+    object-fit: contain;
+  }
+  .janela__poster[hidden] {
+    display: none;
+  }
+  .janela__play {
+    position: absolute;
+    left: 0;
+    bottom: 12%;
+  }
+  .janela__vazia {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    gap: var(--e-2);
+    padding: var(--e-5);
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,143 @@
+---
+// 07b · No Google (faixa fina, musgo). Gesto: a nota em display enorme contra três trechos
+// literais em linha. Sem estrelas, sem foto, sem carrossel, sem AggregateRating.
+// Produção: só se conferido há menos de 60 dias; senão some com aviso de build (não bloqueia).
+import Provisorio from '../Provisorio.astro';
+import Selo from '../ui/Selo.astro';
+import Legenda from '../ui/Legenda.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import { avaliacoes } from '../../config/avaliacoes.ts';
+import { contato } from '../../config/contato.ts';
+import { googleTexto } from './conteudo.ts';
+
+const atual = avaliacoes.conferidoEm.estado === 'confirmado';
+const producao = emProducao();
+if (producao && !atual)
+  alertarOmissao('faixa "No Google"', avaliacoes.conferidoEm.motivo ?? 'conferência vencida');
+const mostrar = !producao || atual;
+
+const nota = (avaliacoes.nota.valor ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: 1 });
+const total = avaliacoes.total.valor;
+const iso = avaliacoes.conferidoEm.valor ?? '';
+const data = iso.split('-').reverse().join('/');
+const ordem = googleTexto.preferidos;
+const trechos = [...avaliacoes.trechos]
+  .sort((a, b) => (ordem.indexOf(a.id) + 1 || 99) - (ordem.indexOf(b.id) + 1 || 99))
+  .slice(0, 3);
+const maps = contato.google.mapsUrl.valor;
+---
+
+<Provisorio modulo="avaliacoesGoogle">
+  {mostrar && (
+    <section id="google" class="google" data-tone="moss" aria-labelledby="google-titulo">
+      <div class="recipiente google__grade">
+        <div class="google__nota">
+          <Legenda>{googleTexto.legenda}</Legenda>
+          <h2 id="google-titulo" class="google__titulo">
+            <span class="google__numero" aria-hidden="true">
+              {nota}
+            </span>
+            <span class="so-leitor">Nota {nota} no Google</span>
+          </h2>
+          <p class="google__total">
+            {total} avaliações no Google, conferido em <time datetime={iso}>{data}</time>
+            {!atual && <Selo titulo={avaliacoes.conferidoEm.motivo ?? ''} />}
+          </p>
+        </div>
+        <ul class="google__trechos" role="list">
+          {trechos.map((t) => (
+            <li>
+              <blockquote>
+                <p>“{t.trecho}”</p>
+              </blockquote>
+              <p class="google__autor">{t.nome}</p>
+            </li>
+          ))}
+        </ul>
+        {maps && (
+          <a class="google__link" href={maps} rel="noopener" target="_blank">
+            {googleTexto.link}
+            <span class="so-leitor"> (abre o Google Maps em nova aba)</span> ↗
+          </a>
+        )}
+      </div>
+    </section>
+  )}
+</Provisorio>
+
+<style>
+  .google {
+    padding-block: var(--e-8);
+    border-top: var(--l-fina) solid var(--linha);
+  }
+  .google__grade {
+    display: grid;
+    gap: var(--e-6);
+    align-items: end;
+  }
+  .google__titulo {
+    margin-block-start: var(--e-5);
+    line-height: 0.8;
+  }
+  .google__numero {
+    display: block;
+    padding-block-start: 0.12em;
+  }
+  .google__numero {
+    font-size: var(--t-mega);
+    font-weight: 300;
+    letter-spacing: var(--tracking-display);
+    font-variant-numeric: lining-nums;
+  }
+  .google__total {
+    margin: var(--e-3) 0 0;
+    font-size: var(--t-pequeno);
+  }
+  .google__trechos {
+    display: grid;
+    gap: var(--e-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .google__trechos li {
+    padding-block-start: var(--e-3);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .google__trechos blockquote {
+    margin: 0;
+  }
+  .google__trechos blockquote p {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    font-style: italic;
+    line-height: 1.25;
+  }
+  .google__autor {
+    margin: var(--e-2) 0 0;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .google__link {
+    justify-self: start;
+    font-size: var(--t-pequeno);
+    font-weight: 600;
+  }
+  @media (min-width: 900px) {
+    .google__grade {
+      grid-template-columns: 4fr 8fr;
+      column-gap: var(--e-8);
+    }
+    .google__trechos {
+      grid-template-columns: 1.4fr 1fr 1fr;
+      align-items: start;
+    }
+    .google__link {
+      grid-column: 2;
+    }
+  }
+</style>

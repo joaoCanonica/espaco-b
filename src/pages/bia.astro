@@ -1,0 +1,18 @@
+---
+// /bia (sessão 6C).
+import Bia from '../components/paginas/Bia.astro';
+import NavServicos from '../components/servicos/NavServicos.astro';
+import Transicoes from '../components/servicos/Transicoes.astro';
+import Header from '../components/ui/Header.astro';
+import { marca } from '../config/marca.ts';
+import Base from '../layouts/Base.astro';
+import { biaPagina } from '../components/paginas/conteudo.ts';
+---
+
+<Base descricao={biaPagina.abertura} titulo={`A Bia · ${marca.nomeCurto.valor}`}>
+  <Transicoes slot="head" />
+  <Header slot="header" tomInicial="light">
+    <NavServicos />
+  </Header>
+  <Bia />
+</Base>

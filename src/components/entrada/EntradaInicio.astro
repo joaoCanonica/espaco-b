@@ -1,0 +1,8 @@
+---
+// Vai no <head> (slot "head" do Base): decide ANTES da primeira pintura se a entrada roda.
+// Não roda: sessão já viu, sessionStorage indisponível, prefers-reduced-motion ou sem JS.
+// Rede de segurança: remove a entrada em 5 s mesmo se o resto falhar.
+const script = `(function(){var d=document.documentElement;try{if(sessionStorage.getItem('entrada-vista'))return;sessionStorage.setItem('entrada-vista','1')}catch(e){return}if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('com-entrada');setTimeout(function(){d.classList.remove('com-entrada')},5000)})();`;
+---
+
+<script is:inline set:html={script} />

@@ -1,0 +1,30 @@
+---
+// /casos (sessão 6C): a rota só é gerada se houver mídia de caso utilizável e o módulo estiver
+// ligado (sem isso, getStaticPaths volta vazio e o build avisa). Nunca é capa nem og:image.
+import Casos from '../../components/paginas/Casos.astro';
+import { casosPagina } from '../../components/paginas/conteudo.ts';
+import { casosUtilizaveis, type Casos as DadosCasos } from '../../components/paginas/casos.ts';
+import NavServicos from '../../components/servicos/NavServicos.astro';
+import Transicoes from '../../components/servicos/Transicoes.astro';
+import Header from '../../components/ui/Header.astro';
+import { marca } from '../../config/marca.ts';
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  const casos = casosUtilizaveis();
+  return casos ? [{ params: { casos: undefined }, props: { casos } }] : [];
+}
+
+interface Props {
+  casos: DadosCasos;
+}
+const { casos } = Astro.props;
+---
+
+<Base titulo={`Casos · ${marca.nomeCurto.valor}`} descricao={casosPagina.aviso}>
+  <Transicoes slot="head" />
+  <Header slot="header" tomInicial="light">
+    <NavServicos />
+  </Header>
+  <Casos casos={casos} />
+</Base>

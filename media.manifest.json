@@ -1,0 +1,1180 @@
+{
+  "$schema": "./media.manifest.schema.json",
+  "versao": 1,
+  "atualizadoEm": "2026-10-12",
+  "musgoOficial": {
+    "hex": "#52543F",
+    "fonte": "marca/logo-b-2048.jpg",
+    "metodo": "média dos 4 cantos 300×300 px e da moldura de 200 px do logo (2000×2000); os 4 cantos deram #52543F idênticos"
+  },
+  "itens": [
+    {
+      "id": "retrato-bia-colete",
+      "slug": "bia-retrato-colete",
+      "arquivo": "imagens/retrato-bia-colete.jpg",
+      "tipo": "imagem",
+      "origem": "real",
+      "autoria": "fotógrafo do ensaio: a informar",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["hero.principal (janela grande da home)", "/bia"],
+      "decisao": "usar",
+      "tecnico": {
+        "largura": 1500,
+        "altura": 2000,
+        "bytes": 204756,
+        "formato": "JPEG q90 sRGB",
+        "proporcao": "3:4",
+        "sha256": "46ace2cfa974eed53c030b6c5dcfb6fb948ef1cc234de137f2725c0c49d264f6"
+      },
+      "corMedia": "#241F23",
+      "corFundo": {
+        "supEsq": "#0F0F12",
+        "supDir": "#262430",
+        "infEsq": "#18161C",
+        "infDir": "#26252F",
+        "leitura": "fundo escuro azulado frio"
+      },
+      "objectPosition": "40% 18%",
+      "recortes": [
+        {
+          "nome": "3x4",
+          "proporcao": "3:4",
+          "objectPosition": "40% 18%"
+        }
+      ],
+      "ajusteCorPlanejado": "ajuste GLOBAL de curva/temperatura, idêntico nos dois retratos, para aproximar o fundo frio do Tinta quente (#1E211A); aplicado só no derivado, nunca no original, nunca localizado em rosto ou pele; definir na sessão 3",
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "veio como anexo; pode ter sido recomprimido ou reduzido; pedir o original (recebido: 1500×2000, 204.756 bytes, JPEG q90, sem EXIF)",
+        "crédito do fotógrafo a informar",
+        "dataRegistro desconhecida (sem EXIF)"
+      ]
+    },
+    {
+      "id": "retrato-bia-vestido",
+      "slug": "bia-retrato-vestido",
+      "arquivo": "imagens/retrato-bia-vestido.jpg",
+      "tipo": "imagem",
+      "origem": "real",
+      "autoria": "fotógrafo do ensaio: a informar",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["home: seção \"A Bia\" (janela alta, corpo inteiro)", "/bia"],
+      "decisao": "usar",
+      "tecnico": {
+        "largura": 1500,
+        "altura": 2000,
+        "bytes": 110394,
+        "formato": "JPEG q90 sRGB",
+        "proporcao": "3:4",
+        "sha256": "d3c4aed607cff5c8099003ef066e865c98dacc9928d8237226f3c3a751167abf"
+      },
+      "corMedia": "#282525",
+      "corFundo": {
+        "supEsq": "#171718",
+        "supDir": "#403E3F",
+        "infEsq": "#403A35",
+        "infDir": "#5F5752",
+        "leitura": "degradê cinza, mais claro embaixo à direita"
+      },
+      "objectPosition": "50% 10%",
+      "recortes": [
+        {
+          "nome": "3x4",
+          "proporcao": "3:4",
+          "objectPosition": "50% 10%"
+        }
+      ],
+      "ajusteCorPlanejado": "mesmo ajuste GLOBAL do retrato-bia-colete (idêntico), só no derivado",
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "veio como anexo; pode ter sido recomprimido ou reduzido; pedir o original (recebido: 1500×2000, 110.394 bytes, JPEG q90, sem EXIF)",
+        "rosto no topo (≈12% da altura): object-position nunca pode cortar o rosto em janelas largas",
+        "crédito do fotógrafo a informar"
+      ]
+    },
+    {
+      "id": "logo-b-2048",
+      "slug": "logo-b",
+      "arquivo": "marca/logo-b-2048.jpg",
+      "tipo": "marca",
+      "origem": "real",
+      "autoria": "marca da Clínica Espaço B (autoria do desenho a informar)",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["extração das contraformas (sessão 3)", "favicon"],
+      "decisao": "usar",
+      "tecnico": {
+        "largura": 2000,
+        "altura": 2000,
+        "bytes": 107818,
+        "formato": "JPEG q90 sRGB (raster)",
+        "proporcao": "1:1",
+        "sha256": "df318d1faf409999d7eb5f9ef79678ce37b0c331bbcbf678a8fe36f1c4a71851"
+      },
+      "corMedia": "#5B5D49",
+      "corFundo": {
+        "medido": "#52543F",
+        "letra": "#F4EFE6",
+        "leitura": "fundo = Musgo oficial; letra creme (média dos pixels com luminância > 220)"
+      },
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "veio como anexo; pode ter sido recomprimido ou reduzido; pedir o original (recebido: 2000×2000, não 2048×2048; 107.818 bytes, JPEG q90)",
+        "é raster, não vetor; o vetor oficial, se vier, substitui este arquivo"
+      ]
+    },
+    {
+      "id": "foto-dra",
+      "slug": "bia-print-antigo",
+      "arquivo": "imagens/foto-dra.png",
+      "tipo": "imagem",
+      "origem": "real",
+      "autoria": "a informar (print de rede social)",
+      "consentimento": "titular",
+      "publicavel": false,
+      "previewOk": false,
+      "substituida": true,
+      "substituidaPor": ["retrato-bia-colete", "retrato-bia-vestido"],
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": [],
+      "decisao": "não usar",
+      "tecnico": {
+        "largura": 678,
+        "altura": 900,
+        "bytes": 128664,
+        "formato": "PNG",
+        "sha256": "ff4ae98a43da3745d649aa65b334db1ecd91d219508bf9ea2458c82477301a1e"
+      },
+      "corMedia": "#282525",
+      "edicoes": [],
+      "trim": [],
+      "problemas": ["print 678×900 com ícone do Instagram; substituído pelos retratos de estúdio"]
+    },
+    {
+      "id": "logo-150",
+      "slug": "logo-pequeno-antigo",
+      "arquivo": "imagens/logo.jpg",
+      "tipo": "marca",
+      "origem": "real",
+      "autoria": "marca da Clínica Espaço B",
+      "consentimento": "titular",
+      "publicavel": false,
+      "previewOk": false,
+      "substituida": true,
+      "substituidaPor": ["logo-b-2048"],
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": [],
+      "decisao": "não usar",
+      "tecnico": {
+        "largura": 150,
+        "altura": 150,
+        "bytes": 1923,
+        "formato": "JPEG q61",
+        "sha256": "d9cbba473f2e71d9d6bef56fb9b971e42e20515e77a2b47e2bf6b36d94763fb1"
+      },
+      "corMedia": "#585B4B",
+      "edicoes": [],
+      "trim": [],
+      "problemas": ["150×150, baixa qualidade; substituído pelo logo-b-2048"]
+    },
+    {
+      "id": "imagem1",
+      "slug": "textura-linho-musgo",
+      "arquivo": "imagens/imagem1.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["fundo escuro", "entrada"],
+      "decisao": "usar como atmosfera",
+      "tecnico": {
+        "largura": 2752,
+        "altura": 1536,
+        "bytes": 2990222,
+        "formato": "JPEG q100",
+        "sha256": "450b5b669aec30ba116c91efbe99a5124ee561e9553835e7aee3a2e3e76fd882"
+      },
+      "corMedia": "#373821",
+      "ajusteCorPlanejado": "aproximar do Musgo (#52543F) no derivado (sessão 3)",
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "tom diverge do Musgo: média #373821 (mais escura e mais amarela que #52543F); planejar ajuste de cor no build"
+      ]
+    },
+    {
+      "id": "imagem2",
+      "slug": "textura-gesso-ripas",
+      "arquivo": "imagens/imagem2.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["fundos claros", "manifesto"],
+      "decisao": "usar como atmosfera",
+      "tecnico": {
+        "largura": 2752,
+        "altura": 1536,
+        "bytes": 3009340,
+        "formato": "JPEG q100",
+        "sha256": "a4ab6dff2ff9a1272eb740b1d3b7e22693442d0cb113bf1a4ee9ad897420f4db"
+      },
+      "corMedia": "#BEAD92",
+      "edicoes": [],
+      "trim": [],
+      "problemas": []
+    },
+    {
+      "id": "imagem3",
+      "slug": "textura-flores-secas",
+      "arquivo": "imagens/imagem3.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["textura"],
+      "decisao": "usar como atmosfera (provisória)",
+      "tecnico": {
+        "largura": 1856,
+        "altura": 2304,
+        "bytes": 2846753,
+        "formato": "JPEG q100",
+        "sha256": "c002c7ee721e399fb9517617c2cdebb080fcedab22a2387144609332120027ca"
+      },
+      "corMedia": "#BCA890",
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "flores rosa-poeira; as flores reais da clínica são framboesa: priorizar foto real quando existir"
+      ]
+    },
+    {
+      "id": "imagem4",
+      "slug": "textura-frascos-ambar",
+      "arquivo": "imagens/imagem4.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "prioridade": "baixa",
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": [],
+      "decisao": "não usar até haver lugar claro",
+      "tecnico": {
+        "largura": 1856,
+        "altura": 2304,
+        "bytes": 2661454,
+        "formato": "JPEG q100",
+        "sha256": "25cf3f99f4802e5642323f22680088c4e80788c0d6c01d78a5a5346ced4a5c02"
+      },
+      "corMedia": "#968A73",
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "prioridade baixa; frascos podem sugerir produto/medicamento: conferir contexto antes de usar"
+      ]
+    },
+    {
+      "id": "imagem5",
+      "slug": "textura-luz-agua",
+      "arquivo": "imagens/imagem5.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["/pele-e-tecnologia"],
+      "decisao": "usar como atmosfera",
+      "tecnico": {
+        "largura": 2752,
+        "altura": 1536,
+        "bytes": 2351696,
+        "formato": "JPEG q100",
+        "sha256": "d39e7e93ada1da0a8412b54b2e50b3f74b237ff625964fe31152f11fbd962417"
+      },
+      "corMedia": "#BAAA93",
+      "edicoes": [],
+      "trim": [],
+      "problemas": []
+    },
+    {
+      "id": "imagem6",
+      "slug": "textura-tecido-osso",
+      "arquivo": "imagens/imagem6.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["transição de seção"],
+      "decisao": "usar como atmosfera",
+      "tecnico": {
+        "largura": 2752,
+        "altura": 1536,
+        "bytes": 2542956,
+        "formato": "JPEG q100",
+        "sha256": "0c2d6e30c34e5de16acb5f602187e531d72fbf1643e40d70ae302cd8b5c35516"
+      },
+      "corMedia": "#3E3927",
+      "edicoes": [],
+      "trim": [],
+      "problemas": []
+    },
+    {
+      "id": "imagem7",
+      "slug": "textura-bronze-carvalho",
+      "arquivo": "imagens/imagem7.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["detalhe"],
+      "decisao": "usar como atmosfera",
+      "tecnico": {
+        "largura": 1856,
+        "altura": 2304,
+        "bytes": 2535600,
+        "formato": "JPEG q100",
+        "sha256": "f193f03673c37212d3d3bb408ef20e1e5208ca6c1c20b21d87d2540151a07483"
+      },
+      "corMedia": "#8B785C",
+      "edicoes": [],
+      "trim": [],
+      "problemas": []
+    },
+    {
+      "id": "imagem8",
+      "slug": "textura-papel",
+      "arquivo": "imagens/imagem8.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["textura de grão"],
+      "decisao": "usar como textura única (não ladrilhar)",
+      "tecnico": {
+        "largura": 2048,
+        "altura": 2048,
+        "bytes": 3039735,
+        "formato": "JPEG q100",
+        "proporcao": "1:1",
+        "sha256": "2136741df3a0af1b4db1db51c2bff6522bbe0fb607f523d62af1454184451935"
+      },
+      "corMedia": "#F1E9DD",
+      "ladrilhavel": {
+        "resultado": false,
+        "teste": "2×2 com contraste realçado: costuras visíveis na borda esquerda/direita e topo/base; diferença média de cinza na borda 6,2 (esq×dir) e 5,8 (topo×base) contra 5,5 e 3,7 entre colunas/linhas vizinhas internas; centro ~1,5% mais claro (vinheta leve)"
+      },
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "não é ladrilhável sem tratamento; para grão global preferir ruído gerado por CSS/SVG (sessão 3)"
+      ]
+    },
+    {
+      "id": "imagem9",
+      "slug": "textura-calcario",
+      "arquivo": "imagens/imagem9.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["fundo de seção"],
+      "decisao": "usar como atmosfera",
+      "tecnico": {
+        "largura": 2752,
+        "altura": 1536,
+        "bytes": 2294444,
+        "formato": "JPEG q100",
+        "sha256": "f4ff713c6a509e5536cfc319b259d5ba38c1a8e093e5088efcf56b67c42a2dcd"
+      },
+      "corMedia": "#DFD3C3",
+      "edicoes": [],
+      "trim": [],
+      "problemas": []
+    },
+    {
+      "id": "imagem10",
+      "slug": "ornamento-pampas-traco",
+      "arquivo": "imagens/imagem10.jpeg",
+      "tipo": "imagem",
+      "origem": "gerada-por-ia",
+      "autoria": "gerada por IA (Gemini/Nano Banana)",
+      "consentimento": "nenhum-necessario",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": false,
+      "uso": ["ornamento a VETORIZAR (sessão 3)"],
+      "decisao": "vetorizar; não usar o raster",
+      "tecnico": {
+        "largura": 2048,
+        "altura": 2048,
+        "bytes": 2363231,
+        "formato": "JPEG q100",
+        "proporcao": "1:1",
+        "sha256": "70c7aaaf154e33e66f387b2281faa71d73a1386f357bfb44d957e820ac52c14a"
+      },
+      "corMedia": "#54523E",
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "tom do fundo diverge do logo (média #54523E vs Musgo #52543F); some ao vetorizar"
+      ]
+    },
+    {
+      "id": "ambiente-clinica",
+      "slug": "o-espaco",
+      "arquivo": "videos/ambiente-clinica.mp4",
+      "tipo": "video",
+      "origem": "real",
+      "autoria": "Clínica Espaço B (gravação própria; autor a informar)",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": true,
+      "uso": ["/espaco: seção \"O espaço\""],
+      "decisao": "usar (nunca no hero)",
+      "perfil": "ambiente",
+      "audio": false,
+      "tecnico": {
+        "largura": 720,
+        "altura": 1280,
+        "bytes": 5856936,
+        "formato": "MP4 (H.264 + AAC)",
+        "duracao": 27.47,
+        "codec": "h264 yuv420p",
+        "fps": 30,
+        "audioOriginal": "aac 44,1 kHz estéreo",
+        "proporcao": "9:16",
+        "sha256": "157e3b723f97b11f337417494f35f6ee26133bdf643d51143299107e17b0a22c"
+      },
+      "legendaQueimada": {
+        "texto": "O ambiente também faz parte do tratamento",
+        "zona": {
+          "topo": 0.4,
+          "base": 0.56
+        },
+        "observacao": "presente em todo o vídeo; faz parte da mensagem; zona medida nos quadros a cada 2 s (fração da altura)"
+      },
+      "poster": {
+        "t": 25.5,
+        "observacao": "flores framboesa e sofá; a legenda queimada aparece em todos os quadros: não há quadro limpo"
+      },
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 2.0,
+          "conteudo": "porta de vidro com a placa antiga (emblema azul, \"Espaço Emagrecimento e Est…\"), rua e carro",
+          "usar": true,
+          "motivo": "abertura do espaço",
+          "problemas": "placa antiga = fase anterior da marca (informativo)"
+        },
+        {
+          "ini": 2.0,
+          "fim": 9.3,
+          "conteudo": "consultório: quadro pintado da Bia, divisória dourada, maca",
+          "usar": true,
+          "motivo": "espaço real"
+        },
+        {
+          "ini": 9.3,
+          "fim": 11.1,
+          "conteudo": "sala com equipamento corporal",
+          "usar": true,
+          "motivo": "espaço real",
+          "problemas": "equipamento visível: conferir marca legível na sessão 9 (não é oferta)"
+        },
+        {
+          "ini": 11.1,
+          "fim": 18.6,
+          "conteudo": "luminária, recepção vista de cima, sala com aparelho e manta framboesa",
+          "usar": true,
+          "motivo": "espaço real"
+        },
+        {
+          "ini": 18.6,
+          "fim": 22.7,
+          "conteudo": "cafeteira, cápsulas e xícaras",
+          "usar": true,
+          "motivo": "acolhimento",
+          "problemas": "marcas de cafeteira/cápsulas legíveis (informativo)"
+        },
+        {
+          "ini": 22.7,
+          "fim": 24.8,
+          "conteudo": "recepcionista de costas ao computador, tela visível",
+          "usar": false,
+          "motivo": "decisão do João: excluir a recepcionista (terceiro) e a tela"
+        },
+        {
+          "ini": 24.8,
+          "fim": 27.47,
+          "conteudo": "flores framboesa e sofá",
+          "usar": true,
+          "motivo": "espaço real"
+        }
+      ],
+      "edicoes": ["corte do trecho 22,7–24,8 s"],
+      "trim": [
+        {
+          "ini": 22.7,
+          "fim": 24.8,
+          "motivo": "recepcionista de costas ao computador"
+        }
+      ],
+      "problemas": [
+        "placa antiga na porta (logo da fase anterior da marca; informativo)",
+        "vídeo mudo no site (loop); áudio original descartado no derivado"
+      ]
+    },
+    {
+      "id": "video-para-presenca-e-profissionalismo",
+      "slug": "bastidores-ensaio-e-casos",
+      "arquivo": "videos/video-para-presenca-e-profissionalismo.mp4",
+      "tipo": "video",
+      "origem": "real",
+      "autoria": "Clínica Espaço B (edição para redes; autor a informar)",
+      "consentimento": "declarado-pelo-cliente",
+      "termoArquivado": false,
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "pacienteRefs": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006", "P-007", "P-008"],
+      "menorDeIdade": false,
+      "naoUsarComoCapa": true,
+      "uso": [
+        "/casos (pares antes/depois)",
+        "dentro das seções (bastidores e pares)",
+        "nunca capa, hero, og:image ou primeira dobra"
+      ],
+      "decisao": "usar bastidores e pares; excluir a legenda com superlativo",
+      "perfil": "mudo",
+      "audio": false,
+      "tecnico": {
+        "largura": 720,
+        "altura": 1280,
+        "bytes": 4322742,
+        "formato": "MP4 (H.264 + AAC)",
+        "duracao": 32.83,
+        "codec": "h264 yuvj420p",
+        "fps": 30,
+        "audioOriginal": "aac 44,1 kHz estéreo",
+        "proporcao": "9:16",
+        "sha256": "f96741e013a7094dcf151c37422be455e17f7f3167979d93273911608c7cb4c7"
+      },
+      "legendaQueimada": {
+        "texto": "Você finalmente encontrou a doutora que esculpe os rostos mais lindos da Serra Catarinense",
+        "zona": {
+          "topo": 0.37,
+          "base": 0.58
+        },
+        "observacao": "só entre 0 e ~4,8 s; o resto do vídeo não tem legenda"
+      },
+      "poster": {
+        "t": 30.5,
+        "observacao": "Bia sentada posando, sem legenda e sem paciente"
+      },
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 4.8,
+          "conteudo": "Bia posando no banco + legenda queimada \"…a doutora que esculpe os rostos mais lindos da Serra Catarinense\"",
+          "usar": false,
+          "motivo": "legenda queimada com superlativo (e \"doutora\")"
+        },
+        {
+          "ini": 4.8,
+          "fim": 6.37,
+          "conteudo": "bastidores: Bia posando no banco",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        },
+        {
+          "ini": 6.37,
+          "fim": 7.67,
+          "conteudo": "par antes/depois, rosto",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-001",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 7.67,
+          "fim": 9.27,
+          "conteudo": "bastidores: Bia posando",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        },
+        {
+          "ini": 9.27,
+          "fim": 10.57,
+          "conteudo": "par antes/depois, rosto de perfil",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-002",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 10.57,
+          "fim": 12.23,
+          "conteudo": "bastidores: Bia (transição em fusão)",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        },
+        {
+          "ini": 12.23,
+          "fim": 13.57,
+          "conteudo": "par antes/depois, rosto e pescoço",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-003",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 13.57,
+          "fim": 15.2,
+          "conteudo": "bastidores: Bia sentada posando",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        },
+        {
+          "ini": 15.2,
+          "fim": 16.57,
+          "conteudo": "par antes/depois, rosto; ao fundo, membro da equipe de costas",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-004",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true,
+          "problemas": "terceiro (equipe do ensaio) ao fundo, de costas, sem rosto"
+        },
+        {
+          "ini": 16.57,
+          "fim": 18.47,
+          "conteudo": "Bia sentada; membro da equipe (camisa mostarda) de costas em primeiro plano",
+          "usar": false,
+          "motivo": "terceiro em destaque",
+          "problemas": "verificar"
+        },
+        {
+          "ini": 18.47,
+          "fim": 19.8,
+          "conteudo": "par antes/depois, rosto",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-005",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 19.8,
+          "fim": 21.47,
+          "conteudo": "bastidores: Bia em pé, vestido vinho",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        },
+        {
+          "ini": 21.47,
+          "fim": 22.83,
+          "conteudo": "par antes/depois, rosto",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-006",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 22.83,
+          "fim": 24.5,
+          "conteudo": "membro da equipe ajustando a roupa da Bia (braço e costas em primeiro plano)",
+          "usar": false,
+          "motivo": "terceiro em destaque",
+          "problemas": "verificar"
+        },
+        {
+          "ini": 24.5,
+          "fim": 26.0,
+          "conteudo": "par antes/depois, rosto",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-007",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 26.0,
+          "fim": 27.93,
+          "conteudo": "bastidores: Bia de perfil, vestido preto com costas abertas",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        },
+        {
+          "ini": 27.93,
+          "fim": 29.33,
+          "conteudo": "par antes/depois, rosto de perfil",
+          "usar": true,
+          "motivo": "caso declarado autorizado",
+          "pacienteRef": "P-008",
+          "consentimento": "declarado-pelo-cliente",
+          "naoUsarComoCapa": true
+        },
+        {
+          "ini": 29.33,
+          "fim": 32.83,
+          "conteudo": "bastidores: Bia sentada posando",
+          "usar": true,
+          "motivo": "bastidores do ensaio"
+        }
+      ],
+      "clipes": [
+        {
+          "id": "par-p001",
+          "ini": 6.42,
+          "fim": 7.62,
+          "pacienteRef": "P-001"
+        },
+        {
+          "id": "par-p002",
+          "ini": 9.32,
+          "fim": 10.52,
+          "pacienteRef": "P-002"
+        },
+        {
+          "id": "par-p003",
+          "ini": 12.28,
+          "fim": 13.52,
+          "pacienteRef": "P-003"
+        },
+        {
+          "id": "par-p004",
+          "ini": 15.25,
+          "fim": 16.52,
+          "pacienteRef": "P-004"
+        },
+        {
+          "id": "par-p005",
+          "ini": 18.52,
+          "fim": 19.75,
+          "pacienteRef": "P-005"
+        },
+        {
+          "id": "par-p006",
+          "ini": 21.52,
+          "fim": 22.78,
+          "pacienteRef": "P-006"
+        },
+        {
+          "id": "par-p007",
+          "ini": 24.55,
+          "fim": 25.95,
+          "pacienteRef": "P-007"
+        },
+        {
+          "id": "par-p008",
+          "ini": 27.98,
+          "fim": 29.28,
+          "pacienteRef": "P-008"
+        }
+      ],
+      "edicoes": ["montagem só dos segmentos usar:true", "clipes curtos e mudos de cada par"],
+      "trim": [
+        {
+          "ini": 0,
+          "fim": 4.8,
+          "motivo": "legenda queimada com superlativo"
+        },
+        {
+          "ini": 16.57,
+          "fim": 18.47,
+          "motivo": "terceiro em destaque (verificar)"
+        },
+        {
+          "ini": 22.83,
+          "fim": 24.5,
+          "motivo": "terceiro em destaque (verificar)"
+        }
+      ],
+      "problemas": [
+        "cada par antes/depois dura ~1,3 s no original: os clipes ficam curtos (≈1,2–1,4 s)",
+        "um pacienteRef por par; não dá para confirmar só pelos quadros se pares diferentes são da mesma pessoa (ex.: P-002 e P-007): verificar com o João",
+        "trilha sonora do reels não verificada (licença): derivado sem áudio",
+        "membro da equipe do ensaio aparece de costas em vários trechos"
+      ]
+    },
+    {
+      "id": "usou-monjauro-corpo-flacido",
+      "slug": "corpo-flacidez-pos-emagrecimento",
+      "arquivo": "videos/usou-monjauro-corpo-flacido.mp4",
+      "tipo": "video",
+      "origem": "real",
+      "autoria": "Clínica Espaço B (gravação própria; autor a informar)",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": true,
+      "uso": ["/corpo-e-emagrecimento (clique para tocar)"],
+      "decisao": "usar",
+      "perfil": "clique",
+      "audio": true,
+      "flagFinal": ["cita medicamento de prescrição"],
+      "tecnico": {
+        "largura": 720,
+        "altura": 1280,
+        "bytes": 22177191,
+        "formato": "MP4 (H.264 + AAC)",
+        "duracao": 88.3,
+        "codec": "h264 yuv420p",
+        "fps": 30,
+        "audioOriginal": "aac 44,1 kHz estéreo",
+        "proporcao": "9:16",
+        "sha256": "89d4b81102db767d73d3af127ea602e23d8ec778c84e77c8f57d09035e0cea03"
+      },
+      "legendaQueimada": {
+        "texto": "legenda de fala, uma frase por vez, no topo do quadro",
+        "zona": {
+          "topo": 0.07,
+          "base": 0.17
+        },
+        "observacao": "legenda no topo; a curva do D não pode arredondar os cantos superiores"
+      },
+      "poster": {
+        "t": 21.0,
+        "observacao": "Bia falando, sem legenda (conferido no quadro exato)"
+      },
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 2.0,
+          "conteudo": "Bia falando; legenda cita o nome de um medicamento de prescrição",
+          "usar": true,
+          "motivo": "decisão do João (usar)",
+          "problemas": "flagFinal: cita medicamento de prescrição"
+        },
+        {
+          "ini": 2.0,
+          "fim": 17.8,
+          "conteudo": "Bia falando sobre emagrecimento e flacidez",
+          "usar": true,
+          "motivo": "conteúdo da responsável"
+        },
+        {
+          "ini": 17.8,
+          "fim": 77.5,
+          "conteudo": "Bia falando (novo plano); cita \"canetinhas\", relatos de pacientes em fala e o nome de um protocolo",
+          "usar": true,
+          "motivo": "conteúdo da responsável",
+          "problemas": "texto para a conferência final: \"resultado especial\", relatos citados, nome de protocolo"
+        },
+        {
+          "ini": 77.5,
+          "fim": 88.3,
+          "conteudo": "Bia segura o aplicador de um equipamento; marca legível na base do aparelho",
+          "usar": true,
+          "motivo": "conteúdo da responsável",
+          "problemas": "marca de equipamento legível no quadro (conferir na sessão 9; nunca citar como oferta)"
+        }
+      ],
+      "edicoes": [],
+      "trim": [],
+      "problemas": [
+        "nenhum intervalo com corpo de paciente encontrado nos quadros a cada 2 s: o vídeo é só a Bia falando",
+        "nome do arquivo cita medicamento de prescrição: no site usar só o slug",
+        "legenda cita medicamento de prescrição (0–2 s)"
+      ]
+    },
+    {
+      "id": "mulheres-transformadas-com-bia",
+      "slug": "historia-da-bia",
+      "arquivo": "videos/mulheres-transformadas-com-bia.mp4",
+      "tipo": "video",
+      "origem": "real",
+      "autoria": "Clínica Espaço B, série \"Mulheres transformadas | Espaço B\", ep. 1 (autor a informar)",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": true,
+      "uso": ["/bia (clique para tocar)"],
+      "decisao": "usar",
+      "perfil": "clique",
+      "audio": true,
+      "tecnico": {
+        "largura": 720,
+        "altura": 1280,
+        "bytes": 26289999,
+        "formato": "MP4 (H.264 + AAC)",
+        "duracao": 141.66,
+        "codec": "h264 yuv420p",
+        "fps": 30,
+        "audioOriginal": "aac 44,1 kHz estéreo",
+        "proporcao": "9:16",
+        "sha256": "ae87025eee743a887b3cd5a8208b8de6aa82031a53ca8e931c54e1bf0bb43e4a"
+      },
+      "legendaQueimada": {
+        "texto": "legenda palavra a palavra, centro do quadro",
+        "zona": {
+          "topo": 0.6,
+          "base": 0.7
+        },
+        "observacao": "fica como está (decisão do João)"
+      },
+      "poster": {
+        "t": 108.2,
+        "observacao": "Bia sentada, entre palavras da legenda (conferido no quadro exato)"
+      },
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 1.65,
+          "conteudo": "abertura da série: montagem rápida com cerca de 9 outras mulheres (entrevistadas de outros episódios)",
+          "usar": false,
+          "motivo": "terceiros sem autorização registrada"
+        },
+        {
+          "ini": 1.65,
+          "fim": 4.0,
+          "conteudo": "tela preta e revelação da Bia",
+          "usar": true,
+          "motivo": "abertura"
+        },
+        {
+          "ini": 4.0,
+          "fim": 6.4,
+          "conteudo": "título \"Mulheres transformadas | Espaço B\" sobre a Bia",
+          "usar": true,
+          "motivo": "título da série"
+        },
+        {
+          "ini": 6.4,
+          "fim": 141.66,
+          "conteudo": "Bia conta a própria história (carreira, família, investimento, primeira clínica)",
+          "usar": true,
+          "motivo": "história da responsável",
+          "problemas": "legenda contém \"garantido\" em contexto narrativo (26–28 s) e o nome da série usa \"transformadas\": conferência final"
+        }
+      ],
+      "edicoes": ["corte da abertura 0–1,65 s"],
+      "trim": [
+        {
+          "ini": 0,
+          "fim": 1.65,
+          "motivo": "abertura com terceiros"
+        }
+      ],
+      "problemas": [
+        "abertura com terceiros (0–1,65 s) cortada",
+        "nome da série usa \"transformadas\" (termo evitado no texto do site; aqui é título queimado)"
+      ]
+    },
+    {
+      "id": "cafe-com-bia",
+      "slug": "cafe-com-bia",
+      "arquivo": "videos/cafe-com-bia.mp4",
+      "tipo": "video",
+      "origem": "real",
+      "autoria": "Clínica Espaço B, quadro \"Café com a Bia\" (autor a informar)",
+      "consentimento": "titular",
+      "publicavel": true,
+      "previewOk": true,
+      "dataRegistro": null,
+      "pacienteRef": null,
+      "menorDeIdade": false,
+      "naoUsarComoCapa": true,
+      "uso": ["/bia: \"Café com Bia\" (clique para tocar)"],
+      "decisao": "usar só o que estiver liberado; o resto depende de ouvir o áudio",
+      "perfil": "clique",
+      "audio": true,
+      "flagFinal": ["cita medicamento de prescrição"],
+      "tecnico": {
+        "largura": 720,
+        "altura": 1280,
+        "bytes": 23332046,
+        "formato": "MP4 (H.264 + AAC)",
+        "duracao": 118.67,
+        "codec": "h264 yuv420p",
+        "fps": 30,
+        "audioOriginal": "aac 44,1 kHz estéreo",
+        "proporcao": "9:16",
+        "sha256": "3209522af64ce37e6541930b4c85c95463bd489a5dc3ee3dda545fb53e25b057"
+      },
+      "legendaQueimada": {
+        "texto": "títulos de abertura e uma legenda de tema; sem legenda de fala",
+        "zona": {
+          "topo": 0.4,
+          "base": 0.72
+        },
+        "observacao": "títulos em 0–9,9 s e legenda de tema em 14,5–20,7 s"
+      },
+      "poster": {
+        "t": 11.0,
+        "observacao": "Bia com a xícara, sem legenda"
+      },
+      "segmentos": [
+        {
+          "ini": 0,
+          "fim": 9.9,
+          "conteudo": "cafeteira preparando café; títulos \"Está começando mais um…\" e \"Café com a Bia!\"",
+          "usar": true,
+          "motivo": "abertura do quadro",
+          "problemas": "cafeteira de marca visível (informativo)"
+        },
+        {
+          "ini": 9.9,
+          "fim": 14.0,
+          "conteudo": "Bia com a xícara, abrindo o tema",
+          "usar": true,
+          "motivo": "abertura"
+        },
+        {
+          "ini": 14.0,
+          "fim": 20.7,
+          "conteudo": "legenda queimada com o nome de um medicamento de prescrição e de um influenciador",
+          "usar": false,
+          "motivo": "menção a influenciador (terceiro)"
+        },
+        {
+          "ini": 20.7,
+          "fim": 24.8,
+          "conteudo": "Bia falando entre a legenda do influenciador e o recorte",
+          "usar": false,
+          "motivo": "provável menção falada ao influenciador",
+          "problemas": "verificar"
+        },
+        {
+          "ini": 24.8,
+          "fim": 35.5,
+          "conteudo": "recorte de terceiros (\"Caxias Online\", foto de dois homens)",
+          "usar": false,
+          "motivo": "mídia de terceiros sem autorização"
+        },
+        {
+          "ini": 35.5,
+          "fim": 118.67,
+          "conteudo": "Bia falando com a xícara, sem legenda",
+          "usar": false,
+          "motivo": "áudio não transcrito; o vídeo trata do caso do influenciador e pode citá-lo na fala",
+          "problemas": "verificar"
+        }
+      ],
+      "edicoes": ["montagem só dos segmentos usar:true"],
+      "trim": [
+        {
+          "ini": 14.0,
+          "fim": 20.7,
+          "motivo": "legenda com influenciador"
+        },
+        {
+          "ini": 20.7,
+          "fim": 24.8,
+          "motivo": "provável menção ao influenciador (verificar)"
+        },
+        {
+          "ini": 24.8,
+          "fim": 35.5,
+          "motivo": "recorte de terceiros"
+        },
+        {
+          "ini": 35.5,
+          "fim": 118.67,
+          "motivo": "áudio não verificado (verificar)"
+        }
+      ],
+      "problemas": [
+        "sem transcrição local: não foi possível ouvir o áudio; até o João ouvir e liberar, o derivado tem só 0–14 s",
+        "tema do vídeo é o caso de um influenciador com medicamento de prescrição"
+      ]
+    }
+  ]
+}

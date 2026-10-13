@@ -1,0 +1,83 @@
+---
+// "Para quem é": coluna estreita deslocada, com a palavra-guia em display gigante ao lado.
+import Legenda from '../ui/Legenda.astro';
+import Texto from './Texto.astro';
+import { visao } from './blocos.ts';
+import type { Bloco } from './conteudo.ts';
+
+interface Props {
+  numero: number;
+  blocos: Bloco[];
+  tom: 'light' | 'dark' | 'moss';
+  onde: string;
+}
+const { numero, blocos, tom, onde } = Astro.props;
+const itens = blocos.map((b) => ({ ...b, v: visao(b.texto, onde) })).filter((b) => b.v.mostrar);
+const id = `${onde}-para-quem`;
+---
+
+<section class="para-quem" data-tone={tom} aria-labelledby={id}>
+  <div class="recipiente para-quem__grade">
+    <div class="para-quem__cabeca">
+      <Legenda numero={numero}>Indicação</Legenda>
+      <h2 id={id} class="para-quem__titulo">
+        Para quem é
+      </h2>
+    </div>
+    <div class="para-quem__itens">
+      {itens.map((b) => (
+        <div class="para-quem__item">
+          <h3 class="para-quem__rotulo">{b.titulo}</h3>
+          <Texto v={b.v} fontes={b.fontes} classe="para-quem__texto" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .para-quem {
+    padding-block: var(--secao-y);
+  }
+  .para-quem__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .para-quem__titulo {
+    margin-block-start: var(--e-4);
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+  }
+  .para-quem__itens {
+    display: grid;
+    gap: var(--e-6);
+  }
+  .para-quem__item {
+    padding-block-start: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .para-quem__rotulo {
+    margin-block-end: var(--e-3);
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .para-quem__item :global(.para-quem__texto) {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    line-height: 1.3;
+  }
+  @media (min-width: 900px) {
+    .para-quem__grade {
+      grid-template-columns: 5fr 6fr;
+      column-gap: var(--e-9);
+      align-items: start;
+    }
+    .para-quem__itens {
+      margin-block-start: var(--e-9);
+    }
+  }
+</style>

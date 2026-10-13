@@ -1,0 +1,73 @@
+---
+// "O que é importante saber": limites e contraindicações gerais, sem promessa. Coluna única
+// com fio de acento à esquerda (o único ponto de framboesa da tela).
+import Legenda from '../ui/Legenda.astro';
+import Texto from './Texto.astro';
+import { visao } from './blocos.ts';
+import { avisoGeral, type Bloco } from './conteudo.ts';
+
+interface Props {
+  numero: number;
+  blocos: Bloco[];
+  tom: 'light' | 'dark' | 'moss';
+  onde: string;
+}
+const { numero, blocos, tom, onde } = Astro.props;
+const itens = blocos.map((b) => ({ ...b, v: visao(b.texto, onde) })).filter((b) => b.v.mostrar);
+const id = `${onde}-importante`;
+---
+
+<section class="importante" data-tone={tom} aria-labelledby={id}>
+  <div class="recipiente importante__grade">
+    <div>
+      <Legenda numero={numero}>Limites</Legenda>
+      <h2 id={id} class="t-2 importante__titulo">
+        O que é importante saber
+      </h2>
+    </div>
+    <div class="importante__lista">
+      {itens.map((b) => (
+        <div class="importante__item">
+          <h3 class="importante__rotulo">{b.titulo}</h3>
+          <Texto v={b.v} fontes={b.fontes} />
+        </div>
+      ))}
+      <p class="importante__geral">{avisoGeral}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .importante {
+    padding-block: var(--secao-y) calc(var(--secao-y) * 0.7);
+  }
+  .importante__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .importante__titulo {
+    margin-block-start: var(--e-4);
+    max-width: 12ch;
+  }
+  .importante__lista {
+    display: grid;
+    gap: var(--e-6);
+    padding-inline-start: var(--e-5);
+    border-left: var(--l-media) solid var(--acento);
+  }
+  .importante__rotulo {
+    margin-block-end: var(--e-2);
+    font-size: var(--t-4);
+  }
+  .importante__geral {
+    margin: 0;
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .importante__grade {
+      grid-template-columns: 4fr 6fr;
+      column-gap: var(--e-9);
+    }
+  }
+</style>

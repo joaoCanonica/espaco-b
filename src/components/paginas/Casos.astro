@@ -1,0 +1,239 @@
+---
+// /casos. Abertura ocupa a primeira dobra inteira (100svh) só com texto e uma janela de
+// atmosfera (não-paciente). A galeria vem depois: fichas com o clipe numa contraforma e a
+// legenda técnica neutra ao lado (procedimento, data do registro quando existir, executora).
+import Provisorio from '../Provisorio.astro';
+import Janela from '../brand/Janela.astro';
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import Legenda from '../ui/Legenda.astro';
+import Selo from '../ui/Selo.astro';
+import Migalhas from '../servicos/Migalhas.astro';
+import { alertarOmissao, emPreview } from '../../config/ambiente.ts';
+import { imagemDoItem } from '../hero/midia.ts';
+import { imagemJanela } from '../home/midia.ts';
+import type { Casos } from './casos.ts';
+import { casosPagina } from './conteudo.ts';
+
+interface Props {
+  casos: Casos;
+}
+const { casos } = Astro.props;
+const preview = emPreview();
+const atmosfera = imagemDoItem('imagem3');
+const proc = casosPagina.procedimento;
+if (!preview && proc.estado !== 'confirmado')
+  alertarOmissao('"Procedimento" nas fichas de /casos', proc.motivo ?? 'pendente');
+// A curva do D não corta o par (≈ 0,20–0,53 da altura): cai para cantos fora da zona.
+const ZONA_PAR = { topo: 0.18, base: 0.56, esquerda: 0.04, direita: 0.96 };
+const data = casos.dataRegistro?.split('-').reverse().join('/');
+---
+
+<section class="cas-ab" data-tone="light" data-dobra="primeira" aria-labelledby="titulo-pagina">
+  <div class="recipiente cas-ab__grade">
+    <div class="cas-ab__texto">
+      <Migalhas itens={[{ rotulo: casosPagina.legenda }]} />
+      <Legenda numero={1}>{casosPagina.legenda}</Legenda>
+      <h1 id="titulo-pagina" class="cas-ab__titulo vt-titulo">
+        {casosPagina.titulo}
+      </h1>
+      <p class="cas-ab__aviso">{casosPagina.aviso}</p>
+      <p class="cas-ab__seta" aria-hidden="true">
+        ↓
+      </p>
+    </div>
+    <div class="cas-ab__janela" aria-hidden="true">
+      <Janela
+        forma="alta"
+        {...(atmosfera && {
+          imagem: {
+            ...imagemJanela(atmosfera, '(min-width: 900px) 20vw, 40vw'),
+            carregamento: 'eager' as const,
+          },
+        })}
+        placeholder="imagem3 (atmosfera)"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="cas-gal" data-tone="dark" data-modulo="casos" aria-labelledby="cas-gal-titulo">
+  <div class="recipiente">
+    <Legenda numero={2}>Fichas</Legenda>
+    <h2 id="cas-gal-titulo" class="so-leitor">
+      Fichas dos casos
+    </h2>
+    {preview && !casos.termoArquivado && (
+      <p class="cas-gal__aviso-termo">
+        <Selo titulo="consentimento declarado pelo cliente; termo não arquivado (aviso, não bloqueia)" />{' '}
+        termo de consentimento não arquivado
+      </p>
+    )}
+    <ol class="cas-gal__lista" role="list">
+      {casos.clipes.map((c, i) => (
+        <li class="ficha">
+          <span class="ficha__n" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="ficha__clipe">
+            <Janela
+              forma="baixa"
+              video={{
+                mp4: c.mp4,
+                ...(c.webm && { webm: c.webm }),
+                poster: c.poster,
+                mudo: true,
+                zonaLegenda: ZONA_PAR,
+                rotulo: `Caso ${c.pacienteRef}, clipe curto sem som`,
+              }}
+            />
+          </div>
+          <dl class="ficha__dados">
+            <div>
+              <dt>Caso</dt>
+              <dd>{c.pacienteRef}</dd>
+            </div>
+            {(proc.estado === 'confirmado' || preview) && (
+              <div>
+                <dt>Procedimento</dt>
+                <dd>
+                  <Provisorio campo={proc}>
+                    <span>{proc.valor}</span>
+                  </Provisorio>
+                </dd>
+              </div>
+            )}
+            {data && (
+              <div>
+                <dt>Data do registro</dt>
+                <dd>{data}</dd>
+              </div>
+            )}
+            <div>
+              <dt>Executora</dt>
+              <dd>{casosPagina.executora}</dd>
+            </div>
+          </dl>
+        </li>
+      ))}
+    </ol>
+    <p class="cas-gal__nota">{casosPagina.notaFinal}</p>
+    <MarcadorCauda altura="4rem" alinhamento="fim" />
+  </div>
+</section>
+
+<style>
+  .cas-ab {
+    display: grid;
+    min-height: 100svh;
+    padding-block: var(--e-6) var(--e-7);
+    overflow: clip;
+  }
+  .cas-ab__grade {
+    display: grid;
+    gap: var(--e-6);
+    align-content: space-between;
+  }
+  .cas-ab__texto {
+    display: grid;
+    gap: var(--e-5);
+    align-content: start;
+  }
+  .cas-ab__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    max-width: 13ch;
+  }
+  .cas-ab__aviso {
+    max-width: 40ch;
+    padding-inline-start: var(--e-4);
+    border-left: var(--l-media) solid var(--acento);
+  }
+  .cas-ab__seta {
+    margin: 0;
+    font-family: var(--f-display);
+    font-size: var(--t-3);
+  }
+  .cas-ab__janela {
+    justify-self: end;
+    width: min(42%, 12rem);
+  }
+  @media (min-width: 900px) {
+    .cas-ab__grade {
+      grid-template-columns: 8fr 3fr;
+      align-items: end;
+    }
+    .cas-ab__janela {
+      width: 100%;
+    }
+  }
+
+  .cas-gal {
+    padding-block: var(--secao-y) var(--e-8);
+  }
+  .cas-gal__aviso-termo {
+    margin-block-start: var(--e-4);
+    font-size: var(--t-pequeno);
+  }
+  .cas-gal__lista {
+    display: grid;
+    gap: var(--e-8) var(--e-7);
+    margin: var(--e-7) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ficha {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--e-4);
+    align-items: start;
+    padding-block-start: var(--e-4);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .ficha__n {
+    font-family: var(--f-display);
+    font-size: var(--t-3);
+    line-height: 1;
+    color: var(--fg-suave);
+  }
+  .ficha__clipe {
+    width: min(100%, 13rem);
+  }
+  .ficha__dados {
+    grid-column: 2;
+    display: grid;
+    gap: var(--e-3);
+    margin: 0;
+    font-size: var(--t-pequeno);
+  }
+  .ficha__dados dt {
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .ficha__dados dd {
+    margin: 0;
+  }
+  .cas-gal__nota {
+    margin-block-start: var(--e-8);
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .cas-gal__lista {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ficha {
+      grid-template-columns: 4rem minmax(0, 13rem) minmax(0, 1fr);
+    }
+    .ficha__dados {
+      grid-column: 3;
+    }
+    .ficha:nth-child(even) {
+      margin-block-start: var(--e-9);
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+// Breadcrumb em HTML real (lista ordenada; o último item é a página atual).
+interface Props {
+  itens: { rotulo: string; href?: string }[];
+}
+const { itens } = Astro.props;
+---
+
+<nav class="migalhas" aria-label="Você está em">
+  <ol role="list">
+    <li>
+      <a href="/">Início</a>
+    </li>
+    {itens.map((i) => (
+      <li>
+        {i.href ? <a href={i.href}>{i.rotulo}</a> : <span aria-current="page">{i.rotulo}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .migalhas ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+  }
+  .migalhas li + li::before {
+    content: '/';
+    margin-inline-end: var(--e-2);
+    color: var(--fg-suave);
+  }
+  .migalhas a {
+    text-decoration-color: transparent;
+  }
+  .migalhas a:hover {
+    text-decoration-color: currentColor;
+  }
+  .migalhas [aria-current] {
+    color: var(--fg-suave);
+  }
+</style>

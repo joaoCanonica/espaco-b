@@ -1,0 +1,236 @@
+---
+// 04 · Protocolos da Bia (tinta). Gesto: carrossel horizontal por scroll-snap (CSS puro),
+// nome gigante por lâmina. Setas são melhoria (aparecem só com JS). Só protocolos confirmados.
+import Provisorio from '../Provisorio.astro';
+import Legenda from '../ui/Legenda.astro';
+import { alertarOmissao, emProducao } from '../../config/ambiente.ts';
+import { protocolos } from '../../config/protocolos.ts';
+import { conteudoProtocolo, protocolosTexto } from './conteudo.ts';
+
+const lista = protocolos.filter((p) => p.publicar && p.nome.estado === 'confirmado');
+const total = String(lista.length).padStart(2, '0');
+const campos = [conteudoProtocolo.paraQuem, conteudoProtocolo.sessao];
+if (emProducao() && lista.length === 0)
+  alertarOmissao('seção "Protocolos da Bia"', 'nenhum protocolo confirmado');
+---
+
+{lista.length > 0 && (
+  <section id="protocolos" class="protocolos" data-tone="dark" aria-labelledby="protocolos-titulo">
+    <div class="recipiente protocolos__topo">
+      <Legenda numero={4}>{protocolosTexto.legenda}</Legenda>
+      <h2 id="protocolos-titulo" class="protocolos__abertura t-3">
+        {protocolosTexto.abertura}
+      </h2>
+      <div class="protocolos__setas" data-setas hidden>
+        <button
+          class="protocolos__seta"
+          type="button"
+          data-dir="-1"
+          aria-controls="protocolos-trilho"
+          aria-label="Protocolo anterior"
+        >
+          ←
+        </button>
+        <button
+          class="protocolos__seta"
+          type="button"
+          data-dir="1"
+          aria-controls="protocolos-trilho"
+          aria-label="Próximo protocolo"
+        >
+          →
+        </button>
+      </div>
+    </div>
+
+    <ol
+      id="protocolos-trilho"
+      class="protocolos__trilho"
+      role="list"
+      tabindex="0"
+      aria-label="Protocolos da Bia (role para os lados)"
+    >
+      {lista.map((p, i) => (
+        <li class="protocolo">
+          <p class="protocolo__indice">
+            <span class="protocolo__n">{String(i + 1).padStart(2, '0')}</span> / {total}
+            <span class="protocolo__area">· {protocolosTexto.rotulos[p.servico] ?? ''}</span>
+          </p>
+          <h3 class="protocolo__nome">{p.nome.valor}</h3>
+          <div class="protocolo__dados">
+            {campos.map((c) => (
+              <Provisorio campo={c}>
+                <div class="protocolo__dado">
+                  <h4 class="protocolo__rotulo">{c.rotulo}</h4>
+                  <p>{c.valor}</p>
+                </div>
+              </Provisorio>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="recipiente protocolos__rodape">
+      <a class="botao botao--linha" href={protocolosTexto.todos.href}>
+        {protocolosTexto.todos.rotulo}
+      </a>
+    </div>
+  </section>
+)}
+
+<script>
+  for (const secao of document.querySelectorAll<HTMLElement>('.protocolos')) {
+    const trilho = secao.querySelector<HTMLElement>('.protocolos__trilho');
+    const setas = secao.querySelector<HTMLElement>('[data-setas]');
+    const botoes = [...secao.querySelectorAll<HTMLButtonElement>('[data-dir]')];
+    if (!trilho || !setas) continue;
+    setas.hidden = false;
+    const passo = () =>
+      trilho.querySelector<HTMLElement>('.protocolo')?.offsetWidth ?? trilho.clientWidth;
+    const atualizar = () => {
+      const fim = trilho.scrollWidth - trilho.clientWidth - 2;
+      botoes.forEach((b) => {
+        const dir = Number(b.dataset['dir']);
+        b.disabled = dir < 0 ? trilho.scrollLeft <= 2 : trilho.scrollLeft >= fim;
+      });
+    };
+    const reduz = matchMedia('(prefers-reduced-motion: reduce)');
+    botoes.forEach((b) =>
+      b.addEventListener('click', () => {
+        trilho.scrollBy({
+          left: Number(b.dataset['dir']) * passo(),
+          behavior: reduz.matches ? 'auto' : 'smooth',
+        });
+      }),
+    );
+    trilho.addEventListener('scroll', atualizar, { passive: true });
+    atualizar();
+  }
+</script>
+
+<style>
+  .protocolos {
+    padding-block: calc(var(--secao-y) * 1.1) var(--secao-y);
+    overflow: clip;
+  }
+  .protocolos__topo {
+    display: grid;
+    gap: var(--e-5);
+    align-items: end;
+  }
+  .protocolos__abertura {
+    max-width: 22ch;
+    font-style: italic;
+  }
+  .protocolos__setas {
+    display: flex;
+    gap: var(--e-2);
+  }
+  .protocolos__setas[hidden] {
+    display: none;
+  }
+  .protocolos__seta {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3rem;
+    border: var(--l-fina) solid var(--linha-forte);
+    border-radius: var(--r-d);
+    background: transparent;
+    color: var(--fg);
+    font: 400 1.25rem/1 var(--f-texto);
+    cursor: pointer;
+  }
+  .protocolos__seta:hover:not(:disabled) {
+    border-color: var(--fg);
+  }
+  .protocolos__seta:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .protocolos__trilho {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 86%;
+    gap: 0;
+    margin: var(--e-7) 0 0;
+    padding: 0 var(--gutter);
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: thin;
+    scrollbar-color: var(--linha-forte) transparent;
+  }
+  .protocolos__trilho:focus-visible {
+    outline-offset: -4px;
+  }
+  .protocolo {
+    display: grid;
+    align-content: start;
+    gap: var(--e-5);
+    padding: var(--e-5) var(--e-6) var(--e-7) 0;
+    border-top: var(--l-fina) solid var(--linha-forte);
+    scroll-snap-align: start;
+  }
+  .protocolo + .protocolo {
+    padding-inline-start: var(--e-5);
+    border-left: var(--l-fina) solid var(--linha);
+  }
+  .protocolo__indice {
+    margin: 0;
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .protocolo__n {
+    color: var(--acento);
+  }
+  .protocolo__nome {
+    font-size: clamp(3.25rem, 1.5rem + 8vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: var(--tracking-display);
+    font-weight: 350;
+    overflow-wrap: anywhere;
+  }
+  .protocolo__dados {
+    display: grid;
+    gap: var(--e-4);
+    max-width: 34rem;
+    margin: 0;
+  }
+  .protocolo__rotulo {
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  .protocolo__rotulo {
+    font-family: var(--f-texto);
+    line-height: 1.4;
+  }
+  .protocolo__dado p {
+    margin: var(--e-1) 0 0;
+  }
+  .protocolos__rodape {
+    margin-block-start: var(--e-7);
+  }
+  @media (min-width: 900px) {
+    .protocolos__topo {
+      grid-template-columns: auto 1fr auto;
+      column-gap: var(--e-8);
+    }
+    .protocolos__trilho {
+      grid-auto-columns: 62%;
+      padding-inline-start: max(var(--gutter), calc((100vw - 96rem) / 2 + var(--gutter)));
+    }
+    .protocolo:last-child {
+      margin-inline-end: 30vw;
+    }
+  }
+</style>

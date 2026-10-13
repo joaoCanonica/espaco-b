@@ -1,0 +1,18 @@
+---
+// /privacidade (sessão 7).
+import Politica from '../components/consentimento/Politica.astro';
+import NavServicos from '../components/servicos/NavServicos.astro';
+import Header from '../components/ui/Header.astro';
+import { marca } from '../config/marca.ts';
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  titulo={`Política de privacidade · ${marca.nomeCurto.valor}`}
+  descricao="Como o site do Espaço B trata dados: WhatsApp, armazenamento no navegador, mapa do Google, direitos da LGPD e como mudar as suas preferências."
+>
+  <Header slot="header" tomInicial="light">
+    <NavServicos />
+  </Header>
+  <Politica />
+</Base>

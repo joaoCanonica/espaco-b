@@ -1,0 +1,77 @@
+---
+// /avaliar: leva ao Perfil da Empresa no Google. Sem filtro de satisfação, sem brinde, sem
+// incentivo. O link direto de avaliação só é usado quando estiver `confirmado`; enquanto for
+// candidato (`informado`), o botão leva à ficha no Maps e o build avisa.
+import Selo from '../ui/Selo.astro';
+import Legenda from '../ui/Legenda.astro';
+import Migalhas from '../servicos/Migalhas.astro';
+import { emPreview } from '../../config/ambiente.ts';
+import { contato } from '../../config/contato.ts';
+
+const direta = contato.google.avaliacaoDiretaUrl;
+const usaDireta = direta.estado === 'confirmado' && !!direta.valor;
+const destino = usaDireta ? direta.valor : contato.google.mapsUrl.valor;
+if (!usaDireta)
+  console.warn(
+    `[espaco-b] /avaliar: link direto de avaliação ainda ${direta.estado} (${direta.motivo ?? ''}); o botão leva à ficha no Google Maps.`,
+  );
+const preview = emPreview();
+---
+
+<section class="av" data-tone="moss" aria-labelledby="titulo-pagina">
+  <div class="recipiente av__conteudo">
+    <Migalhas itens={[{ rotulo: 'Avaliar' }]} />
+    <Legenda>Avaliar</Legenda>
+    <h1 id="titulo-pagina" class="av__titulo vt-titulo">
+      Conte como foi no Google.
+    </h1>
+    <p class="av__texto">
+      Se você já foi atendida ou atendido no Espaço B, pode deixar a sua avaliação no Perfil da
+      Empresa no Google. Vale qualquer experiência, boa ou ruim. A clínica não oferece brinde,
+      desconto nem qualquer vantagem em troca de avaliação.
+    </p>
+    {destino && (
+      <a class="botao av__botao" href={destino} rel="noopener" target="_blank" data-avaliar>
+        {usaDireta ? 'Avaliar no Google' : 'Abrir o Espaço B no Google Maps'}
+        <span class="so-leitor"> (abre em nova aba)</span>
+      </a>
+    )}
+    {!usaDireta && (
+      <p class="av__nota">
+        No Google Maps, toque em “Avaliações” e depois em “Escrever uma avaliação”.
+        {preview && <Selo titulo={`link direto ${direta.estado}: ${direta.motivo ?? ''}`} />}
+      </p>
+    )}
+  </div>
+</section>
+
+<style>
+  .av {
+    display: grid;
+    align-items: center;
+    min-height: 80svh;
+    padding-block: var(--e-6) var(--secao-y);
+  }
+  .av__conteudo {
+    display: grid;
+    gap: var(--e-5);
+    justify-items: start;
+  }
+  .av__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    max-width: 12ch;
+  }
+  .av__texto {
+    max-width: 36rem;
+    font-size: var(--t-4);
+    font-family: var(--f-display);
+    line-height: 1.35;
+  }
+  .av__nota {
+    font-size: var(--t-pequeno);
+    color: var(--fg-suave);
+  }
+</style>

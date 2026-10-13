@@ -1,0 +1,12 @@
+---
+// 404 própria (sessão 6C), no estilo do site; sempre noindex.
+import NaoEncontrada from '../components/paginas/NaoEncontrada.astro';
+import Header from '../components/ui/Header.astro';
+import { marca } from '../config/marca.ts';
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo={`Página não encontrada · ${marca.nomeCurto.valor}`} noindex>
+  <Header slot="header" tomInicial="moss" />
+  <NaoEncontrada />
+</Base>

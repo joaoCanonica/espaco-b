@@ -1,0 +1,17 @@
+---
+// Rotas internas (dev e PREVIEW=1; nunca em produção; noindex): /_pendencias/ e /_sistema/.
+// O Astro ignora páginas com "_" no nome do arquivo, por isso as rotas são geradas aqui.
+import Pendencias from '../components/internas/Pendencias.astro';
+import Sistema from '../components/internas/Sistema.astro';
+import { emProducao } from '../config/ambiente.ts';
+
+export function getStaticPaths() {
+  if (emProducao()) return [];
+  return [{ params: { interna: '_pendencias' } }, { params: { interna: '_sistema' } }];
+}
+
+const { interna } = Astro.params;
+---
+
+{interna === '_pendencias' && <Pendencias />}
+{interna === '_sistema' && <Sistema />}

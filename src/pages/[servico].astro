@@ -1,0 +1,107 @@
+---
+// Páginas de serviço (sessão 6B): /harmonizacao-facial, /corpo-e-emagrecimento, /pele-e-tecnologia.
+// Cada uma tem abertura própria e ordem/tons próprios das seções.
+import AberturaCorpo from '../components/servicos/AberturaCorpo.astro';
+import AberturaPele from '../components/servicos/AberturaPele.astro';
+import AberturaRosto from '../components/servicos/AberturaRosto.astro';
+import Atendimento from '../components/servicos/Atendimento.astro';
+import Cta from '../components/servicos/Cta.astro';
+import Detalhes from '../components/servicos/Detalhes.astro';
+import Faq from '../components/servicos/Faq.astro';
+import Importante from '../components/servicos/Importante.astro';
+import NavServicos from '../components/servicos/NavServicos.astro';
+import ParaQuem from '../components/servicos/ParaQuem.astro';
+import Transicoes from '../components/servicos/Transicoes.astro';
+import VideoCorpo from '../components/servicos/VideoCorpo.astro';
+import { bloqueioDaPagina, paginasGeradas } from '../components/servicos/rotas.ts';
+import Header from '../components/ui/Header.astro';
+import Selo from '../components/ui/Selo.astro';
+import { marca } from '../config/marca.ts';
+import type { PaginaServico } from '../components/servicos/conteudo.ts';
+import Base from '../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return paginasGeradas().map((p) => ({ params: { servico: p.slug }, props: { p } }));
+}
+
+interface Props {
+  p: PaginaServico;
+}
+const { p } = Astro.props;
+const bloqueio = bloqueioDaPagina(p);
+const href = `/${p.slug}/`;
+const tomInicial = {
+  'harmonizacao-facial': 'light',
+  'corpo-e-emagrecimento': 'moss',
+  'pele-e-tecnologia': 'dark',
+} as const;
+const titulo = `${p.legenda} · ${marca.nomeCurto.valor ?? 'Espaço B'}`;
+---
+
+<Base titulo={titulo} descricao={p.resumo}>
+  <Transicoes slot="head" />
+  <Header slot="header" tomInicial={tomInicial[p.slug]}>
+    <NavServicos atual={href} />
+  </Header>
+  {bloqueio && (
+    <p class="recipiente">
+      <Selo titulo={bloqueio} /> {bloqueio}
+    </p>
+  )}
+
+  {p.slug === 'harmonizacao-facial' && (
+    <>
+      <AberturaRosto p={p} />
+      <ParaQuem numero={2} blocos={p.paraQuem} tom="moss" onde={p.slug} />
+      <Detalhes
+        numero={3}
+        legenda="O que fazemos"
+        titulo="Procedimentos e termos"
+        blocos={p.blocos}
+        tom="dark"
+        onde={p.slug}
+      />
+      <Atendimento numero={4} sessoes={p.sessoes} tom="light" onde={p.slug} />
+      <Importante numero={5} blocos={p.importante} tom="moss" onde={p.slug} />
+      <Faq numero={6} perguntas={p.faq} tom="dark" onde={p.slug} />
+      <Cta slugs={p.servicos} atual={href} tom="light" />
+    </>
+  )}
+  {p.slug === 'corpo-e-emagrecimento' && (
+    <>
+      <AberturaCorpo p={p} />
+      <ParaQuem numero={2} blocos={p.paraQuem} tom="light" onde={p.slug} />
+      <VideoCorpo numero={3} tom="dark" />
+      <Detalhes
+        numero={4}
+        legenda="Como a clínica trabalha"
+        titulo="Firmeza, gordura localizada e acompanhamento"
+        blocos={p.blocos}
+        tom="light"
+        onde={p.slug}
+      />
+      <Atendimento numero={5} sessoes={p.sessoes} tom="moss" onde={p.slug} />
+      <Importante numero={6} blocos={p.importante} tom="dark" onde={p.slug} />
+      <Faq numero={7} perguntas={p.faq} tom="light" onde={p.slug} />
+      <Cta slugs={p.servicos} atual={href} tom="moss" />
+    </>
+  )}
+  {p.slug === 'pele-e-tecnologia' && (
+    <>
+      <AberturaPele p={p} />
+      <Detalhes
+        numero={2}
+        legenda="Serviços"
+        titulo="Depilação, limpeza de pele e rejuvenescimento"
+        blocos={p.blocos}
+        tom="light"
+        onde={p.slug}
+      />
+      <ParaQuem numero={3} blocos={p.paraQuem} tom="moss" onde={p.slug} />
+      <Atendimento numero={4} sessoes={p.sessoes} tom="dark" onde={p.slug} />
+      <Importante numero={5} blocos={p.importante} tom="light" onde={p.slug} />
+      <Faq numero={6} perguntas={p.faq} tom="moss" onde={p.slug} />
+      <Cta slugs={p.servicos} atual={href} tom="dark" />
+    </>
+  )}
+</Base>

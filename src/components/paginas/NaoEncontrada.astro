@@ -1,0 +1,44 @@
+---
+// 404: o B gigante cortado pela borda e a contraforma alta vazia como "janela sem nada".
+import BGigante from '../brand/BGigante.astro';
+import Legenda from '../ui/Legenda.astro';
+import { pagina404 } from './conteudo.ts';
+---
+
+<section class="nf" data-tone="moss" aria-labelledby="titulo-pagina">
+  <BGigante lado="direita" altura="130vh" corte={0.3} topo="-10%" intensidade={0.12} />
+  <div class="recipiente nf__conteudo">
+    <Legenda numero={404}>Página não encontrada</Legenda>
+    <h1 id="titulo-pagina" class="nf__titulo">
+      {pagina404.titulo}
+    </h1>
+    <p>{pagina404.texto}</p>
+    <a class="botao" href="/">
+      {pagina404.link}
+    </a>
+  </div>
+</section>
+
+<style>
+  .nf {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-height: 100svh;
+    overflow: clip;
+  }
+  .nf__conteudo {
+    position: relative;
+    display: grid;
+    gap: var(--e-5);
+    justify-items: start;
+    padding-block: var(--secao-y);
+  }
+  .nf__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    max-width: 10ch;
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+// Links do header nas páginas de serviço (desktop); no mobile a navegação fica no fim da página.
+interface Props {
+  atual?: string;
+}
+const { atual } = Astro.props;
+const links = [
+  { href: '/harmonizacao-facial/', rotulo: 'Rosto' },
+  { href: '/corpo-e-emagrecimento/', rotulo: 'Corpo' },
+  { href: '/pele-e-tecnologia/', rotulo: 'Pele' },
+  { href: '/protocolos-bia/', rotulo: 'Protocolos' },
+];
+---
+
+<ul class="nav-servicos" role="list">
+  {links.map((l) => (
+    <li>
+      <a href={l.href} aria-current={l.href === atual ? 'page' : undefined}>
+        {l.rotulo}
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .nav-servicos {
+    display: none;
+    gap: var(--e-5);
+    margin: 0 var(--e-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .nav-servicos a {
+    text-decoration-color: transparent;
+  }
+  .nav-servicos a:hover,
+  .nav-servicos [aria-current] {
+    text-decoration-color: currentColor;
+  }
+  @media (min-width: 900px) {
+    .nav-servicos {
+      display: flex;
+    }
+  }
+</style>

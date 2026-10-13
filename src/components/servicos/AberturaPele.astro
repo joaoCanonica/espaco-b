@@ -1,0 +1,108 @@
+---
+// Abertura de /pele-e-tecnologia (tinta). Composição: imagem5 (atmosfera) numa contraforma
+// baixa gigante que vaza pela borda DIREITA, atrás do título; uma alta mínima no pé, à esquerda.
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { imagemJanela } from '../home/midia.ts';
+import Migalhas from './Migalhas.astro';
+import Resumo from './Resumo.astro';
+import type { PaginaServico } from './conteudo.ts';
+
+interface Props {
+  p: PaginaServico;
+}
+const { p } = Astro.props;
+const luz = imagemDoItem('imagem5', '40% 50%');
+const calcario = imagemDoItem('imagem9');
+---
+
+<section class="ab-pele" data-tone="dark" aria-labelledby="titulo-pagina">
+  <div class="recipiente ab-pele__migalhas">
+    <Migalhas itens={[{ rotulo: p.legenda }]} />
+  </div>
+  <div class="ab-pele__fundo" aria-hidden="true">
+    <Janela
+      forma="baixa"
+      {...(luz && {
+        imagem: {
+          ...imagemJanela(luz, '(min-width: 900px) 52vw, 90vw'),
+          prioridade: 'alta' as const,
+        },
+      })}
+      placeholder="imagem5 (atmosfera)"
+    />
+  </div>
+  <div class="recipiente ab-pele__conteudo">
+    <Legenda numero={1}>{p.legenda}</Legenda>
+    <h1 id="titulo-pagina" class="ab-pele__titulo vt-titulo">
+      {p.titulo}
+    </h1>
+    <div class="ab-pele__texto">
+      <Resumo abertura={p.abertura} resumo={p.resumo} />
+    </div>
+    <div class="ab-pele__mini" aria-hidden="true">
+      <Janela
+        forma="alta"
+        {...(calcario && { imagem: imagemJanela(calcario, '8rem') })}
+        placeholder="imagem9"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ab-pele {
+    position: relative;
+    overflow: clip;
+    padding-block: var(--e-6) var(--secao-y);
+  }
+  .ab-pele__fundo {
+    width: 78%;
+    margin: 0 -18% var(--e-6) auto;
+  }
+  .ab-pele__conteudo {
+    position: relative;
+    display: grid;
+    gap: var(--e-5);
+  }
+  .ab-pele__migalhas {
+    position: relative;
+    z-index: 1;
+    margin-block-end: var(--e-5);
+  }
+  .ab-pele__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+  }
+  .ab-pele__texto {
+    display: grid;
+    gap: var(--e-4);
+    max-width: 36rem;
+  }
+  .ab-pele__mini {
+    width: 4.5rem;
+  }
+  @media (min-width: 900px) {
+    .ab-pele__fundo {
+      position: absolute;
+      top: 0;
+      right: -8vw;
+      width: 52vw;
+      max-width: 56rem;
+      margin: 0;
+    }
+    .ab-pele__conteudo {
+      padding-block-start: 14rem;
+    }
+    .ab-pele__titulo {
+      max-width: 9ch;
+    }
+    .ab-pele__mini {
+      width: 6rem;
+      margin-block-start: var(--e-6);
+    }
+  }
+</style>

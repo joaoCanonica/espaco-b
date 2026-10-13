@@ -1,0 +1,43 @@
+---
+// Parágrafo de um bloco: texto fixo, ou Campo com selo/cartão (preview) — produção já filtrou.
+import Provisorio from '../Provisorio.astro';
+import type { Visao } from './blocos.ts';
+import type { Fonte } from './conteudo.ts';
+
+interface Props {
+  v: Visao;
+  fontes?: Fonte[] | undefined;
+  classe?: string;
+}
+const { v, fontes = [], classe } = Astro.props;
+---
+
+{v.campo ? (
+  <Provisorio campo={v.campo}>
+    <p class={classe}>{v.texto}</p>
+  </Provisorio>
+) : (
+  <p class={classe}>{v.texto}</p>
+)}
+{fontes.length > 0 && v.texto && (
+  <p class="fontes-bloco">
+    Fonte{fontes.length > 1 ? 's' : ''}:{' '}
+    {fontes.map((f, k) => (
+      <>
+        {k > 0 && ' · '}
+        <a href={f.url} rel="noopener" target="_blank">
+          {f.rotulo}
+        </a>
+      </>
+    ))}
+  </p>
+)}
+
+<style>
+  .fontes-bloco {
+    margin-block-start: calc(var(--e-2) * -1);
+    font-size: var(--t-legenda);
+    line-height: 1.6;
+    color: var(--fg-suave);
+  }
+</style>

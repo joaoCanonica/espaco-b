@@ -1,0 +1,85 @@
+---
+// Blocos do serviço (deck): lista editorial numerada; títulos grandes alternam o lado (desktop).
+import Legenda from '../ui/Legenda.astro';
+import Texto from './Texto.astro';
+import { visao } from './blocos.ts';
+import type { Bloco } from './conteudo.ts';
+
+interface Props {
+  numero: number;
+  legenda: string;
+  titulo: string;
+  blocos: Bloco[];
+  tom: 'light' | 'dark' | 'moss';
+  onde: string;
+}
+const { numero, legenda, titulo, blocos, tom, onde } = Astro.props;
+const itens = blocos.map((b) => ({ ...b, v: visao(b.texto, onde) })).filter((b) => b.v.mostrar);
+const id = `${onde}-detalhes`;
+---
+
+<section class="detalhes" data-tone={tom} aria-labelledby={id}>
+  <div class="recipiente">
+    <Legenda numero={numero}>{legenda}</Legenda>
+    <h2 id={id} class="so-leitor">
+      {titulo}
+    </h2>
+    <ol class="detalhes__lista" role="list">
+      {itens.map((b, i) => (
+        <li class="detalhe">
+          <h3 class="detalhe__titulo">
+            <span class="detalhe__n" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            {b.titulo}
+          </h3>
+          <div class="detalhe__corpo">
+            <Texto v={b.v} fontes={b.fontes} />
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .detalhes {
+    padding-block: var(--secao-y);
+  }
+  .detalhes__lista {
+    margin: var(--e-7) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .detalhe {
+    display: grid;
+    gap: var(--e-4);
+    padding-block: var(--e-6);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .detalhe__titulo {
+    font-size: var(--t-3);
+    line-height: 1.1;
+  }
+  .detalhe__n {
+    display: block;
+    margin-block-end: var(--e-2);
+    font-size: var(--t-legenda);
+    font-family: var(--f-texto);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    color: var(--fg-suave);
+  }
+  .detalhe__corpo :global(p) {
+    max-width: 40rem;
+  }
+  @media (min-width: 900px) {
+    .detalhe {
+      grid-template-columns: 5fr 7fr;
+      column-gap: var(--e-8);
+    }
+    .detalhe:nth-child(even) .detalhe__titulo {
+      order: 2;
+    }
+  }
+</style>

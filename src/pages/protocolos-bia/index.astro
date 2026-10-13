@@ -1,0 +1,40 @@
+---
+// /protocolos-bia (sessão 6B): índice dos protocolos confirmados (os `informado` não aparecem).
+import AberturaProtocolos from '../../components/servicos/AberturaProtocolos.astro';
+import Atendimento from '../../components/servicos/Atendimento.astro';
+import Cta from '../../components/servicos/Cta.astro';
+import Faq from '../../components/servicos/Faq.astro';
+import IndiceProtocolos from '../../components/servicos/IndiceProtocolos.astro';
+import NavServicos from '../../components/servicos/NavServicos.astro';
+import Transicoes from '../../components/servicos/Transicoes.astro';
+import { protocolosPagina } from '../../components/servicos/conteudo.ts';
+import { protocolosPublicos } from '../../components/servicos/protocolos.ts';
+import Header from '../../components/ui/Header.astro';
+import { marca } from '../../config/marca.ts';
+import { pendente } from '../../config/tipos.ts';
+import Base from '../../layouts/Base.astro';
+
+const slugs = [...new Set(protocolosPublicos.map((p) => p.servico))];
+const sessoes = {
+  titulo: 'Sessões',
+  texto: pendente<string>(
+    'Como são as sessões (protocolos)',
+    'conteúdo dos protocolos a enviar pelo João',
+  ),
+};
+---
+
+<Base
+  titulo={`${protocolosPagina.legenda} · ${marca.nomeCurto.valor}`}
+  descricao={protocolosPagina.resumo}
+>
+  <Transicoes slot="head" />
+  <Header slot="header" tomInicial="dark">
+    <NavServicos atual="/protocolos-bia/" />
+  </Header>
+  <AberturaProtocolos />
+  <IndiceProtocolos numero={2} />
+  <Atendimento numero={3} sessoes={sessoes} tom="moss" onde="protocolos-bia" />
+  <Faq numero={4} perguntas={protocolosPagina.faq} tom="dark" onde="protocolos-bia" />
+  <Cta slugs={slugs} atual="/protocolos-bia/" tom="light" />
+</Base>

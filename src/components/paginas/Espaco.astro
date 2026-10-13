@@ -1,0 +1,243 @@
+---
+// /espaco. Abertura: o vídeo do ambiente numa contraforma baixa enorme no CENTRO, com o título
+// em duas metades (antes e depois da janela). Atmosfera: texturas geradas por IA em faixa
+// horizontal, rotuladas como atmosfera (data-origem; nunca como foto do espaço).
+// Depois: endereço, horário, como chegar (link, sem mapa carregado) e acessibilidade (a informar).
+import Provisorio from '../Provisorio.astro';
+import Janela from '../brand/Janela.astro';
+import MarcadorCauda from '../brand/MarcadorCauda.astro';
+import Legenda from '../ui/Legenda.astro';
+import Migalhas from '../servicos/Migalhas.astro';
+import { contato } from '../../config/contato.ts';
+import { itemDoManifesto } from '../../config/midia.ts';
+import { imagemDoItem } from '../hero/midia.ts';
+import { enderecoLinhas } from '../home/conteudo.ts';
+import { imagemJanela } from '../home/midia.ts';
+import VideoVertical from './VideoVertical.astro';
+import { espacoPagina, horariosExtenso } from './conteudo.ts';
+
+// Só itens que o manifesto marca como gerados por IA entram na faixa de atmosfera.
+const atmosfera = ['imagem7', 'imagem2', 'imagem9']
+  .filter(
+    (id) => (itemDoManifesto(id) as { origem?: string } | undefined)?.origem === 'gerada-por-ia',
+  )
+  .map((id) => ({ id, img: imagemDoItem(id) }));
+const maps = contato.google.mapsUrl.valor;
+---
+
+<section class="esp-ab" data-tone="moss" data-dobra="primeira" aria-labelledby="titulo-pagina">
+  <div class="recipiente">
+    <Migalhas itens={[{ rotulo: espacoPagina.legenda }]} />
+    <div class="esp-ab__legenda">
+      <Legenda numero={1}>{espacoPagina.legenda}</Legenda>
+    </div>
+    <h1 id="titulo-pagina" class="so-leitor">
+      {espacoPagina.titulo}
+    </h1>
+    <div class="esp-ab__titulo vt-titulo">
+      <span class="esp-ab__a" aria-hidden="true">
+        O Espaço
+      </span>
+      <div class="esp-ab__janela">
+        <VideoVertical
+          item="ambiente-clinica"
+          mudo
+          rotulo={espacoPagina.rotuloVideo}
+          legenda="Sem som · clique para assistir"
+        />
+      </div>
+      <span class="esp-ab__b" aria-hidden="true">
+        B.
+      </span>
+    </div>
+    <p class="esp-ab__texto">{espacoPagina.texto}</p>
+  </div>
+</section>
+
+<section class="esp-atm" data-tone="light" aria-labelledby="esp-atm-titulo">
+  <div class="recipiente">
+    <Legenda numero={2}>Galeria</Legenda>
+    <h2 id="esp-atm-titulo" class="so-leitor">
+      Galeria e atmosfera
+    </h2>
+    <div class="esp-atm__galeria">
+      <Provisorio campo={espacoPagina.galeria}>
+        <span />
+      </Provisorio>
+    </div>
+    <ul class="esp-atm__faixa" role="list" aria-hidden="true">
+      {atmosfera.map(({ id, img }, i) => (
+        <li data-origem="gerada-por-ia" data-midia={id}>
+          <Janela
+            forma={i === 1 ? 'baixa' : 'alta'}
+            {...(img && { imagem: imagemJanela(img, '(min-width: 900px) 22vw, 30vw') })}
+            placeholder={id}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="esp-info" data-tone="dark" aria-labelledby="esp-info-titulo">
+  <div class="recipiente esp-info__grade">
+    <div>
+      <Legenda numero={3}>Visita</Legenda>
+      <h2 id="esp-info-titulo" class="t-2 esp-info__titulo">
+        Endereço e horário
+      </h2>
+    </div>
+    <div class="esp-info__dados">
+      <div>
+        <h3 class="esp-info__rotulo">Endereço</h3>
+        <address>
+          {enderecoLinhas.map((l) => (
+            <span>{l}</span>
+          ))}
+        </address>
+      </div>
+      <div>
+        <h3 class="esp-info__rotulo">Horário</h3>
+        <ul class="esp-info__lista" role="list">
+          {horariosExtenso.map((h) => (
+            <li>{h}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="esp-info__rotulo">{espacoPagina.comoChegar}</h3>
+        {maps && (
+          <a class="esp-info__mapa" href={maps} rel="noopener" target="_blank">
+            {espacoPagina.verMapa} ↗<span class="so-leitor"> (abre em nova aba)</span>
+          </a>
+        )}
+      </div>
+      <div>
+        <h3 class="esp-info__rotulo">Acessibilidade</h3>
+        <Provisorio campo={espacoPagina.acessibilidade}>
+          <span />
+        </Provisorio>
+      </div>
+    </div>
+    <MarcadorCauda altura="4rem" alinhamento="fim" />
+  </div>
+</section>
+
+<style>
+  .esp-ab {
+    padding-block: var(--e-6) var(--secao-y);
+    overflow: clip;
+  }
+  .esp-ab__legenda {
+    margin-block: var(--e-6) var(--e-4);
+  }
+  .esp-ab__titulo {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: var(--e-4);
+    font-family: var(--f-display);
+    font-size: clamp(3.5rem, 1.5rem + 10vw, 14rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: var(--tracking-display);
+    text-align: center;
+  }
+  .esp-ab__janela {
+    width: min(78%, 22rem);
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: start;
+  }
+  .esp-ab__texto {
+    margin: var(--e-7) auto 0;
+    max-width: 30rem;
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+    text-align: center;
+  }
+  @media (min-width: 900px) {
+    .esp-ab__titulo {
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+    .esp-ab__a {
+      justify-self: end;
+    }
+    .esp-ab__b {
+      justify-self: start;
+    }
+    .esp-ab__janela {
+      width: 22rem;
+    }
+  }
+
+  .esp-atm {
+    padding-block: var(--secao-y);
+    overflow: clip;
+  }
+  .esp-atm__galeria {
+    max-width: 32rem;
+    margin-block-start: var(--e-5);
+  }
+  .esp-atm__faixa {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    align-items: end;
+    gap: var(--e-4);
+    margin: var(--e-7) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .esp-atm__faixa li:nth-child(3) {
+    margin-block-end: var(--e-8);
+  }
+
+  .esp-info {
+    padding-block: var(--secao-y) var(--e-8);
+  }
+  .esp-info__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .esp-info__titulo {
+    margin-block-start: var(--e-4);
+  }
+  .esp-info__dados {
+    display: grid;
+    gap: var(--e-6);
+  }
+  .esp-info__rotulo {
+    margin-block-end: var(--e-2);
+    font: 600 var(--t-legenda) / 1.4 var(--f-texto);
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    color: var(--fg-suave);
+  }
+  address {
+    display: grid;
+    font-style: normal;
+  }
+  .esp-info__lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .esp-info__mapa {
+    font-family: var(--f-display);
+    font-size: var(--t-4);
+  }
+  @media (min-width: 900px) {
+    .esp-info__grade {
+      grid-template-columns: 4fr 7fr;
+      column-gap: var(--e-9);
+    }
+    .esp-info__dados {
+      grid-template-columns: 1fr 1fr;
+    }
+    .esp-info__grade > :global(.marcador-cauda) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

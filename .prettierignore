@@ -1,0 +1,20 @@
+dist/
+.astro/
+node_modules/
+public/media/
+media-originais/
+pnpm-lock.yaml
+# documentos do João: preservados como chegaram
+CLAUDE.md
+docs/CONTEXTO.md
+docs/ESPACO_B_*.md
+ESPACO_B_*.md
+docs/dados/
+# gerado por scripts/capturar.mjs
+docs/capturas/
+# gerados por scripts
+docs/PENDENCIAS.md
+docs/COMPLIANCE.md
+docs/MIDIA_CATALOGO.md
+docs/CONTRASTE.md
+src/assets/brand/marca.json

@@ -1,0 +1,65 @@
+---
+// O B gigante cortado pela borda da tela (elemento de arquitetura, decorativo).
+// O pai precisa de position:relative e overflow:hidden (o <section> com data-tone já serve).
+import { pathB, viewBoxB } from './marca.ts';
+
+interface Props {
+  /** borda que corta o B */
+  lado?: 'esquerda' | 'direita';
+  /** altura do B (qualquer unidade CSS) */
+  altura?: string;
+  /** fração da largura do B que fica fora da tela (0–0.9) */
+  corte?: number;
+  /** posição vertical do topo do B (CSS) */
+  topo?: string;
+  /** intensidade sobre o fundo (0–1) */
+  intensidade?: number;
+}
+
+const {
+  lado = 'direita',
+  altura = '140vh',
+  corte = 0.35,
+  topo = '-12%',
+  intensidade = 0.08,
+} = Astro.props;
+const [, , vw, vh] = viewBoxB.split(' ').map(Number);
+const proporcao = (vw ?? 1) / (vh ?? 1);
+const estilo = [
+  `--bg-altura:${altura}`,
+  `--bg-largura:calc(${altura} * ${proporcao.toFixed(4)})`,
+  `--bg-corte:${corte}`,
+  `--bg-topo:${topo}`,
+  `--bg-intensidade:${intensidade}`,
+].join(';');
+---
+
+<svg
+  class:list={['b-gigante', `b-gigante--${lado}`]}
+  style={estilo}
+  viewBox={viewBoxB}
+  aria-hidden="true"
+  focusable="false"
+>
+  <path fill="currentColor" fill-rule="evenodd" d={pathB}></path>
+</svg>
+
+<style>
+  .b-gigante {
+    position: absolute;
+    top: var(--bg-topo);
+    height: var(--bg-altura);
+    width: var(--bg-largura);
+    max-width: none;
+    color: var(--fg);
+    opacity: var(--bg-intensidade);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .b-gigante--direita {
+    right: calc(var(--bg-largura) * var(--bg-corte) * -1);
+  }
+  .b-gigante--esquerda {
+    left: calc(var(--bg-largura) * var(--bg-corte) * -1);
+  }
+</style>

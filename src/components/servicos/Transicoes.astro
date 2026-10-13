@@ -1,0 +1,13 @@
+<!-- View Transitions entre documentos: só melhoria (navegação normal sem elas). -->
+<style is:global>
+  @supports (view-transition-name: none) {
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition {
+        navigation: auto;
+      }
+      .vt-titulo {
+        view-transition-name: titulo-pagina;
+      }
+    }
+  }
+</style>

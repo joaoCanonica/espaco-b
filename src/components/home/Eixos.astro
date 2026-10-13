@@ -1,0 +1,179 @@
+---
+// 03 · Três eixos (musgo). Gesto: três faixas verticais de larguras diferentes (5/3/4);
+// cada faixa mostra uma fatia da sua janela em D e a abre inteira no hover/foco.
+// Sem hover (toque), a janela fica sempre inteira.
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { eixos } from './conteudo.ts';
+import { imagemJanela } from './midia.ts';
+
+const faixas = eixos.itens.map((e) => ({ ...e, img: imagemDoItem(e.imagem) }));
+---
+
+<section id="eixos" class="eixos" data-tone="moss" aria-labelledby="eixos-titulo">
+  <div class="recipiente">
+    <Legenda numero={3}>{eixos.legenda}</Legenda>
+    <h2 id="eixos-titulo" class="so-leitor">
+      {eixos.titulo}
+    </h2>
+  </div>
+  <ol class="eixos__faixas recipiente" role="list">
+    {faixas.map((f, i) => (
+      <li class:list={['eixo', `eixo--${i + 1}`]}>
+        <a class="eixo__link" href={f.href}>
+          <span class="eixo__numero" aria-hidden="true">
+            {f.numero}
+          </span>
+          <span class="eixo__nome t-2">
+            <span class="so-leitor">{f.numero} </span>
+            {f.nome}
+          </span>
+          <span class="eixo__texto">{f.texto}</span>
+          <span class="eixo__ir" aria-hidden="true">
+            Ver {f.nome.toLowerCase()} →
+          </span>
+        </a>
+        <div class="eixo__janela" aria-hidden="true">
+          <Janela
+            forma={i === 1 ? 'alta' : 'baixa'}
+            {...(f.img && { imagem: imagemJanela(f.img, '(min-width: 900px) 22vw, 60vw') })}
+            placeholder={`${f.imagem} (textura)`}
+          />
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .eixos {
+    padding-block: var(--secao-y) 0;
+  }
+  .eixos__faixas {
+    display: grid;
+    margin: var(--e-7) auto 0;
+    padding-block: 0;
+    list-style: none;
+  }
+  .eixo {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 38%;
+    gap: var(--e-5);
+    padding-block: var(--e-6) var(--e-7);
+    border-top: var(--l-fina) solid var(--linha-forte);
+  }
+  .eixo__link {
+    display: grid;
+    align-content: start;
+    gap: var(--e-3);
+    text-decoration: none;
+  }
+  .eixo__numero {
+    font-family: var(--f-display);
+    font-size: var(--t-3);
+    line-height: 1;
+    color: var(--fg-suave);
+    font-variant-numeric: lining-nums;
+  }
+  .eixo__nome {
+    font-family: var(--f-display);
+    line-height: var(--lh-titulo);
+  }
+  .eixo__texto {
+    max-width: 30ch;
+    font-size: var(--t-pequeno);
+    line-height: var(--lh-corpo);
+  }
+  .eixo__ir {
+    margin-block-start: var(--e-2);
+    font-size: var(--t-legenda);
+    font-weight: 600;
+    letter-spacing: var(--tracking-legenda);
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-thickness: var(--l-fina);
+    text-underline-offset: 0.3em;
+    text-decoration-color: var(--linha-forte);
+  }
+  .eixo__link:hover .eixo__ir {
+    text-decoration-color: currentColor;
+  }
+  .eixo__janela {
+    align-self: end;
+  }
+  .eixo--2 {
+    grid-template-columns: 34% minmax(0, 1fr);
+  }
+  .eixo--2 .eixo__janela {
+    order: -1;
+  }
+
+  @media (min-width: 900px) {
+    .eixos__faixas {
+      grid-template-columns: 5fr 3fr 4fr;
+      align-items: stretch;
+    }
+    .eixo,
+    .eixo--2 {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      padding: var(--e-6) var(--e-6) 0;
+      border-top: 0;
+      border-left: var(--l-fina) solid var(--linha-forte);
+    }
+    .eixo--1 {
+      min-height: 40rem;
+      padding-inline-start: 0;
+      border-left: 0;
+    }
+    .eixo--2 {
+      min-height: 32rem;
+      margin-block-start: var(--e-9);
+    }
+    .eixo--3 {
+      min-height: 36rem;
+      margin-block-start: var(--e-7);
+    }
+    .eixo--2 .eixo__janela {
+      order: 0;
+    }
+    .eixo__janela {
+      width: 72%;
+      justify-self: end;
+      margin-block-end: calc(var(--e-7) * -1);
+      position: relative;
+      z-index: 1;
+    }
+    .eixo--2 .eixo__janela {
+      width: 64%;
+      justify-self: start;
+    }
+  }
+
+  /* Revelação no hover/foco só onde existe hover fino; o resto vê a janela sempre. */
+  @media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+    .eixo__janela {
+      clip-path: inset(58% 0 0 0);
+      transition: clip-path var(--dur-lenta) var(--curva-saida);
+    }
+    .eixo:hover .eixo__janela,
+    .eixo:focus-within .eixo__janela {
+      clip-path: inset(0 0 0 0);
+    }
+    .eixo__nome {
+      transition: transform var(--dur-media) var(--curva-saida);
+    }
+    .eixo:hover .eixo__nome,
+    .eixo:focus-within .eixo__nome {
+      transform: translateX(0.15em);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .eixo__janela,
+    .eixo__nome {
+      transition: none;
+    }
+  }
+</style>

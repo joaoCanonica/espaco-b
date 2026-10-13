@@ -1,0 +1,101 @@
+---
+// Abertura de /protocolos-bia (tinta). Composição: três contraformas altas pequenas em escada,
+// uma por protocolo confirmado, numeradas; título à esquerda.
+import Janela from '../brand/Janela.astro';
+import Legenda from '../ui/Legenda.astro';
+import { imagemDoItem } from '../hero/midia.ts';
+import { imagemJanela } from '../home/midia.ts';
+import Migalhas from './Migalhas.astro';
+import { protocolosPagina } from './conteudo.ts';
+import { protocolosPublicos, TEXTURA } from './protocolos.ts';
+
+const janelas = protocolosPublicos.map((p) => ({
+  p,
+  img: imagemDoItem(TEXTURA[p.id] ?? 'imagem9'),
+}));
+---
+
+<section class="ab-protocolos" data-tone="dark" aria-labelledby="titulo-pagina">
+  <div class="recipiente ab-protocolos__grade">
+    <div class="ab-protocolos__texto">
+      <Migalhas itens={[{ rotulo: protocolosPagina.legenda }]} />
+      <Legenda numero={1}>{protocolosPagina.legenda}</Legenda>
+      <h1 id="titulo-pagina" class="ab-protocolos__titulo vt-titulo">
+        {protocolosPagina.titulo}
+      </h1>
+      <p data-resumo>{protocolosPagina.resumo}</p>
+    </div>
+    <ol class="ab-protocolos__escada" aria-hidden="true" role="list">
+      {janelas.map(({ p, img }, i) => (
+        <li>
+          <span class="ab-protocolos__n">{String(i + 1).padStart(2, '0')}</span>
+          <Janela
+            forma="alta"
+            {...(img && {
+              imagem: {
+                ...imagemJanela(img, '(min-width: 900px) 10vw, 22vw'),
+                carregamento: 'eager' as const,
+              },
+            })}
+            placeholder={p.nomeTexto}
+          />
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .ab-protocolos {
+    padding-block: var(--e-6) var(--secao-y);
+  }
+  .ab-protocolos__grade {
+    display: grid;
+    gap: var(--e-7);
+  }
+  .ab-protocolos__texto {
+    display: grid;
+    gap: var(--e-5);
+  }
+  .ab-protocolos__texto p {
+    margin: 0;
+  }
+  .ab-protocolos__titulo {
+    font-size: var(--t-1);
+    font-weight: 350;
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    font-style: italic;
+  }
+  .ab-protocolos__escada {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--e-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: start;
+  }
+  .ab-protocolos__escada li:nth-child(2) {
+    margin-block-start: var(--e-7);
+  }
+  .ab-protocolos__escada li:nth-child(3) {
+    margin-block-start: var(--e-9);
+  }
+  .ab-protocolos__n {
+    display: block;
+    margin-block-end: var(--e-2);
+    font-family: var(--f-display);
+    color: var(--fg-suave);
+  }
+  @media (min-width: 900px) {
+    .ab-protocolos__grade {
+      grid-template-columns: 6fr 5fr;
+      column-gap: var(--e-9);
+      align-items: end;
+    }
+    .ab-protocolos__texto {
+      padding-block-start: var(--e-8);
+    }
+  }
+</style>

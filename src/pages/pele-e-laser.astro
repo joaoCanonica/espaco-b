@@ -1,0 +1,14 @@
+---
+// Endereço antigo citado na home (sessão 6A): leva para /pele-e-tecnologia/ sem depender de JS.
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Pele e tecnologia · Espaço B" noindex>
+  <link slot="head" rel="canonical" href="/pele-e-tecnologia/" />
+  <meta slot="head" http-equiv="refresh" content="0; url=/pele-e-tecnologia/" />
+  <section class="recipiente" data-tone="light" style="padding-block: 4rem">
+    <p>
+      Esta página mudou de endereço: <a href="/pele-e-tecnologia/">Pele e tecnologia</a>.
+    </p>
+  </section>
+</Base>

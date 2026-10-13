@@ -1,0 +1,25 @@
+---
+// Selo PROVISÓRIO (o mesmo da sessão 2; Provisorio.astro usa este componente).
+interface Props {
+  titulo?: string;
+  texto?: string;
+}
+const { titulo, texto = 'PROVISÓRIO' } = Astro.props;
+---
+
+<mark class="selo" title={titulo}>
+  {texto}
+</mark>
+
+<style>
+  .selo {
+    display: inline-block;
+    margin-inline-start: 0.4em;
+    padding: 0 0.4em;
+    font: 600 0.6875rem/1.7 var(--f-texto, system-ui, sans-serif);
+    letter-spacing: 0.08em;
+    background: var(--c-framboesa-funda, #8a3027);
+    color: var(--c-osso, #f1ece1);
+    border-radius: 0 999px 999px 0;
+  }
+</style>
