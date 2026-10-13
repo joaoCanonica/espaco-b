@@ -1,0 +1,131 @@
+- main:
+  - region "Casos acompanhados na clínica.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Casos
+    - paragraph: 01 Casos
+    - heading "Casos acompanhados na clínica." [level=1]
+    - paragraph: Cada pessoa responde de um jeito. Estas imagens mostram casos reais, publicados com autorização, e não indicam o resultado que você vai ter.
+  - region "Fichas dos casos":
+    - paragraph: 02 Fichas
+    - heading "Fichas dos casos" [level=2]
+    - paragraph:
+      - mark: PROVISÓRIO
+      - text: termo de consentimento não arquivado
+    - list:
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-001, clipe curto sem som"'
+        - term: Caso
+        - definition: P-001
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-002, clipe curto sem som"'
+        - term: Caso
+        - definition: P-002
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-003, clipe curto sem som"'
+        - term: Caso
+        - definition: P-003
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-004, clipe curto sem som"'
+        - term: Caso
+        - definition: P-004
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-005, clipe curto sem som"'
+        - term: Caso
+        - definition: P-005
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-006, clipe curto sem som"'
+        - term: Caso
+        - definition: P-006
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-007, clipe curto sem som"'
+        - term: Caso
+        - definition: P-007
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+      - listitem:
+        - figure:
+          - 'button "Assistir : Caso P-008, clipe curto sem som"'
+        - term: Caso
+        - definition: P-008
+        - term: Procedimento
+        - definition:
+          - mark: PROVISÓRIO
+          - paragraph:
+            - strong: Procedimento
+            - text: ": a informar."
+          - paragraph: procedimento de cada caso a enviar pelo João
+        - term: Executora
+        - definition: Bianca Cardoso
+    - paragraph: Imagens publicadas com autorização das pacientes. Resultados variam de pessoa para pessoa.

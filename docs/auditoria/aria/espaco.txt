@@ -1,0 +1,41 @@
+- main:
+  - region "O Espaço B.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /O espaço
+    - paragraph: 01 O espaço
+    - heading "O Espaço B." [level=1]
+    - figure "Sem som · clique para assistir":
+      - 'button "Assistir : Vídeo do ambiente da clínica, sem som"'
+      - text: Sem som · clique para assistir
+    - paragraph: Uma clínica no bairro Coral, em Lages. Salas reservadas, luz quente e uma recepção para você chegar com calma.
+  - region "Galeria e atmosfera":
+    - paragraph: 02 Galeria
+    - heading "Galeria e atmosfera" [level=2]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Galeria de fotos do espaço
+      - text: ": a informar."
+    - paragraph: fotos reais em alta, sem pessoas, a enviar pelo João; quadros do vídeo exigem extensão do prepare-media
+  - region "Endereço e horário":
+    - paragraph: 03 Visita
+    - heading "Endereço e horário" [level=2]
+    - heading "Endereço" [level=3]
+    - text: Rua Humberto de Campos, 328 Coral · Lages/SC CEP 88508-190
+    - heading "Horário" [level=3]
+    - list:
+      - listitem: segunda a sexta, 9h–12h e 13h30–18h30
+      - listitem: sábado, 8h–12h
+      - listitem: domingo, fechado
+    - heading "Como chegar" [level=3]
+    - link "Ver no Google Maps ↗ (abre em nova aba)":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0
+    - heading "Acessibilidade" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Acessibilidade
+      - text: ": a informar."
+    - paragraph: "acesso, rampa/escada, estacionamento: a informar pelo João"

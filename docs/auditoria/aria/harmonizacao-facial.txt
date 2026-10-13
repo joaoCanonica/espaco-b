@@ -1,0 +1,135 @@
+- main:
+  - region "Harmonização facial com método.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Harmonização facial
+    - paragraph: 01 Harmonização facial
+    - heading "Harmonização facial com método." [level=1]
+    - paragraph: Expressão, contorno e qualidade da pele, avaliados juntos. O objetivo é o seu rosto descansado, não um rosto diferente. Na avaliação, a Bia ouve o que incomoda você, examina pele, contorno e histórico e explica o que faz sentido agora. Às vezes a conclusão é esperar ou procurar outro profissional.
+  - region "Para quem é":
+    - paragraph: 02 Indicação
+    - heading "Para quem é" [level=2]
+    - heading "O que entra" [level=3]
+    - paragraph: "Harmonização com método: expressão, contorno e qualidade da pele, em doses que respeitam o seu rosto."
+    - heading "Indicações detalhadas" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Para quem é (rosto)
+      - text: ": a informar."
+    - paragraph: indicações por procedimento a enviar pelo João
+  - region "Procedimentos e termos":
+    - paragraph: 03 O que fazemos
+    - heading "Procedimentos e termos" [level=2]
+    - list:
+      - listitem:
+        - heading "Toxina botulínica" [level=3]
+        - paragraph: "A toxina botulínica relaxa os músculos que formam as rugas de expressão, como as da testa e entre as sobrancelhas. O efeito é temporário: os estudos descrevem em geral de 3 a 5 meses, e depois o músculo volta a trabalhar."
+        - mark: PROVISÓRIO
+        - paragraph:
+          - text: "Fonte:"
+          - link "Revisão sobre duração do efeito (PubMed 20369902)":
+            - /url: https://pubmed.ncbi.nlm.nih.gov/20369902/
+      - listitem:
+        - 'heading "Preenchimentos: lábios e sulco nasogeniano" [level=3]'
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Bloco "Preenchimentos"
+          - text: ": a informar."
+        - paragraph: "CONDICIONAL: base COFFITO para preenchimento por fisioterapeuta não pesquisada; texto só depois da verificação"
+      - listitem:
+        - heading "“FaceLifting”" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Bloco "FaceLifting"
+          - text: ": a informar."
+        - paragraph: "o que é o serviço FaceLifting: a enviar pelo João"
+      - listitem:
+        - heading "“Derretimento Facial”" [level=3]
+        - paragraph: A Bia chama de “Derretimento Facial” a sensação de que o rosto perdeu sustentação. Isso pode acontecer, por exemplo, depois de emagrecer muito, quando o rosto perde volume e a pele fica mais flácida. A avaliação mostra o que está por trás em cada caso.
+        - paragraph:
+          - text: "Fontes:"
+          - link "Aesthetic Surgery Journal Open Forum, 2024 (revisão de escopo)":
+            - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojae069/7739023
+          - text: ·
+          - link "Metrópoles, 2026 (imprensa)":
+            - /url: https://www.metropoles.com/vida-e-estilo/sindrome-da-face-hiperpreenchida-gera-alerta-sobre-excessos-na-beleza
+      - listitem:
+        - heading "“Seu rosto mais jovem”" [level=3]
+        - paragraph: Título que ela usa nos conteúdos. Aqui é só o nome do conteúdo, sem promessa de resultado.
+  - region "Como é o atendimento":
+    - paragraph: 04 Atendimento
+    - heading "Como é o atendimento" [level=2]
+    - list:
+      - listitem:
+        - heading "Avaliação" [level=3]
+        - paragraph: Você conta o que incomoda. A Bia avalia pele, contorno e histórico.
+      - listitem:
+        - heading "Plano" [level=3]
+        - paragraph: Vocês combinam um plano, ou a conclusão de que não é a hora.
+      - listitem:
+        - heading "Sessões" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Como são as sessões (rosto)
+          - text: ": a informar."
+        - paragraph: duração, intervalo e retorno a enviar pelo João
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+  - region "O que é importante saber":
+    - paragraph: 05 Limites
+    - heading "O que é importante saber" [level=2]
+    - heading "Não é um diagnóstico" [level=3]
+    - paragraph: "“Derretimento Facial” não é um diagnóstico: é o ponto de partida para a avaliação entender o que mudou."
+    - paragraph:
+      - text: "Fonte:"
+      - link "Aesthetic Surgery Journal Open Forum, 2024 (revisão de escopo)":
+        - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojae069/7739023
+    - heading "Às vezes a resposta é esperar" [level=3]
+    - paragraph: Às vezes a conclusão é esperar ou procurar outro profissional.
+    - heading "Contraindicações" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Contraindicações gerais
+      - text: ": a informar."
+    - paragraph: o deck não traz contraindicações; a Bia/o João devem enviar a lista revisada
+    - paragraph: As informações deste site são educativas e não substituem a avaliação individual. Cada pessoa responde de um jeito aos procedimentos.
+  - region "Perguntas":
+    - paragraph: 06 Perguntas
+    - heading "Perguntas" [level=2]
+    - group: O que é a avaliação e por que ela vem antes de tudo?
+    - group: O que a Bia chama de “Derretimento Facial”?
+    - group:
+      - text: Quanto tempo dura a toxina botulínica? condicional
+      - mark: PROVISÓRIO
+    - group:
+      - text: "Bioestimulador ou fios: qual a diferença? condicional"
+      - mark: PROVISÓRIO
+    - group: Quem faz os procedimentos?
+  - region "Agendar avaliação pelo WhatsApp.":
+    - heading "Agendar avaliação pelo WhatsApp." [level=2]
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - term: Serviços
+    - definition: Harmonização orofacial
+    - term: Quem atende
+    - definition: Fisioterapeuta Bianca Cardoso · CREFITO 183149
+    - term: Responsável técnica
+    - definition: Bianca Cardoso
+    - term: Conselho
+    - definition:
+      - text: COFFITO/CREFITO
+      - mark: PROVISÓRIO
+    - navigation "Outras páginas":
+      - list:
+        - listitem:
+          - link "Corpo e emagrecimento":
+            - /url: /corpo-e-emagrecimento/
+        - listitem:
+          - link "Pele e tecnologia":
+            - /url: /pele-e-tecnologia/
+        - listitem:
+          - link "Protocolos da Bia":
+            - /url: /protocolos-bia/

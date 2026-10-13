@@ -1,0 +1,202 @@
+- main:
+  - region "Rosto e corpo, um projeto só.":
+    - paragraph: 01 Estética integrada · Lages, SC
+    - heading "Rosto e corpo, um projeto só." [level=1]:
+      - text: Rosto e corpo,
+      - emphasis: um projeto só.
+    - mark: PROVISÓRIO
+    - paragraph: Fisioterapeuta Bianca Cardoso · CREFITO 183149
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - link "Conhecer os protocolos":
+      - /url: /protocolos-bia/
+    - figure:
+      - img "Bianca Cardoso, fisioterapeuta, em retrato de estúdio"
+  - region "Primeiro a gente entende o seu rosto e o seu corpo. Depois decide o que fazer.":
+    - paragraph: 02 Manifesto
+    - heading "Primeiro a gente entende o seu rosto e o seu corpo. Depois decide o que fazer." [level=2]
+    - paragraph: "A Bia trabalha com estética há mais de 15 anos. Cada atendimento começa por uma avaliação: o que incomoda você, o que a sua pele mostra, o que faz sentido agora e o que pode esperar. Rosto, corpo e pele entram no mesmo plano."
+  - region "Três eixos":
+    - paragraph: 03 Três eixos
+    - heading "Três eixos" [level=2]
+    - list:
+      - listitem:
+        - 'link "01 Rosto Harmonização com método: expressão, contorno e qualidade da pele, em doses que respeitam o seu rosto."':
+          - /url: /harmonizacao-facial/
+      - listitem:
+        - link "02 Corpo Gordura localizada e flacidez, inclusive depois de emagrecer. Avaliação primeiro, protocolo depois.":
+          - /url: /corpo-e-emagrecimento/
+      - listitem:
+        - link "03 Pele e depilação Tecnologias para textura, manchas e redução duradoura dos pelos.":
+          - /url: /pele-e-laser/
+  - region "Três protocolos com o nome de quem os criou e aplica.":
+    - paragraph: 04 Protocolos da Bia
+    - heading "Três protocolos com o nome de quem os criou e aplica." [level=2]
+    - button "Protocolo anterior" [disabled]: ←
+    - button "Próximo protocolo": →
+    - list "Protocolos da Bia (role para os lados)":
+      - listitem:
+        - paragraph: 01 / 03· Rosto
+        - heading "BiaLifting" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Para quem é
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Como é a sessão
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+      - listitem:
+        - paragraph: 02 / 03· Rosto
+        - heading "BiaLips" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Para quem é
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Como é a sessão
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+      - listitem:
+        - paragraph: 03 / 03· Corpo
+        - heading "Lipocrio da Bia" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Para quem é
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Como é a sessão
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+    - link "Ver os protocolos":
+      - /url: /protocolos-bia/
+  - region "Fisioterapeuta. Há anos olhando para o mesmo detalhe que você.":
+    - figure:
+      - img "Bianca Cardoso, fisioterapeuta, em retrato de estúdio"
+    - paragraph: 05 A Bia
+    - heading "Fisioterapeuta. Há anos olhando para o mesmo detalhe que você." [level=2]
+    - paragraph: Fisioterapeuta · CREFITO 183149
+    - paragraph: Bianca Cardoso é fisioterapeuta (CREFITO 183149) e responsável técnica do Espaço B. Atende todos os protocolos da clínica. Explica o que funciona, o que não funciona e por quê.
+    - link "Conhecer a Bia":
+      - /url: /bia/
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Consultar o registro no CREFITO-10
+      - text: ": a informar."
+    - paragraph: URL de consulta pública do CREFITO-10 não encontrada
+    - figure "Da série em vídeo · clique para assistir":
+      - 'button "Assistir : Vídeo da série com a Bia"'
+      - text: Da série em vídeo · clique para assistir
+  - region "O ambiente faz parte do atendimento.":
+    - paragraph: 06 O espaço
+    - heading "O ambiente faz parte do atendimento." [level=2]
+    - figure:
+      - 'button "Assistir : Vídeo do ambiente da clínica"'
+    - paragraph: Luz quente, sala reservada e tempo para conversar antes de qualquer procedimento.
+    - heading "Endereço" [level=3]
+    - text: Rua Humberto de Campos, 328 Coral · Lages/SC CEP 88508-190
+    - heading "Horário" [level=3]
+    - list:
+      - listitem: seg–sex 9h–12h e 13h30–18h30
+      - listitem: sáb 8h–12h
+  - region "Casos acompanhados na clínica.":
+    - paragraph: 07 Casos
+    - heading "Casos acompanhados na clínica." [level=2]
+    - paragraph: Cada pessoa responde de um jeito. Estas imagens mostram casos reais, publicados com autorização, e não indicam o resultado que você vai ter.
+    - list:
+      - listitem:
+        - 'figure "P-001 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 01, clipe curto sem som"'
+          - text: "P-001 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-002 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 02, clipe curto sem som"'
+          - text: "P-002 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-003 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 03, clipe curto sem som"'
+          - text: "P-003 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-004 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 04, clipe curto sem som"'
+          - text: "P-004 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-005 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 05, clipe curto sem som"'
+          - text: "P-005 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-006 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 06, clipe curto sem som"'
+          - text: "P-006 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-007 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 07, clipe curto sem som"'
+          - text: "P-007 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+      - listitem:
+        - 'figure "P-008 área tratada · protocolo · data do registro: a informar PROVISÓRIO"':
+          - 'button "Assistir : Caso 08, clipe curto sem som"'
+          - text: "P-008 área tratada · protocolo · data do registro: a informar"
+          - mark: PROVISÓRIO
+  - region "Nota 4,8 no Google":
+    - paragraph: No Google
+    - heading "Nota 4,8 no Google" [level=2]
+    - paragraph:
+      - text: 32 avaliações no Google, conferido em
+      - time: 12/10/2026
+    - list:
+      - listitem:
+        - blockquote:
+          - paragraph: “Excelente profissional, super atenciosa, nos orienta e explica todo o procedimento, esclarecendo todas as dúvidas.”
+        - paragraph: Mayara B.
+      - listitem:
+        - blockquote:
+          - paragraph: “Fui muito bem recebida”
+        - paragraph: Bruna F.
+      - listitem:
+        - blockquote:
+          - paragraph: “Sempre muito bem atendida”
+        - paragraph: Rosane S.
+    - link "Ver todas no Google (abre o Google Maps em nova aba) ↗":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0
+  - region "Perguntas":
+    - paragraph: 08 Perguntas
+    - heading "Perguntas" [level=2]
+    - group: O que é a avaliação e por que ela vem antes de tudo? +
+    - group: Por que a pele fica flácida depois de emagrecer? +
+    - group: Tecnologia para firmeza funciona no corpo? +
+    - group: A redução de gordura por frio substitui a perda de peso? +
+    - group: A depilação com luz é para sempre? +
+    - group: O que a Bia chama de “Derretimento Facial”? +
+    - group: Quem faz os procedimentos? +
+  - region "Como é a primeira consulta.":
+    - paragraph: 09 Primeira consulta
+    - heading "Como é a primeira consulta." [level=2]
+    - list:
+      - listitem: Você conta o que incomoda.
+      - listitem: A Bia avalia pele, contorno e histórico.
+      - listitem: Vocês combinam um plano, ou a conclusão de que não é a hora.
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - paragraph: WhatsApp (49) 99911-5351
+    - heading "Endereço" [level=3]
+    - text: Rua Humberto de Campos, 328 Coral · Lages/SC CEP 88508-190
+    - heading "Horário" [level=3]
+    - list:
+      - listitem: seg–sex 9h–12h e 13h30–18h30
+      - listitem: sáb 8h–12h
+    - link "Ver no mapa Google Maps ↗ (abre em nova aba)":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0

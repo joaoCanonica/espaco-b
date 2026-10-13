@@ -1,0 +1,63 @@
+✓ /: zero requisições externas antes do aceite (27 no total)
+✓ /: CSP sem violações
+✓ /: banner visível e nenhum iframe
+✓ /harmonizacao-facial/: zero requisições externas antes do aceite (11 no total)
+✓ /harmonizacao-facial/: CSP sem violações
+✓ /harmonizacao-facial/: banner visível e nenhum iframe
+✓ /corpo-e-emagrecimento/: zero requisições externas antes do aceite (11 no total)
+✓ /corpo-e-emagrecimento/: CSP sem violações
+✓ /corpo-e-emagrecimento/: banner visível e nenhum iframe
+✓ /pele-e-tecnologia/: zero requisições externas antes do aceite (11 no total)
+✓ /pele-e-tecnologia/: CSP sem violações
+✓ /pele-e-tecnologia/: banner visível e nenhum iframe
+✓ /protocolos-bia/: zero requisições externas antes do aceite (11 no total)
+✓ /protocolos-bia/: CSP sem violações
+✓ /protocolos-bia/: banner visível e nenhum iframe
+✓ /protocolos-bia/bialifting/: zero requisições externas antes do aceite (8 no total)
+✓ /protocolos-bia/bialifting/: CSP sem violações
+✓ /protocolos-bia/bialifting/: banner visível e nenhum iframe
+✓ /bia/: zero requisições externas antes do aceite (12 no total)
+✓ /bia/: CSP sem violações
+✓ /bia/: banner visível e nenhum iframe
+✓ /espaco/: zero requisições externas antes do aceite (11 no total)
+✓ /espaco/: CSP sem violações
+✓ /espaco/: banner visível e nenhum iframe
+✓ /casos/: zero requisições externas antes do aceite (16 no total)
+✓ /casos/: CSP sem violações
+✓ /casos/: banner visível e nenhum iframe
+✓ /contato/: zero requisições externas antes do aceite (9 no total)
+✓ /contato/: CSP sem violações
+✓ /contato/: banner visível e nenhum iframe
+✓ /privacidade/: zero requisições externas antes do aceite (7 no total)
+✓ /privacidade/: CSP sem violações
+✓ /privacidade/: banner visível e nenhum iframe
+✓ /avaliar/: zero requisições externas antes do aceite (7 no total)
+✓ /avaliar/: CSP sem violações
+✓ /avaliar/: banner visível e nenhum iframe
+✓ /nao-existe/: zero requisições externas antes do aceite (7 no total)
+✓ /nao-existe/: CSP sem violações
+✓ /nao-existe/: banner visível e nenhum iframe
+✓ 390px light: Aceitar/Recusar/Personalizar com o mesmo tamanho e estilo (Aceitar 109×48, Recusar 109×48, Personalizar 109×48)
+✓ 390px dark: Aceitar/Recusar/Personalizar com o mesmo tamanho e estilo (Aceitar 109×48, Recusar 109×48, Personalizar 109×48)
+✓ 1440px light: Aceitar/Recusar/Personalizar com o mesmo tamanho e estilo (Aceitar 160×48, Recusar 160×48, Personalizar 160×48)
+✓ 1440px dark: Aceitar/Recusar/Personalizar com o mesmo tamanho e estilo (Aceitar 160×48, Recusar 160×48, Personalizar 160×48)
+✓ Recusar: grava tudo desligado
+✓ Recusar: banner some
+✓ Recusar: o tema não é gravado no navegador
+✓ Recusar: nenhum mapa e nenhuma requisição externa
+✓ Recusar: a escolha persiste na recarga
+✓ Antes do aceite: nenhum evento de conversão registrado
+✓ Aceitar: o mapa do Google é pedido só agora (https://www.google.com/maps?q=-27.8074182,-50.3162505&hl=pt-BR&z=17&ou…)
+✓ Aceitar: clique no WhatsApp entra só na fila local de estatística
+✓ Revogação: o link do rodapé abre as preferências
+✓ Revogação: o mapa sai da página
+✓ Revogação: só a categoria desmarcada muda
+✓ Com o mapa carregado: CSP sem violações
+✓ Personalizar: nenhuma categoria opcional vem marcada
+✓ Personalizar + Esc: nada muda, o banner continua
+✓ Sem localStorage: o banner aparece
+✓ Sem localStorage: aceitar funciona (vale nesta visita)
+✓ Sem localStorage: nenhum erro de script
+
+✓ privacidade e CSP: tudo verde
+saída 0

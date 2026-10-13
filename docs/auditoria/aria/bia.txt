@@ -1,0 +1,71 @@
+- main:
+  - region "Bianca Cardoso. Fisioterapeuta.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /A Bia
+    - paragraph: 01 A Bia
+    - heading "Bianca Cardoso. Fisioterapeuta." [level=1]
+    - paragraph: Bianca Cardoso · Fisioterapeuta · CREFITO 183149
+    - paragraph: A Bia trabalha com estética há mais de 15 anos. É a responsável técnica do Espaço B, em Lages, e atende todos os protocolos da clínica.
+    - figure:
+      - img "Bianca Cardoso, fisioterapeuta, retrato de corpo inteiro"
+    - figure:
+      - img "Bianca Cardoso, retrato"
+  - region "Registro e formação":
+    - paragraph: 02 Trajetória
+    - heading "Registro e formação" [level=2]
+    - term: Registro
+    - definition:
+      - text: CREFITO 183149
+      - mark: PROVISÓRIO
+      - paragraph:
+        - strong: Consultar o registro no CREFITO-10
+        - text: ": a informar."
+      - paragraph: URL de consulta pública do CREFITO-10 não encontrada
+    - term: Atuação
+    - definition: A Bia trabalha com estética há mais de 15 anos. É a responsável técnica do Espaço B, em Lages, e atende todos os protocolos da clínica.
+    - term: Formação
+    - definition:
+      - mark: PROVISÓRIO
+      - paragraph:
+        - strong: Formação
+        - text: ": a informar."
+      - paragraph: curso, instituição e ano a enviar pelo João
+    - term: Cursos e habilitações
+    - definition:
+      - mark: PROVISÓRIO
+      - paragraph:
+        - strong: Cursos e habilitações
+        - text: ": a informar."
+      - paragraph: lista com instituição e ano; habilitação de toxina no CREFITO-10 (a1); RQE se houver (a5)
+  - region "Termos que a Bia usa":
+    - paragraph: 03 Como ela fala do trabalho
+    - heading "Termos que a Bia usa" [level=2]
+    - list:
+      - listitem:
+        - paragraph: “Derretimento Facial”
+        - paragraph: O nome que ela dá à perda de sustentação do rosto.
+      - listitem:
+        - paragraph: “Seu rosto mais jovem”
+        - paragraph: Título que ela usa nos conteúdos. Aqui é só o nome do conteúdo, sem promessa de resultado.
+  - region "“Mulheres transformadas | Espaço B” — episódio 1":
+    - figure "Com som · clique para assistir · legenda no próprio vídeo":
+      - 'button "Assistir : Vídeo: episódio 1 da série, a Bia conta a própria história"'
+      - text: Com som · clique para assistir · legenda no próprio vídeo
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Transcrição do episódio 1
+      - text: ": a informar."
+    - paragraph: transcrição revisada a enviar (slot .vtt vazio); legendas em .vtt pendentes
+    - paragraph: 04 Série
+    - heading "“Mulheres transformadas | Espaço B” — episódio 1" [level=2]
+    - paragraph: No primeiro episódio da série que ela grava na clínica, a Bia conta a própria história.
+    - heading "“Café com Bia”" [level=2]
+    - paragraph: Conversas curtas sobre o que aparece no consultório.
+    - paragraph: "Trecho liberado: só a abertura. O restante depende de o João ouvir e liberar."
+    - figure "Com som · clique para assistir":
+      - 'button "Assistir : Vídeo: abertura do Café com Bia"'
+      - text: Com som · clique para assistir

@@ -1,0 +1,3 @@
+$ node scripts/audit-compliance.mjs
+audit-compliance: 0 bloqueio(s), 78 aviso(s) → docs/COMPLIANCE.md
+saída 0

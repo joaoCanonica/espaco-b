@@ -1,6 +1,6 @@
 // Capturas de tela: sobe `astro preview`, abre cada rota no Chromium (Playwright)
 // em 390 e 1440 px, tema claro e escuro, com prefers-reduced-motion: reduce.
-// Uso: pnpm capturar [/rota ...]   (padrão: "/")
+// Uso: pnpm capturar [/rota ...]   (padrão: "/"; CAPTURAS_PASTA=final muda a pasta de saída)
 // Saída: docs/capturas/<AAAA-MM-DD>/*.png + indice.md (só o índice vai para o git).
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
@@ -18,7 +18,7 @@ const larguras = [
 const temas = ['light', 'dark'];
 
 const data = new Date().toISOString().slice(0, 10);
-const destino = join(raiz, 'docs', 'capturas', data);
+const destino = join(raiz, 'docs', 'capturas', process.env.CAPTURAS_PASTA ?? data);
 mkdirSync(destino, { recursive: true });
 
 function portaLivre() {

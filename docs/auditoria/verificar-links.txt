@@ -1,0 +1,4 @@
+$ node scripts/verificar-links.mjs
+verificar-links: 16 página(s), 618 link(s) interno(s) conferido(s)
+✓ nenhum link quebrado
+saída 0

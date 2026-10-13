@@ -1,0 +1,16 @@
+- main:
+  - region "Conte como foi no Google.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Avaliar
+    - paragraph: Avaliar
+    - heading "Conte como foi no Google." [level=1]
+    - paragraph: Se você já foi atendida ou atendido no Espaço B, pode deixar a sua avaliação no Perfil da Empresa no Google. Vale qualquer experiência, boa ou ruim. A clínica não oferece brinde, desconto nem qualquer vantagem em troca de avaliação.
+    - link "Abrir o Espaço B no Google Maps (abre em nova aba)":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0
+    - paragraph:
+      - text: No Google Maps, toque em “Avaliações” e depois em “Escrever uma avaliação”.
+      - mark: PROVISÓRIO

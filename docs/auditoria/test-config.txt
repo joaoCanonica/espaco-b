@@ -1,0 +1,61 @@
+$ node scripts/test-config.mjs
+== base (config real de hoje) ==
+✓ produção com a config real PASSA (código 0)
+✓ produção não gera /_pendencias/
+✓ produção sem faixa e sem selo
+✓ validate-config em produção passa com a config real
+✓ (a) PREVIEW=1 com todos os pendentes PASSA (código 0)
+✓ (a) preview mostra a faixa "em revisão"
+✓ (a) preview mostra selos PROVISÓRIO
+✓ (a) preview mostra cartão "a informar"
+✓ (c) seção da equipe presente em preview (módulo desligado vira cartão)
+✓ (c) módulo historias (desligado) também presente em preview
+
+== seção dependente de dado pendente some em produção, com alerta ==
+✓ produção omite a seção pendente e a equipe
+✓ o build avisa a omissão (não é silenciosa)
+✓ (c) preview mantém equipe e cartão "a informar"
+
+== exceção: "antes e depois" dentro do módulo de casos ==
+✓ produção passa com "antes e depois" dentro de [data-modulo="casos"]
+
+== bloqueios simulados ==
+✓ registro profissional ausente: produção FALHA → - registro profissional ausente ou não confirmado (pessoas.bianca.registro)
+✓ registro profissional ausente: PREVIEW=1 passa
+✓ registro profissional ausente: validate-config em produção sai com 1
+✓ registro profissional ausente: validate-config em preview sai com 0
+✓ WhatsApp não confirmado como real: produção FALHA → - WhatsApp não confirmado como real (contato.whatsapp)
+✓ WhatsApp não confirmado como real: PREVIEW=1 passa
+✓ WhatsApp não confirmado como real: validate-config em produção sai com 1
+✓ WhatsApp não confirmado como real: validate-config em preview sai com 0
+✓ mídia de paciente no hero (config): produção FALHA → - mídia de paciente "video-para-presenca-e-profissionalismo" no slot hero.principal (hero): proibido em hero/og:image/primeira dobra
+✓ mídia de paciente no hero (config): PREVIEW=1 passa
+✓ mídia de paciente no hero (config): validate-config em produção sai com 1
+✓ mídia de paciente no hero (config): validate-config em preview sai com 0
+✓ mídia de paciente no og:image (config): produção FALHA → - mídia de paciente "video-para-presenca-e-profissionalismo" no slot og.imagem (og): proibido em hero/og:image/primeira dobra
+✓ mídia de paciente no og:image (config): PREVIEW=1 passa
+✓ mídia de paciente no og:image (config): validate-config em produção sai com 1
+✓ mídia de paciente no og:image (config): validate-config em preview sai com 0
+✓ claim com publicar:true sem fonte: produção FALHA → - claim "teste" com publicar:true sem fonte
+✓ claim com publicar:true sem fonte: PREVIEW=1 passa
+✓ claim com publicar:true sem fonte: validate-config em produção sai com 1
+✓ claim com publicar:true sem fonte: validate-config em preview sai com 0
+✓ termo vetado no HTML (garantido): produção FALHA → - "garantido" em dist/teste-trava/index.html:15 → resultado garantido
+✓ termo vetado no HTML (garantido): PREVIEW=1 passa
+✓ medicamento no HTML (botox): produção FALHA → - "botox" em dist/teste-trava/index.html:15 → aplicação de Botox
+✓ medicamento no HTML (botox): PREVIEW=1 passa
+✓ "Dra." no HTML com tratamento.dra desligado: produção FALHA → - "Dra." em dist/teste-trava/index.html:15 → Dra. Bia
+✓ "Dra." no HTML com tratamento.dra desligado: PREVIEW=1 passa
+✓ "antes e depois" fora do módulo de casos: produção FALHA → - "antes e depois" em dist/teste-trava/index.html:15 → antes e depois
+✓ "antes e depois" fora do módulo de casos: PREVIEW=1 passa
+✓ marca de equipamento no HTML: produção FALHA → - "marca de equipamento: Lavieen" em dist/teste-trava/index.html:15 → Lavieen
+✓ marca de equipamento no HTML: PREVIEW=1 passa
+✓ mídia de paciente no hero (HTML): produção FALHA → - "mídia de paciente (bastidores-ensaio-e-casos)" em dist/teste-trava/index.html:15 → <img src="/media/video/bastidores-ensaio-e-casos-par-p
+✓ mídia de paciente no hero (HTML): PREVIEW=1 passa
+✓ mídia de paciente no og:image (HTML): produção FALHA → - "mídia de paciente (bastidores-ensaio-e-casos)" em dist/teste-trava/index.html:15 → <meta content="/media/video/bastidores-ensaio-e-casos-
+✓ mídia de paciente no og:image (HTML): PREVIEW=1 passa
+✓ avaliação publicável com termo vetado/regulado: produção FALHA → - "o melhor" em docs/dados/avaliacoes-google.json → G-004: O melhor botox, ficou perfeita
+✓ avaliação publicável com termo vetado/regulado: PREVIEW=1 passa
+
+test-config: tudo verde
+saída 0

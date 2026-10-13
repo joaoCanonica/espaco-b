@@ -1,0 +1,103 @@
+- main:
+  - region "Lipocrio da Bia":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem:
+          - text: /
+          - link "Protocolos da Bia":
+            - /url: /protocolos-bia/
+        - listitem: /Lipocrio da Bia
+    - paragraph: 03 Protocolo 03 de 03 · Corpo
+    - heading "Lipocrio da Bia" [level=1]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Resumo citável (Lipocrio da Bia)
+      - text: ": a informar."
+    - paragraph: depende do conteúdo do protocolo
+  - region "Sobre o Lipocrio da Bia":
+    - paragraph: 02 O protocolo
+    - heading "Sobre o Lipocrio da Bia" [level=2]
+    - list:
+      - listitem:
+        - heading "Para quem é" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Para quem é (Lipocrio da Bia)
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+      - listitem:
+        - heading "Como é a sessão" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Como é a sessão (Lipocrio da Bia)
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João
+      - listitem:
+        - heading "O que esperar" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: O que esperar (Lipocrio da Bia)
+          - text: ": a informar."
+        - paragraph: conteúdo do protocolo a enviar pelo João; sem prazo nem número
+      - listitem:
+        - heading "Quem aplica" [level=3]
+        - paragraph: Fisioterapeuta Bianca Cardoso
+  - region "Como é o atendimento":
+    - paragraph: 03 Atendimento
+    - heading "Como é o atendimento" [level=2]
+    - list:
+      - listitem:
+        - heading "Avaliação" [level=3]
+        - paragraph: Você conta o que incomoda. A Bia avalia pele, contorno e histórico.
+      - listitem:
+        - heading "Plano" [level=3]
+        - paragraph: Vocês combinam um plano, ou a conclusão de que não é a hora.
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+  - region "O que é importante saber":
+    - paragraph: 04 Limites
+    - heading "O que é importante saber" [level=2]
+    - heading "Contraindicações" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Contraindicações (Lipocrio da Bia)
+      - text: ": a informar."
+    - paragraph: a enviar pelo João junto com o conteúdo do protocolo
+    - paragraph: As informações deste site são educativas e não substituem a avaliação individual. Cada pessoa responde de um jeito aos procedimentos.
+  - region "Perguntas":
+    - paragraph: 05 Perguntas
+    - heading "Perguntas" [level=2]
+    - group: O que é a avaliação e por que ela vem antes de tudo?
+    - group: Quem faz os procedimentos?
+    - group: O que a Bia chama de “Derretimento Facial”?
+  - region "Agendar avaliação pelo WhatsApp.":
+    - heading "Agendar avaliação pelo WhatsApp." [level=2]
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - term: Serviços
+    - definition: Corpo e emagrecimento
+    - term: Quem atende
+    - definition: Fisioterapeuta Bianca Cardoso · CREFITO 183149
+    - term: Responsável técnica
+    - definition: Bianca Cardoso
+    - term: Conselho
+    - definition:
+      - text: COFFITO/CREFITO
+      - mark: PROVISÓRIO
+    - navigation "Outras páginas":
+      - list:
+        - listitem:
+          - link "Harmonização facial":
+            - /url: /harmonizacao-facial/
+        - listitem:
+          - link "Corpo e emagrecimento":
+            - /url: /corpo-e-emagrecimento/
+        - listitem:
+          - link "Pele e tecnologia":
+            - /url: /pele-e-tecnologia/
+        - listitem:
+          - link "Protocolos da Bia":
+            - /url: /protocolos-bia/

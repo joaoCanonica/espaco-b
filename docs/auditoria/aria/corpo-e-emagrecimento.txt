@@ -1,0 +1,144 @@
+- main:
+  - region "Flacidez depois de emagrecer.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Corpo e emagrecimento
+    - paragraph: 01 Corpo e emagrecimento
+    - heading "Flacidez depois de emagrecer." [level=1]
+    - paragraph: "Emagrecer muito pode deixar a pele com menos sustentação, no rosto e no corpo. Não é falta de cuidado: é a pele se adaptando a um volume menor. Quem está emagrecendo com acompanhamento médico continua com o seu médico. A Bia cuida da pele e do contorno, em conversa com o tratamento que você já faz."
+  - region "Para quem é":
+    - paragraph: 02 Indicação
+    - heading "Para quem é" [level=2]
+    - heading "O que entra" [level=3]
+    - paragraph: Gordura localizada e flacidez, inclusive depois de emagrecer. Avaliação primeiro, protocolo depois.
+    - paragraph:
+      - text: "Fonte:"
+      - link "Aesthetic Surgery Journal Open Forum, 2024 (revisão de escopo)":
+        - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojae069/7739023
+    - heading "O que a avaliação define" [level=3]
+    - paragraph: Quanto da flacidez é pele, quanto é gordura localizada e quanto é músculo. Flacidez acentuada costuma ser caso cirúrgico; nesse caso a Bia diz isso na avaliação e orienta você a procurar um cirurgião plástico.
+    - paragraph:
+      - text: "Fonte:"
+      - link "Aesthetic Surgery Journal Open Forum, 2024 (revisão de escopo)":
+        - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojae069/7739023
+  - 'region "Vídeo: flacidez depois de emagrecer"':
+    - figure "Vídeo com som · clique para assistir":
+      - 'button "Assistir : Vídeo: a Bia fala sobre flacidez depois de emagrecer"'
+      - text: Vídeo com som · clique para assistir
+    - paragraph: 03 Em vídeo
+    - heading "Flacidez depois de emagrecer." [level=2]
+    - heading "Transcrição" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Transcrição do vídeo
+      - text: ": a informar."
+    - paragraph: sem transcrição revisada (slot .vtt vazio); legendas em .vtt também pendentes
+  - region "Firmeza, gordura localizada e acompanhamento":
+    - paragraph: 04 Como a clínica trabalha
+    - heading "Firmeza, gordura localizada e acompanhamento" [level=2]
+    - list:
+      - listitem:
+        - heading "Tecnologias para firmeza" [level=3]
+        - paragraph: Há tecnologias que aquecem camadas da pele para estimular firmeza. Elas têm mais estudos no rosto e no pescoço do que no corpo. Por isso a indicação é individual e o acompanhamento mostra se vale continuar.
+        - paragraph:
+          - text: "Fontes:"
+          - link "Revisão sistemática de ultrassom microfocado, 2023":
+            - /url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9861614/
+          - text: ·
+          - link "Aesthetic Surgery Journal 45(3), meta-análise":
+            - /url: https://academic.oup.com/asj/article/45/3/NP86/7900203
+      - listitem:
+        - heading "Quais tecnologias a clínica usa" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Tecnologias de firmeza da clínica
+          - text: ": a informar."
+        - paragraph: lista (pela função, sem marca) a enviar pelo João
+      - listitem:
+        - heading "Gordura localizada" [level=3]
+        - paragraph: O frio controlado é uma das técnicas estudadas para reduzir gordura localizada, com medições feitas cerca de três meses depois. Não substitui a perda de peso. Pode ter efeitos colaterais, a maioria leves e passageiros, e existe um efeito raro em que a gordura aumenta na área tratada.
+        - paragraph:
+          - text: "Fontes:"
+          - link "Obesity Reviews, 2025 (meta-análise)":
+            - /url: https://onlinelibrary.wiley.com/doi/full/10.1111/obr.13925
+          - text: ·
+          - link "ASJ Open Forum, 2025 (meta-análise)":
+            - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojaf142/8307545
+      - listitem:
+        - heading "Acompanhamento" [level=3]
+        - paragraph: Quem está emagrecendo com acompanhamento médico continua com o seu médico. A Bia cuida da pele e do contorno, em conversa com o tratamento que você já faz.
+  - region "Como é o atendimento":
+    - paragraph: 05 Atendimento
+    - heading "Como é o atendimento" [level=2]
+    - list:
+      - listitem:
+        - heading "Avaliação" [level=3]
+        - paragraph: Você conta o que incomoda. A Bia avalia pele, contorno e histórico.
+      - listitem:
+        - heading "Plano" [level=3]
+        - paragraph: Vocês combinam um plano, ou a conclusão de que não é a hora.
+      - listitem:
+        - heading "Sessões" [level=3]
+        - paragraph: A indicação é individual e o acompanhamento mostra se vale continuar.
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+  - region "O que é importante saber":
+    - paragraph: 06 Limites
+    - heading "O que é importante saber" [level=2]
+    - heading "Flacidez acentuada" [level=3]
+    - paragraph: Flacidez acentuada costuma ser caso cirúrgico.
+    - paragraph:
+      - text: "Fonte:"
+      - link "Aesthetic Surgery Journal Open Forum, 2024 (revisão de escopo)":
+        - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojae069/7739023
+    - heading "Frio controlado" [level=3]
+    - paragraph: Não substitui a perda de peso. Pode ter efeitos colaterais, a maioria leves e passageiros, e existe um efeito raro em que a gordura aumenta na área tratada.
+    - paragraph:
+      - text: "Fontes:"
+      - link "Obesity Reviews, 2025 (meta-análise)":
+        - /url: https://onlinelibrary.wiley.com/doi/full/10.1111/obr.13925
+      - text: ·
+      - link "ASJ Open Forum, 2025 (meta-análise)":
+        - /url: https://academic.oup.com/asjopenforum/article/doi/10.1093/asjof/ojaf142/8307545
+    - heading "Contraindicações" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Contraindicações gerais
+      - text: ": a informar."
+    - paragraph: o deck não traz contraindicações; a Bia/o João devem enviar a lista revisada
+    - paragraph: As informações deste site são educativas e não substituem a avaliação individual. Cada pessoa responde de um jeito aos procedimentos.
+  - region "Perguntas":
+    - paragraph: 07 Perguntas
+    - heading "Perguntas" [level=2]
+    - group: Por que a pele fica flácida depois de emagrecer?
+    - group: Tecnologia para firmeza funciona no corpo?
+    - group: A redução de gordura por frio substitui a perda de peso?
+    - group: O que é a avaliação e por que ela vem antes de tudo?
+  - region "Agendar avaliação pelo WhatsApp.":
+    - heading "Agendar avaliação pelo WhatsApp." [level=2]
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - term: Serviços
+    - definition: Corpo e emagrecimento
+    - term: Quem atende
+    - definition: Fisioterapeuta Bianca Cardoso · CREFITO 183149
+    - term: Responsável técnica
+    - definition: Bianca Cardoso
+    - term: Conselho
+    - definition:
+      - text: COFFITO/CREFITO
+      - mark: PROVISÓRIO
+    - navigation "Outras páginas":
+      - list:
+        - listitem:
+          - link "Harmonização facial":
+            - /url: /harmonizacao-facial/
+        - listitem:
+          - link "Pele e tecnologia":
+            - /url: /pele-e-tecnologia/
+        - listitem:
+          - link "Protocolos da Bia":
+            - /url: /protocolos-bia/

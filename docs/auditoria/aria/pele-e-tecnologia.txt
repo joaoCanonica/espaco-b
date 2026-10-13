@@ -1,0 +1,119 @@
+- main:
+  - region "Pele e depilação.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Pele e tecnologia
+    - paragraph: 01 Pele e tecnologia
+    - heading "Pele e depilação." [level=1]
+    - paragraph: Tecnologias para textura, manchas e redução duradoura dos pelos.
+    - paragraph: A depilação com luz reduz a quantidade de pelos ao longo das sessões. A redução varia com a área, a cor e a espessura do pelo e com o seu ciclo de crescimento. Por isso a avaliação vem antes da primeira sessão. Limpeza profunda, com extração e cuidado com a barreira da pele.
+  - region "Depilação, limpeza de pele e rejuvenescimento":
+    - paragraph: 02 Serviços
+    - heading "Depilação, limpeza de pele e rejuvenescimento" [level=2]
+    - list:
+      - listitem:
+        - 'heading "Depilação com luz: redução duradoura dos pelos" [level=3]'
+        - paragraph: A depilação com luz reduz a quantidade de pelos ao longo das sessões. A redução varia com a área, a cor e a espessura do pelo e com o seu ciclo de crescimento. Por isso a avaliação vem antes da primeira sessão.
+        - paragraph:
+          - text: "Fontes:"
+          - link "Journal of Cosmetic and Laser Therapy, 2022 (revisão sistemática)":
+            - /url: https://www.tandfonline.com/doi/full/10.1080/14764172.2022.2075899
+          - text: ·
+          - link "Revisão Cochrane":
+            - /url: https://cochrane.org/pt/CD004684/SKIN_remocao-de-pelos-indesejados-por-sistemas-de-laser-e-fonte-de-luz-intensa-pulsada
+      - listitem:
+        - heading "Limpeza de pele" [level=3]
+        - paragraph: Limpeza profunda, com extração e cuidado com a barreira da pele.
+      - listitem:
+        - heading "Rejuvenescimento" [level=3]
+        - mark: PROVISÓRIO
+        - paragraph:
+          - strong: Bloco "Rejuvenescimento"
+          - text: ": a informar."
+        - paragraph: tecnologia descrita pela função (sem marca) e indicações a enviar pelo João
+  - region "Para quem é":
+    - paragraph: 03 Indicação
+    - heading "Para quem é" [level=2]
+    - heading "O que entra" [level=3]
+    - paragraph: Tecnologias para textura, manchas e redução duradoura dos pelos.
+    - heading "Indicações de pele" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Para quem é (pele)
+      - text: ": a informar."
+    - paragraph: tecnologias e indicações de pele (limpeza, rejuvenescimento) a enviar pelo João
+  - region "Como é o atendimento":
+    - paragraph: 04 Atendimento
+    - heading "Como é o atendimento" [level=2]
+    - list:
+      - listitem:
+        - heading "Avaliação" [level=3]
+        - paragraph: Você conta o que incomoda. A Bia avalia pele, contorno e histórico.
+      - listitem:
+        - heading "Plano" [level=3]
+        - paragraph: Vocês combinam um plano, ou a conclusão de que não é a hora.
+      - listitem:
+        - heading "Sessões" [level=3]
+        - paragraph: A avaliação define o plano e o intervalo entre sessões.
+        - paragraph:
+          - text: "Fontes:"
+          - link "Journal of Cosmetic and Laser Therapy, 2022 (revisão sistemática)":
+            - /url: https://www.tandfonline.com/doi/full/10.1080/14764172.2022.2075899
+          - text: ·
+          - link "Revisão Cochrane":
+            - /url: https://cochrane.org/pt/CD004684/SKIN_remocao-de-pelos-indesejados-por-sistemas-de-laser-e-fonte-de-luz-intensa-pulsada
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+  - region "O que é importante saber":
+    - paragraph: 05 Limites
+    - heading "O que é importante saber" [level=2]
+    - heading "Não elimina todos os pelos" [level=3]
+    - paragraph: Ela reduz bastante a quantidade de pelos, e essa redução costuma durar, mas não elimina todos os pelos de forma permanente. Algumas pessoas precisam de manutenção.
+    - paragraph:
+      - text: "Fontes:"
+      - link "Journal of Cosmetic and Laser Therapy, 2022 (revisão sistemática)":
+        - /url: https://www.tandfonline.com/doi/full/10.1080/14764172.2022.2075899
+      - text: ·
+      - link "Revisão Cochrane":
+        - /url: https://cochrane.org/pt/CD004684/SKIN_remocao-de-pelos-indesejados-por-sistemas-de-laser-e-fonte-de-luz-intensa-pulsada
+    - heading "Contraindicações" [level=3]
+    - mark: PROVISÓRIO
+    - paragraph:
+      - strong: Contraindicações gerais
+      - text: ": a informar."
+    - paragraph: o deck não traz contraindicações; a Bia/o João devem enviar a lista revisada
+    - paragraph: As informações deste site são educativas e não substituem a avaliação individual. Cada pessoa responde de um jeito aos procedimentos.
+  - region "Perguntas":
+    - paragraph: 06 Perguntas
+    - heading "Perguntas" [level=2]
+    - group: A depilação com luz é para sempre?
+    - group: O que é a avaliação e por que ela vem antes de tudo?
+    - group: Quem faz os procedimentos?
+  - region "Agendar avaliação pelo WhatsApp.":
+    - heading "Agendar avaliação pelo WhatsApp." [level=2]
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - term: Serviços
+    - definition: Depilação definitiva · Limpeza de pele · Rejuvenescimento
+    - term: Quem atende
+    - definition: Fisioterapeuta Bianca Cardoso · CREFITO 183149
+    - term: Responsável técnica
+    - definition: Bianca Cardoso
+    - term: Conselho
+    - definition:
+      - text: COFFITO/CREFITO
+      - mark: PROVISÓRIO
+    - navigation "Outras páginas":
+      - list:
+        - listitem:
+          - link "Harmonização facial":
+            - /url: /harmonizacao-facial/
+        - listitem:
+          - link "Corpo e emagrecimento":
+            - /url: /corpo-e-emagrecimento/
+        - listitem:
+          - link "Protocolos da Bia":
+            - /url: /protocolos-bia/

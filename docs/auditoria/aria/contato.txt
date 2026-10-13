@@ -1,0 +1,70 @@
+- main:
+  - region "Agende a sua avaliação.":
+    - navigation "Você está em":
+      - list:
+        - listitem:
+          - link "Início":
+            - /url: /
+        - listitem: /Contato
+    - paragraph: 01 Contato
+    - heading "Agende a sua avaliação." [level=1]
+    - paragraph:
+      - 'link "Telefone e WhatsApp: (49) 99911-5351"':
+        - /url: tel:+5549999115351
+    - link "Agendar avaliação pelo WhatsApp (abre o WhatsApp em nova aba)":
+      - /url: https://wa.me/5549999115351?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o.
+    - link "Ligar":
+      - /url: tel:+5549999115351
+  - region "Horários, endereço e Instagram":
+    - paragraph: 02 Onde e quando
+    - heading "Horários, endereço e Instagram" [level=2]
+    - heading "Horários" [level=3]
+    - list:
+      - listitem: segunda a sexta, 9h–12h e 13h30–18h30
+      - listitem: sábado, 8h–12h
+      - listitem: domingo, fechado
+    - heading "Endereço" [level=3]
+    - text: Rua Humberto de Campos, 328 Coral · Lages/SC CEP 88508-190
+    - link "Ver no mapa ↗ (Google Maps, abre em nova aba)":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0
+    - heading "Instagram" [level=3]
+    - link "@clinica.espacob (abre em nova aba)":
+      - /url: https://www.instagram.com/clinica.espacob/
+  - region "Mapa":
+    - heading "Mapa" [level=2]
+    - paragraph: O mapa é do Google e só carrega com a sua permissão (categoria “Mapas e terceiros”). Ao carregar, o Google recebe o seu endereço IP.
+    - button "Permitir e carregar o mapa"
+    - link "Abrir no Google Maps (nova aba)":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0
+  - region "Como é a primeira consulta.":
+    - paragraph: 03 Primeira consulta
+    - heading "Como é a primeira consulta." [level=2]
+    - list:
+      - listitem:
+        - paragraph: Você conta o que incomoda.
+      - listitem:
+        - paragraph: A Bia avalia pele, contorno e histórico.
+      - listitem:
+        - paragraph: Vocês combinam um plano, ou a conclusão de que não é a hora.
+    - paragraph: Sem compromisso de fechar nada na avaliação.
+  - region "Nota 4,8 no Google":
+    - paragraph: No Google
+    - heading "Nota 4,8 no Google" [level=2]
+    - paragraph:
+      - text: 32 avaliações no Google, conferido em
+      - time: 12/10/2026
+    - list:
+      - listitem:
+        - blockquote:
+          - paragraph: “Excelente profissional, super atenciosa, nos orienta e explica todo o procedimento, esclarecendo todas as dúvidas.”
+        - paragraph: Mayara B.
+      - listitem:
+        - blockquote:
+          - paragraph: “Fui muito bem recebida”
+        - paragraph: Bruna F.
+      - listitem:
+        - blockquote:
+          - paragraph: “Sempre muito bem atendida”
+        - paragraph: Rosane S.
+    - link "Ver todas no Google (abre o Google Maps em nova aba) ↗":
+      - /url: https://www.google.com/maps/place/Espa%C3%A7o+B+-+Harmoniza%C3%A7%C3%A3o+Corporal+e+Facial+%7C+Est%C3%A9tica+em+Lages+%7C+FaceLifting,+Depila%C3%A7%C3%A3o+Definitiva,+Emagrecimento+e+HOF./@-27.8074182,-50.3162505,1006m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94e01f1a3dc60141:0xd167078bfa0fbc32!8m2!3d-27.8074182!4d-50.3162505!16s%2Fg%2F11hzyf45d0

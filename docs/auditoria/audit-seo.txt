@@ -1,0 +1,41 @@
+$ node scripts/audit-seo.mjs
+audit-seo · vocabulário schema.org via schema-dts 2.1.0 (1034 tipos, 1539 propriedades) · SITE_URL=(não definido)
+rota                                 tít desc  robots   schema
+/404.html                             32   79  noindex  
+/avaliar/                             28  126  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/bia/                                 48  135  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/casos/                               36  152  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/contato/                             36  129  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/corpo-e-emagrecimento/               46  140  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+/espaco/                              41  144  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/harmonizacao-facial/                 39  140  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+/                                     47  143  noindex  HealthAndBeautyBusiness,WebSite,FAQPage
+/pele-e-laser/                        28   77  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/pele-e-tecnologia/                   36  142  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+/privacidade/                         34  142  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList
+/protocolos-bia/bialifting/           41  131  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+/protocolos-bia/bialips/              38  128  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+/protocolos-bia/                      35  145  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+/protocolos-bia/lipocrio-da-bia/      46  136  noindex  HealthAndBeautyBusiness,WebSite,BreadcrumbList,FAQPage
+sitemap: 14 rota(s) pública(s) · links: ✓ nenhum link quebrado
+GEO (resumo citável e credencial):
+  /corpo-e-emagrecimento/              resumo 56 palavras · credencial a 97% do texto ✗
+  /harmonizacao-facial/                resumo 50 palavras · credencial a 81% do texto ✗
+  /pele-e-tecnologia/                  resumo 53 palavras · credencial a 81% do texto ✗
+  /protocolos-bia/bialifting/          resumo ausente ✗ · credencial a 50% do texto ✗
+  /protocolos-bia/bialips/             resumo ausente ✗ · credencial a 50% do texto ✗
+  /protocolos-bia/                     resumo 41 palavras · credencial a 52% do texto ✗
+  /protocolos-bia/lipocrio-da-bia/     resumo ausente ✗ · credencial a 50% do texto ✗
+aviso: GEO /corpo-e-emagrecimento/: autor/credencial só a 97% da página (meta: perto do topo)
+aviso: GEO /harmonizacao-facial/: autor/credencial só a 81% da página (meta: perto do topo)
+aviso: GEO /pele-e-tecnologia/: autor/credencial só a 81% da página (meta: perto do topo)
+aviso: GEO /protocolos-bia/bialifting/: resumo citável ausente (meta 40–60)
+aviso: GEO /protocolos-bia/bialifting/: autor/credencial só a 50% da página (meta: perto do topo)
+aviso: GEO /protocolos-bia/bialips/: resumo citável ausente (meta 40–60)
+aviso: GEO /protocolos-bia/bialips/: autor/credencial só a 50% da página (meta: perto do topo)
+aviso: GEO /protocolos-bia/: autor/credencial só a 52% da página (meta: perto do topo)
+aviso: GEO /protocolos-bia/lipocrio-da-bia/: resumo citável ausente (meta 40–60)
+aviso: GEO /protocolos-bia/lipocrio-da-bia/: autor/credencial só a 50% da página (meta: perto do topo)
+aviso: sitemap.xml usa o domínio marcador .invalid (SITE_URL não definido)
+✓ audit-seo: tudo verde
+saída 0
