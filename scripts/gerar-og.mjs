@@ -8,6 +8,7 @@ import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSyn
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
+import sharp from 'sharp';
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(raiz, 'dist');
@@ -83,6 +84,48 @@ async function navegador() {
   return b;
 }
 
+// Plano B sem Chromium (ex.: build na Vercel): sharp compõe retrato no D + B vetorial + título em
+// SVG (fonte do sistema; se não houver fonte, sai sem texto). Avisado no log; não quebra o build.
+async function semNavegador(titulo, destino) {
+  const W = 390;
+  const H = Math.round(W / marca.contraformas.baixa.proporcao);
+  const mascara = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><path transform="scale(${W} ${H})" d="${dD}" fill="#fff"/></svg>`,
+  );
+  const camadas = [];
+  if (existsSync(retratoArq)) {
+    const janela = await sharp(retratoArq)
+      .resize(W, H, { fit: 'cover', position: 'north' })
+      .composite([{ input: mascara, blend: 'dest-in' }])
+      .png()
+      .toBuffer();
+    camadas.push({ input: janela, left: 1200 - 96 - W, top: 60 });
+  }
+  const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const linhas = [];
+  let atual = '';
+  for (const pal of titulo.split(' ')) {
+    if ((atual + ' ' + pal).trim().length > 17) {
+      linhas.push(atual.trim());
+      atual = pal;
+    } else atual += ` ${pal}`;
+  }
+  linhas.push(atual.trim());
+  const [, , vw, vh] = marca.viewBox.split(' ').map(Number);
+  const texto = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+      ${linhas.map((l, i) => `<text x="72" y="${200 + i * 64}" font-family="serif" font-size="56" fill="#F1ECE1">${esc(l)}</text>`).join('')}
+      <svg x="72" y="${630 - 106}" width="${(46 * vw) / vh}" height="46" viewBox="${marca.viewBox}"><path fill="#F1ECE1" d="${marca.b.d}"/></svg>
+    </svg>`,
+  );
+  camadas.push({ input: texto, left: 0, top: 0 });
+  await sharp({ create: { width: 1200, height: 630, channels: 3, background: '#52543F' } })
+    .composite(camadas)
+    .png()
+    .toFile(destino);
+}
+
+let semChromium = false;
 let feitas = 0;
 let cacheadas = 0;
 for (const [caminho, titulo] of pedidos) {
@@ -93,6 +136,21 @@ for (const [caminho, titulo] of pedidos) {
     .digest('hex')
     .slice(0, 16);
   const emCache = join(cache, `${h}.png`);
+  if (!existsSync(emCache) && !semChromium) {
+    try {
+      await navegador();
+    } catch (e) {
+      semChromium = true;
+      console.warn(
+        `gerar-og: Chromium indisponível (${String(e).split('\n')[0]}); usando o plano B (sharp)`,
+      );
+    }
+  }
+  if (!existsSync(emCache) && semChromium) {
+    await semNavegador(titulo, destino);
+    feitas++;
+    continue;
+  }
   if (!existsSync(emCache)) {
     const p = await (await navegador()).newPage({ viewport: { width: 1200, height: 630 } });
     await p.setContent(pagina(titulo));

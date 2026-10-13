@@ -3,13 +3,29 @@
 //      node scripts/extract-posters.mjs --folhas   → também folhas de contato em docs/capturas/midia/
 import { spawnSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { ORIGINAIS, RAIZ, lerManifesto } from './lib/manifesto.mjs';
 
+// ffmpeg: FFMPEG_PATH, senão o do sistema, senão o binário do pacote ffmpeg-static
+// (deploy na Vercel, onde não há ffmpeg instalado; ver docs/DEPLOY.md).
+let binario;
+function caminhoFfmpeg() {
+  if (binario) return binario;
+  if (process.env.FFMPEG_PATH) return (binario = process.env.FFMPEG_PATH);
+  if (spawnSync('ffmpeg', ['-version']).status === 0) return (binario = 'ffmpeg');
+  try {
+    binario = createRequire(import.meta.url)('ffmpeg-static');
+  } catch {
+    binario = 'ffmpeg';
+  }
+  return binario;
+}
+
 export function ffmpeg(args) {
-  const r = spawnSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', ...args], {
+  const r = spawnSync(caminhoFfmpeg(), ['-hide_banner', '-loglevel', 'error', '-y', ...args], {
     maxBuffer: 1 << 28,
   });
   if (r.status !== 0) throw new Error(`ffmpeg falhou: ${r.stderr?.toString() || r.error}`);

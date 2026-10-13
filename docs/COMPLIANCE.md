@@ -1,9 +1,9 @@
 # Compliance (gerado)
 
-Gerado por `scripts/audit-compliance.mjs` em 2026-10-13 · modo produção · HTML de `dist/`.
+Gerado por `scripts/audit-compliance.mjs` em 2026-10-13 · modo preview/dev · HTML de `dist/`.
 Não editar à mão: rode `pnpm audit-compliance` (ou o build). Termos em `src/config/termos.ts`.
 
-**Bloqueios: 0** · avisos: 78 · exceções: 0
+**Bloqueios: 0** · avisos: 90 · exceções: 0
 
 ## Decisões humanas (manual; preservado pelo gerador)
 
@@ -39,6 +39,7 @@ Nenhum.
 | Termo | Origem | Arquivo | Linha | Trecho | Status |
 | --- | --- | --- | --- | --- | --- |
 | fisioterapeuta | html | `dist/404.html` | 18 | Fisioterapeuta Bianca Cardoso | aviso |
+| fisioterapeuta | html | `dist/_sistema/index.html` | 34 | Fisioterapeuta Bianca Cardoso | aviso |
 | desconto | html | `dist/avaliar/index.html` | 1 | oa ou ruim; não há brinde nem desconto por avaliação. | aviso |
 | desconto | html | `dist/avaliar/index.html` | 1 | oa ou ruim; não há brinde nem desconto por avaliação. | aviso |
 | desconto | html | `dist/avaliar/index.html` | 1 | oa ou ruim; não há brinde nem desconto por avaliação. | aviso |
@@ -67,6 +68,17 @@ Nenhum.
 | fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 1 | pele avaliados juntos, com a fisioterapeuta Bianca Cardoso. | aviso |
 | fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 1 | pele avaliados juntos, com a fisioterapeuta Bianca Cardoso. | aviso |
 | fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 24 | Bianca Cardoso, fisioterapeuta | aviso |
+| toxina botulínica | html | `dist/harmonizacao-facial/index.html` | 24 | Toxina botulínica | aviso |
+| toxina botulínica | html | `dist/harmonizacao-facial/index.html` | 24 | A toxina botulínica relaxa os músculos que formam | aviso |
+| toxina botulínica | html | `dist/harmonizacao-facial/index.html` | 24 | blicar com o apostilamento de toxina botulínica deferido no CREFITO-10 (a1) | aviso |
+| preenchimento | html | `dist/harmonizacao-facial/index.html` | 24 | Preenchimentos: lábios e sulco nasogeniano | aviso |
+| preenchimento | html | `dist/harmonizacao-facial/index.html` | 24 | Bloco "Preenchimentos" | aviso |
+| preenchimento | html | `dist/harmonizacao-facial/index.html` | 24 | ONDICIONAL: base COFFITO para preenchimento por fisioterapeuta não pesqui | aviso |
+| fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 24 | OFFITO para preenchimento por fisioterapeuta não pesquisada; texto só depo | aviso |
+| toxina botulínica | html | `dist/harmonizacao-facial/index.html` | 24 | Quanto tempo dura a toxina botulínica? | aviso |
+| toxina botulínica | html | `dist/harmonizacao-facial/index.html` | 24 | apostilamento de toxina botulínica deferido no CREFITO-10 (a1) | aviso |
+| bioestimulador | html | `dist/harmonizacao-facial/index.html` | 24 | Bioestimulador ou fios: qual a diferença? | aviso |
+| bioestimulador | html | `dist/harmonizacao-facial/index.html` | 24 | O bioestimulador é uma substância injetada que | aviso |
 | fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 24 | atendimentos são feitos pela fisioterapeuta Bianca Cardoso, CREFITO 18314 | aviso |
 | fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 24 | Fisioterapeuta Bianca Cardoso · CREFITO 1831 | aviso |
 | fisioterapeuta | html | `dist/harmonizacao-facial/index.html` | 24 | Fisioterapeuta Bianca Cardoso | aviso |
@@ -123,4 +135,4 @@ Nenhum.
 
 ## Fora da varredura
 
-Nada.
+- `dist/_pendencias/index.html` (rota interna, não existe em produção)
